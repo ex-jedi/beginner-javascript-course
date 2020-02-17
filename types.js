@@ -1,6 +1,7 @@
 // ********** Strings **********
 const age = 46;
 const name = 'Mark';
+// eslint-disable-next-line no-unused-vars
 const test = 'Wut';
 const middle = 'Robert';
 const last = `Phoenix`;
@@ -61,3 +62,8 @@ const teller = {
 
 teller.first = 'Teller';
 teller.last = null;
+
+// ********** Booleans **********
+const old = 18;
+const ofAge = old > 19;
+console.log(ofAge);
