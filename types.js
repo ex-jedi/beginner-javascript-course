@@ -36,3 +36,28 @@ const eachKidGets = Math.floor(smarties / kids);
 
 console.log(`Each kid gets ${eachKidGets}`);
 console.log(`Dad gets ${dadGets}`);
+
+// ********** Objects **********
+
+const person = {
+  first: 'Mark',
+  last: 'Phoenix',
+  age: 46,
+};
+
+// ********** Null & Undefined **********
+
+let somethingUndefined;
+const somethingNull = null;
+
+const cher = {
+  first: 'Cher',
+};
+
+const teller = {
+  first: 'Raymond',
+  last: 'teller',
+};
+
+teller.first = 'Teller';
+teller.last = null;
