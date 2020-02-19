@@ -6,7 +6,15 @@ const people = [
 
 people.forEach((person, index) => {
   console.log(person.name);
+  // Console methods
+  // console.groupCollapsed(`${person.name}`);
+  // console.log(person.country);
+  // console.log(person.cool);
+  // console.log('Done');
+  // console.groupEnd(`${person.name}`);
 });
+
+// console.table(people);
 
 // Console Methods
 
@@ -24,7 +32,16 @@ people.forEach((person, index) => {
 
 // Some Setup Code
 
+function doStuff() {
+  console.group('Doing stuff');
+  console.log('Hey');
+  console.warn('Oh no');
+  console.error('Drat it');
+  console.groupEnd('Doing stuff');
+}
+
 function doctorize(name) {
+  // console.count(`Running doctorize for ${name}`);
   return `Dr. ${name}`;
 }
 
@@ -37,6 +54,12 @@ function go() {
   const name = doctorize(greet('Wes'));
   console.log(name);
 }
+
+function bootstrap() {
+  go();
+}
+
+// bootstrap();
 
 const button = document.querySelector('.bigger');
 button.addEventListener('click', function(e) {
