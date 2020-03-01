@@ -44,15 +44,43 @@ image.alt = 'Cute Puppy';
 
 // Append that image to the wrapper
 div.appendChild(image);
-
 console.log(image);
+
 // with HTML string, make a div, with two paragraphs inside of it
+const stringOne = `
+<div class="fragment">
+  <p>I am a paragraph.</p>
+  <p>I am also a paragraph.</p>
+</div>
+`;
+
+const myFragment = document.createRange().createContextualFragment(stringOne);
+
 // put this div before the unordered list from above
+div.append(myFragment);
+const domFragment = document.querySelector('.fragment');
+domFragment.remove();
+div.insertAdjacentElement('afterbegin', domFragment);
 
 // add a class to the second paragraph called warning
+domFragment.lastElementChild.classList.add('warning');
+
 // remove the first paragraph
+domFragment.firstElementChild.remove();
 
 // create a function called generatePlayerCard that takes in three arguments: name, age, and height
+
+function generatePlayerCard(name, age, height) {
+  const ageInDogYears = age * 7;
+  const elemString = `
+  <div class="playerCard">
+      <h2>${name} — ${age}</h2>
+      <p>They are ${height} and ${age} years old. In Dog years this person would be ${ageInDogYears}. That would be a tall dog!</p>
+  </div>
+  `;
+
+  return elemString;
+}
 
 // have that function return html that looks like this:
 // <div class="playerCard">
@@ -61,6 +89,8 @@ console.log(image);
 // </div>
 
 // make a new div with a class of cards
+
+const cardsDiv = document.createElement('div');
 
 // Have that function make 4 cards
 
