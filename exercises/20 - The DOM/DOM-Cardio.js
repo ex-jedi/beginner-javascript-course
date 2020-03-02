@@ -31,10 +31,11 @@ div.appendChild(list);
 const image = document.createElement('img');
 
 // set the source to an image
-image.src = 'https://picsum.photos/200';
+image.src = 'https://picsum.photos/500';
 
 // set the width to 250
 image.width = 250;
+image.height = 250;
 
 // add a class of cute
 image.classList.add('cute');
@@ -48,25 +49,25 @@ console.log(image);
 
 // with HTML string, make a div, with two paragraphs inside of it
 const stringOne = `
-<div class="fragment">
+<div class="myDiv">
   <p>I am a paragraph.</p>
   <p>I am also a paragraph.</p>
 </div>
 `;
 
-const myFragment = document.createRange().createContextualFragment(stringOne);
+// const myFragment = document.createRange().createContextualFragment(stringOne);
 
 // put this div before the unordered list from above
-div.append(myFragment);
-const domFragment = document.querySelector('.fragment');
-domFragment.remove();
-div.insertAdjacentElement('afterbegin', domFragment);
+list.insertAdjacentHTML('beforebegin', stringOne);
 
 // add a class to the second paragraph called warning
-domFragment.lastElementChild.classList.add('warning');
+// domFragment.lastElementChild.classList.add('warning');
+const myDiv = document.querySelector('.myDiv');
+myDiv.lastElementChild.classList.add('warning');
 
 // remove the first paragraph
-domFragment.firstElementChild.remove();
+// domFragment.firstElementChild.remove();
+myDiv.firstElementChild.remove();
 
 // create a function called generatePlayerCard that takes in three arguments: name, age, and height
 
