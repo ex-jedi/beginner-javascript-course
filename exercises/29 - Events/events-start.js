@@ -12,4 +12,18 @@ butts.addEventListener('click', function() {
 });
 coolButton.addEventListener('click', hooray);
 
-butts.removeEventListener('click', handleClick);
+coolButton.removeEventListener('click', handleClick);
+
+// * Adding event listener to multiple items
+const buyButtons = document.querySelectorAll('.buy');
+function buyItem(e) {
+  console.log('Buying Item!');
+  console.log('Target', e.currentTarget);
+}
+
+function attachListener(element) {
+  console.log('Binding the buy button');
+  element.addEventListener('click', buyItem);
+}
+
+buyButtons.forEach(attachListener);
