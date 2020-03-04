@@ -16,14 +16,43 @@ coolButton.removeEventListener('click', handleClick);
 
 // * Adding event listener to multiple items
 const buyButtons = document.querySelectorAll('.buy');
-function buyItem(e) {
-  console.log('Buying Item!');
-  console.log('Target', e.currentTarget);
+
+function buyItem(event) {
+  console.log('The Button!');
+  // const button = event.currentTarget;
+  // console.log('Target', event.target);
+  // console.log('Current Target', event.currentTarget);
+  // Prevent from bubbling up
+  event.stopPropagation();
+
+  // console.log('Buying Item!');
+  // console.log(button.textContent);
+  // console.log(parseFloat(e.target.dataset.price));
 }
 
 function attachListener(element) {
-  console.log('Binding the buy button');
   element.addEventListener('click', buyItem);
 }
 
 buyButtons.forEach(attachListener);
+
+window.addEventListener(
+  'click',
+  function(event) {
+    console.log('The Window!');
+    console.log('Window Target', event.target);
+    console.log('Type', event.type);
+    console.log('Bubbles?', event.bubbles);
+    // event.stopPropagation();
+  }
+  // { capture: true }
+);
+
+const photoEL = document.querySelector('.photo');
+
+photoEL.addEventListener('mouseenter', event => {
+  console.log('Target', event.currentTarget);
+  // This is equal to whatever is left of the dot
+  // In arrow functions this is no longer scoped to the element
+  console.log('This', this);
+});
