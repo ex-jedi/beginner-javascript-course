@@ -26,7 +26,7 @@ ctx.stroke();
 // Write draw function
 function draw({ key }) {
   // Increment hue
-  hue += 10;
+  hue += 5;
   ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
   console.log(key);
   ctx.beginPath();
@@ -77,5 +77,5 @@ function clearCanvas() {
 
 // Listen for arrow keys
 window.addEventListener('keydown', handleKey);
-// Listen for skake / clear canvas button
+// Listen for shake / clear canvas button
 shakebutton.addEventListener('click', clearCanvas);
