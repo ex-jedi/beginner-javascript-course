@@ -1,37 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>If Statements</title>
+    <link rel="stylesheet" href="../base.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>If Statements</title>
-  <link rel="stylesheet" href="../base.css">
-</head>
+  <body>
 
-<body>
-  * empty array
-  * empty object
-  * 1
-  * -10
-  * full string
-  * a string of "0"
-  * 0
-  * undefined variable
-  * Variable set to null
-  * a variable set to `"hello" - 10` NaN
-  * empty string
 
-  <script>
+    <h2>Truthy</h2>
+    * full string
+    * 1
+    * -10
+    * a string of "0"
+    * empty array
+    * empty object
 
+    <h2>Falsy</h2>
+    * 0
+    * undefined variable
+    * Variable set to null
+    * a variable set to `"hello" - 10` NaN
+    * empty string
+
+    <script>
+    const whatIsIt = '';
+    if (whatIsIt) {
+      console.log('True? -', "It's true");
+    } else {
+      console.log("It's false");
+    }
+
+    const age = 100;
     function slugify(sentence, lowercase) {
-      let slug = sentence.replace(/\s/g, '-');
+      const slug = sentence.replace(/\s/g, '-');
       if (lowercase) {
         return slug.toLowerCase();
       }
       return slug;
     }
 
-  </script>
-</body>
+    const first = 'Mark';
+    const last = 'Phoenix';
 
+    if (first === 'Mark' && last === 'Phoenix') {
+      console.log("It's you");
+    } else if (first === 'Mark' || last === 'Phoenix') {
+      console.log('It might be you');
+    } else {
+      console.log("It's not you");
+    }
+
+    // Booleans
+    const sentence = 'How not brown cow?';
+    const test = sentence.includes('How');
+
+    if (test) {
+      console.log('Included');
+    } else {
+      console.log('Not Included');
+    }
+
+    function isItHere(word) {
+      return sentence.includes(word);
+    }
+
+    if (isItHere('How')) {
+      console.log('How is here');
+    }
+
+    // Truthy and falsy
+    const cat = '';
+
+    if (cat) {
+      console.log('You have a cat');
+    } else {
+      console.log("You don't have a cat");
+    }
+    </script>
+  </body>
 </html>
