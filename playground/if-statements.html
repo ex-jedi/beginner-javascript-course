@@ -79,6 +79,33 @@
     } else {
       console.log("You don't have a cat");
     }
+
+    // Loop over types
+    const values = [
+  [],
+  {},
+  -10,
+  1,
+  0,
+  '',
+  'full string',
+  ' ',
+  undefined,
+  NaN,
+  null,
+  '0️⃣',
+  '💩',
+];
+
+console.group('Truthy or Falsy');
+values.forEach(value => {
+  if (value) {
+    console.log(value, 'is truthy');
+  } else {
+    console.log(value, 'is falsy');
+  }
+});
+console.groupEnd;
     </script>
   </body>
 </html>
