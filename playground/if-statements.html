@@ -106,6 +106,78 @@ values.forEach(value => {
   }
 });
 console.groupEnd;
+
+console.clear();
+
+const isCool = true;
+
+if (isCool) {
+  console.log('Is cool');
+} else {
+  console.log('Not cool');
+}
+
+//  Ternary.
+// 1. Condition
+// 2.What to do if true
+// 3. What to do if false
+const count = 10;
+// let word;
+
+// If statement way
+/*
+if (count === 1) {
+  word = 'item';
+} else {
+  word = 'items';
+}
+*/
+
+// Ternary way
+
+// const word = count === 1 ? 'item' : 'items';
+
+const basket = `You have ${count} item${count === 1 ? '' : 's'} in your basket`;
+
+console.log(basket);
+
+function showThing() {
+  console.log('Thing :', "Here's a thing");
+}
+
+const thingShow = true;
+
+thingShow ? showThing() : null;
+
+// And And trick (short circuiting)
+
+console.group('Checks');
+function checkOne() {
+  console.log('Runng check 1');
+  return true;
+}
+function checkTwo() {
+  console.log('Runng check 2');
+  return false;
+}
+function checkThree() {
+  console.log('Runng check 3');
+  return true;
+}
+
+// If one of the checks is false the if statement will stop running, or 'short circuit' at that point
+if (checkOne() && checkTwo() && checkThree()) {
+  console.log('All three check out.');
+} else {
+  console.log('One check failed.');
+}
+console.groupEnd();
+
+// Using (abusing) AND AND trick to short circuit statement
+thingShow && showThing();
+
+// Blockless if statement. Works but maybe not good practice
+if (thingShow) showThing();
     </script>
   </body>
 </html>
