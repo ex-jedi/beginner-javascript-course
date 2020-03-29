@@ -27,7 +27,7 @@
       const speed = 15;
       let x = 0;
       let y = 0;
-      let flipped = false;
+      let flipped = 0;
       let rotate = 0;
 
       function handleKeyDown(event) {
@@ -46,12 +46,12 @@
             break;
           case 'ArrowLeft':
             x -= 1;
-            flipped = true;
+            flipped = 180;
             rotate = 0;
             break;
           case 'ArrowRight':
             x += 1;
-            flipped = false;
+            flipped = 0;
             rotate = 0;
             break;
           default:
@@ -64,7 +64,7 @@
           'style',
           `
           --rotate: ${rotate}deg;
-        --rotateX: ${flipped ? '180deg' : 0};
+        --rotateX: ${flipped}deg;
         --x: ${x * speed}px;
         --y: ${y * speed}px`,
         );
