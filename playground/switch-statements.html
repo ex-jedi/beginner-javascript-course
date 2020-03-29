@@ -1,17 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title></title>
+    <link rel="stylesheet" href="../base.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title></title>
-  <link rel="stylesheet" href="../base.css">
-</head>
+  <body>
+    <style>
+      .turt {
+        position: relative;
+        --x: 0px;
+        --y: 0px;
+        --rotateX: 0;
+        --rotate: 0;
+        transition: all 0.1s linear;
+        transform: translateX(var(--x)) translateY(var(--y))
+          rotateY(var(--rotateX)) rotate(var(--rotate));
+      }
+    </style>
+    <img width="200" src="./turtle.png" alt="Turt" class="turt" />
 
+    <script>
+      const turtle = document.querySelector('.turt');
+      const speed = 15;
+      let x = 0;
+      let y = 0;
+      let flipped = 0;
+      let rotate = 0;
 
-<body>
-  <img width="200" src="./turtle.png" alt="Turt" class="turt">
+      function handleKeyDown(event) {
+        // if it's not an arrow key
+        if (!event.key.includes('Arrow')) {
+          return;
+        }
+        switch (event.key) {
+          case 'ArrowUp':
+            y -= 1;
+            rotate = -90;
+            break;
+          case 'ArrowDown':
+            y += 1;
+            rotate = 90;
+            break;
+          case 'ArrowLeft':
+            x -= 1;
+            flipped = 180;
+            rotate = 0;
+            break;
+          case 'ArrowRight':
+            x += 1;
+            flipped = 0;
+            rotate = 0;
+            break;
+          default:
+            console.log('Denied!');
+            break;
+        }
+        console.log('X;', x);
+        console.log('Y;', y);
+        turtle.setAttribute(
+          'style',
+          `
+          --rotate: ${rotate}deg;
+        --rotateX: ${flipped}deg;
+        --x: ${x * speed}px;
+        --y: ${y * speed}px`,
+        );
+      }
 
-</body>
-
+      window.addEventListener('keydown', handleKeyDown);
+    </script>
+  </body>
 </html>
