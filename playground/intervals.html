@@ -1,58 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Intervals and Timers</title>
+    <link rel="stylesheet" href="../base.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Intervals and Timers</title>
-  <link rel="stylesheet" href="../base.css">
-</head>
+  <body>
+    <script>
+      // Anon function in setTimeout
+      setTimeout(() => {
+        console.log('Hello');
+      }, 3000);
 
-<body>
-  <script>
-    function buzzer() {
-      console.log('ENNGGGGGGG');
-    }
+      // Names function to use in setTimeout
+      function buzzer() {
+        console.log('Buzzzz!');
+      }
 
-    // console.log('Starting');
-    // setTimeout(buzzer, 500);
-    // console.log('finishing');
+      // Code after setTimeout doesn't pause until it runs
+      console.log('Starting');
+      // setTimeout with named function
+      setTimeout(buzzer, 1000);
+      console.log('Finishing');
+      /*
+      Completed from example
+      function buzzer() {
+        console.log('ENNGGGGGGG');
+      }
 
+      // console.log('Starting');
+      // setTimeout(buzzer, 500);
+      // console.log('finishing');
 
-    function setImmediateInterval(funcToRun, ms) {
-      // right away call that function
-      funcToRun();
-      // run a regular interval
-      return setInterval(funcToRun, ms);
-    }
+      function setImmediateInterval(funcToRun, ms) {
+        // right away call that function
+        funcToRun();
+        // run a regular interval
+        return setInterval(funcToRun, ms);
+      }
 
-    setImmediateInterval(buzzer, 2000);
-    function sayHi() {
-      console.log('Heyyy');
-    }
-    // setImmediateInterval(sayHi, 200);
+      setImmediateInterval(buzzer, 2000);
+      function sayHi() {
+        console.log('Heyyy');
+      }
+      // setImmediateInterval(sayHi, 200);
 
-    function destroy() {
-      document.body.innerHTML = `<p>DESTROYED</p>`;
-    }
+      function destroy() {
+        document.body.innerHTML = `<p>DESTROYED</p>`;
+      }
 
-    const bombTimer = setTimeout(destroy, 5000);
+      const bombTimer = setTimeout(destroy, 5000);
 
-    window.addEventListener('click', function () {
-      console.log('You clicked! You saved the world');
-      // ???? How do i stop
-      clearTimeout(bombTimer); // STOP THE TIMER FROM RUNNING
-    });
+      window.addEventListener('click', function() {
+        console.log('You clicked! You saved the world');
+        // ???? How do i stop
+        clearTimeout(bombTimer); // STOP THE TIMER FROM RUNNING
+      });
 
-    const poopInterval = setInterval(function () {
-      console.log('💩');
-      console.log('Hehehe');
-    }, 100);
+      const poopInterval = setInterval(function() {
+        console.log('💩');
+        console.log('Hehehe');
+      }, 100);
 
-    setTimeout(function () {
-      clearInterval(poopInterval);
-    }, 3000);
-  </script>
-</body>
-
+      setTimeout(function() {
+        clearInterval(poopInterval);
+      }, 3000);
+      */
+    </script>
+  </body>
 </html>
