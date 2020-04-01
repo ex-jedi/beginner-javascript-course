@@ -5,25 +5,82 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>Intervals and Timers</title>
     <link rel="stylesheet" href="../base.css" />
+    <style>
+      h1 {
+        width: 100%;
+        text-align: center;
+        margin-top: 100px;
+        font-size: 10rem;
+      }
+    </style>
   </head>
 
   <body>
     <script>
       // Anon function in setTimeout
-      setTimeout(() => {
-        console.log('Hello');
-      }, 3000);
+      // setTimeout(() => {
+      //   console.log('Hello');
+      // }, 3000);
 
       // Names function to use in setTimeout
       function buzzer() {
         console.log('Buzzzz!');
       }
 
+      function sayHi() {
+        console.log('Hi!');
+      }
+
       // Code after setTimeout doesn't pause until it runs
-      console.log('Starting');
+      // console.log('Starting');
       // setTimeout with named function
-      setTimeout(buzzer, 1000);
-      console.log('Finishing');
+      // setTimeout(buzzer, 1000);
+      // console.log('Finishing');
+
+      // Set interval with named function
+      // setInterval(buzzer, 10000);
+
+      // Coding interval and run on load
+      function setImmediateInterval(funcToRun, ms) {
+        // Call passed in function right away
+        funcToRun();
+        // Set an interval
+        return setInterval(funcToRun, ms);
+      }
+
+      // setImmediateInterval(buzzer, 5000);
+      // setImmediateInterval(sayHi, 2000);
+
+      // Clear timers and intervals
+      // Timers
+      function destroy() {
+        document.body.innerHTML = `<h1>DESTROYED</h1>`;
+        // Prevents the saving the planet function from running if timer completes (self added)
+        bombTimer = null;
+      }
+
+      window.addEventListener('click', function() {
+        // Clear (stop) bombTimer
+        clearTimeout(bombTimer);
+        if (bombTimer) {
+          document.body.innerHTML = `<h1>You clicked! You save the planet!!</h1>`;
+        }
+      });
+
+      let bombTimer = setTimeout(destroy, 5000);
+
+      // Intervals
+      const poopInterval = setInterval(() => {
+        console.log('💩');
+        console.log('Tee hee');
+      }, 200);
+
+      // Clear interval with setTimeout
+      setTimeout(() => {
+        clearInterval(poopInterval);
+        console.log("Don't be so childish!");
+      }, 2000);
+
       /*
       Completed from example
       function buzzer() {
