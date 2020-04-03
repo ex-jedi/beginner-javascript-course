@@ -8,8 +8,9 @@
   </head>
 
   <body>
-    <input type="text" name="first" value="Mark" />
+    <!-- <input type="text" name="first" value="Mark" /> -->
 
+    <!-- Using lodash utility library  -->
     <script src="https://unpkg.com/lodash"></script>
     <script>
       // Object literal syntax
@@ -40,7 +41,7 @@
       person.age = 50;
       person.address = { city: 'Cheltenham', county: 'Gloucestershire' };
 
-      console.log('person', person);
+      // console.log('person', person);
 
       // Bracket notation
       // console.log(person.age);
@@ -50,21 +51,102 @@
 
       // Checking if property exists
       // Before getting nested property
-      console.log(person.jobs ? person.jobs.side : 'No more jobs!');
+      // console.log(person.jobs ? person.jobs.side : 'No more jobs!');
 
       // Check if input property exists
       const nameInput = document.querySelector('[name="first"]');
       const name = nameInput ? nameInput.value : 'No name';
-      console.log('Name -', name);
+      // console.log('Name -', name);
 
       // Deleting properties
       // Delete returns true when it runs
       const deleted = delete person.job;
-      console.log('Deleted?', deleted);
+      // console.log('Deleted?', deleted);
 
-      // Just Javascript
+      // References vs Values
+
+      // Variables update like Dan Ambramov says.
+      let name1 = 'Mark';
+      let name2 = 'Mark';
+      name1 = 'Kate';
+      name1 = name2;
+      name2 = name1;
+
+      console.log(name1 === name2);
+      name2 = 'Dug';
+
+      const person1 = {
+        first: 'Mark',
+        last: 'Phoenix',
+        clothing: { hats: 10, shoes: 100 },
+      };
+
+      const person2 = {
+        first: 'Mark',
+        last: 'Phoenix',
+      };
+
+      // This doesn't create a new object, it just points one variable to another.
+      // const person3 = person1;
+      // So changing properties on person3 also alters properties on person one as they're the same object.
+      // person3.first = 'Phil';
+      // console.log(person3.first);
+      // console.log(person1.first);
+
+      // Copy an object using spread
+      // const person3 = { ...person1 };
+      // person3.first = 'Steven';
+
+      // Spread copying (and Object.assign()) only works one level deep (shallow copying). Nested objects are still changed
+      // person3.clothing.hats = 100;
+
+      // Use Lodash utility library
+      const person3 = _.cloneDeep(person1);
+      person3.clothing.hats = 100;
+
+      // Copy object an old fashioned way.
+      const person4 = Object.assign({}, person1);
+
+      // Merging objects
+
+      const meatInventory = {
+        bacon: 2,
+        sausage: 3,
+        oyster: 10,
+      };
+
+      const veggieInventory = {
+        lettuce: 5,
+        tomatoes: 3,
+        // Duplicated properties will be overwritten
+        oyster: 15,
+      };
+
+      const inventory = {
+        ...meatInventory,
+        ...veggieInventory,
+      };
+
+      // / Changing reference also is a factor in functions
+
+      function doStuff(data) {
+        data = 'something else';
+        console.log(data);
+      }
+
+      // works as expected
+      doStuff(name1);
+
+      // Below modifies external object
+      function doStuff2(data) {
+        data.tomatoes = '1000000';
+        console.log(data);
+      }
+
+      doStuff2(inventory);
 
       // const sherlock = {
+      // Just Javascript
       //   surname: 'Holmes',
       //   address: { city: 'London' },
       // };
