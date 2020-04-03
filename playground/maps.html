@@ -10,6 +10,40 @@
   <body>
     <ul class="prizes"></ul>
     <script>
+      console.clear();
+      const person1 = {
+        name: 'Mark',
+        age: 100,
+      };
+
+      // Map properties stay in their order
+      const myMap = new Map();
+      myMap.set('name', 'Mark');
+      myMap.set(100, 'This is a number');
+      myMap.set(person1, 'This person is cool');
+      // console.log(myMap);
+
+      const score = 300;
+
+      const prizes = new Map();
+      prizes.set(100, 'Bear');
+      prizes.set(200, 'Duck');
+      prizes.set(300, 'Dog');
+
+      // console.log(`You win a ${prizes.get(score)}`);
+
+      // Display scores and prizes
+      // Select ul
+      const ul = document.querySelector('.prizes');
+      // prizes.forEach(entry => {
+      //   console.log(entry);
+      // });
+
+      for (const [points, prize] of prizes) {
+        const li = `<li>${points} - ${prize}</li>`;
+        ul.insertAdjacentHTML('beforeend', li);
+      }
+
       // const person1 = {
       //   name: 'wes',
       //   age: 200
