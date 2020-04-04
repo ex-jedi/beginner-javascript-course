@@ -119,17 +119,46 @@
       const betterNewToppings = [...toppings];
       console.log('Better new toppings', betterNewToppings);
       // take out items 3 to 5 of your new toppings array with splice()
+
+      const spliced = toppings.splice(2, 3);
+      console.log('Spliced val =', spliced);
+      console.log('Toppings spliced', toppings);
+
       // find the index of Avocado with indexOf() / lastIndexOf()
+      const avoIndex = toppings.indexOf('Avocado');
+      console.log('Avo index =', avoIndex);
+
       // Check if hot sauce is in the toppings with includes()
+
+      const anyHotSauce = toppings.includes('hot sauce ');
+      console.log('Any hot sauce', anyHotSauce);
+
+      if (!anyHotSauce) {
+        toppings.reverse();
+      }
+
       // add it if it's not
       // flip those toppings around with reverse()
+      console.log('Toppings reversed', toppings);
 
       /*
         Callback Methods
       */
 
       // find the first rating that talks about a burger with find()
+      const anyBurgers = feedback.find(({ comment }) =>
+        comment.includes('burg'),
+      );
+      console.log(anyBurgers);
+
       // find all ratings that are above 2 with filter()
+      function checkRating(score) {
+        return feedback.score > 2;
+      }
+
+      const prettyGoodRating = feedback.filter(({ rating }) => rating > 2);
+      console.log(prettyGoodRating);
+
       // find all ratings that talk about a burger with filter()
       // Remove the one star rating however you like!
 
