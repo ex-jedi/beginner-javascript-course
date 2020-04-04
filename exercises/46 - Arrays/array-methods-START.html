@@ -149,25 +149,46 @@
       const anyBurgers = feedback.find(({ comment }) =>
         comment.includes('burg'),
       );
-      console.log(anyBurgers);
+      console.log('anyBurgers', anyBurgers);
 
       // find all ratings that are above 2 with filter()
-      function checkRating(score) {
-        return feedback.score > 2;
-      }
 
       const prettyGoodRating = feedback.filter(({ rating }) => rating > 2);
-      console.log(prettyGoodRating);
+      console.log('prettyGoodRating', prettyGoodRating);
 
       // find all ratings that talk about a burger with filter()
+      const burgerTalk = feedback.filter(({ comment }) =>
+        comment.toLowerCase().includes('burg'),
+      );
+
+      console.log('burgerTalk', burgerTalk);
+
       // Remove the one star rating however you like!
 
-      // check if there is at least 5 of one type of meat with some()
-      // make sure we have at least 3 of every meat with every()
-      // sort the toppings alphabetically with sort()
-      // sort the order totals from most expensive to least with .sort()
-      // Sort the prices with sort()
+      const allGoodRatings = feedback.filter(({ rating }) => rating > 1);
+      console.log('allGoodRatings', allGoodRatings);
 
+      // check if there is at least 5 of one type of meat with some()
+      const enoughMeat = Object.values(meats).some(meat => meat >= 4);
+      console.log('enoughMeat', enoughMeat);
+      console.log(Object.values(meats));
+
+      // make sure we have at least 3 of every meat with every()
+
+      const threeMeat = Object.values(meats).every(meat => meat >= 3);
+      console.log('threeMeat', threeMeat);
+
+      // sort the toppings alphabetically with sort()
+      const toppingsInOrder = toppings.sort();
+      console.log('toppingsInOrder', toppingsInOrder);
+
+      // sort the order totals from most expensive to least with .sort()
+      const orderOrder = orderTotals.sort((a, b) => a - b);
+      console.log('orderOrder', orderOrder);
+
+      // Sort the prices with sort()
+      const pricesInOrder = Object.values(prices).sort((a, b) => a - b);
+      console.log('pricesInOrder', pricesInOrder);
       /*
         Looping Methods (next)
       */
