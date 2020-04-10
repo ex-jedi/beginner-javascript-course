@@ -47,13 +47,12 @@
         { comment: 'Ambiance needs work', rating: 3 },
         { comment: 'I DONT LIKE BURGERS', rating: 1 },
       ];
-
       /*
         Static Methods
       */
       console.clear();
       // Array.of();
-      const thing = '';
+      const thing = 'Hello';
 
       // Very rarely used
       const arrOf = Array.of(5, 4, 3, 2, 1);
@@ -62,27 +61,18 @@
       // Make a function that creates a range from x to y with Array.from();
 
       function rangeFunc(start, stop, step) {
-        return Array.from(
-          Array.from(
-            { length: (stop - start) / step + 1 },
-            (_, i) => start + i * step,
-          ),
-        );
+        return Array.from(Array.from({ length: (stop - start) / step + 1 }, (_, i) => start + i * step));
       }
 
       const rangeArr = rangeFunc(2, 10, 1);
       console.log('rangeArr', rangeArr);
       // From video
       function createRange(start, end) {
-        const range = Array.from({ length: end - start + 1 }, function(
-          item,
-          index,
-        ) {
+        const range = Array.from({ length: end - start + 1 }, function(item, index) {
           return index + start;
         });
         return range;
       }
-
       const arrFromRange = createRange(5, 10);
       console.log('arrFromRange', arrFromRange);
 
@@ -120,13 +110,13 @@
       const bunsString = buns.join(' - ');
       console.log(bunsString);
 
-      // We have a string "hot dogs,hamburgers,sausages,corn" - use split() to turn it into a string
+      // We have a string "hot dogs,hamburgers,sausages,corn" - use split() to turn it into a array
 
       const foodString = 'hot dogs, hamburgers, sausages, corn';
       const newFoodArr = foodString.split(',');
       console.log(newFoodArr);
-      // take the last item off toppings with pop()
 
+      // take the last item off toppings with pop()
       const popped = toppings.pop();
       console.log('Toppings popped', toppings);
       console.log('Popped val =', popped);
@@ -182,9 +172,7 @@
       */
 
       // find the first rating that talks about a burger with find()
-      const anyBurgers = feedback.find(({ comment }) =>
-        comment.includes('burg'),
-      );
+      const anyBurgers = feedback.find(({ comment }) => comment.includes('burg'));
       console.log('anyBurgers', anyBurgers);
 
       // find all ratings that are above 2 with filter()
@@ -193,9 +181,7 @@
       console.log('prettyGoodRating', prettyGoodRating);
 
       // find all ratings that talk about a burger with filter()
-      const burgerTalk = feedback.filter(({ comment }) =>
-        comment.toLowerCase().includes('burg'),
-      );
+      const burgerTalk = feedback.filter(({ comment }) => comment.toLowerCase().includes('burg'));
 
       console.log('burgerTalk', burgerTalk);
 
