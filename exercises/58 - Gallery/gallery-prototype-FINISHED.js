@@ -16,9 +16,7 @@ function Gallery(gallery) {
   this.handleClickOutside = this.handleClickOutside.bind(this);
 
   // These are our Event Listeners!
-  this.images.forEach(image =>
-    image.addEventListener('click', e => this.showImage(e.currentTarget))
-  );
+  this.images.forEach(image => image.addEventListener('click', e => this.showImage(e.currentTarget)));
 
   // loop over each image
   this.images.forEach(image => {
@@ -72,14 +70,10 @@ Gallery.prototype.handleKeyUp = function(event) {
 
 Gallery.prototype.showNextImage = function() {
   console.log('SHOWING NEXT IMAGE!!!');
-  this.showImage(
-    this.currentImage.nextElementSibling || this.gallery.firstElementChild
-  );
+  this.showImage(this.currentImage.nextElementSibling || this.gallery.firstElementChild);
 };
 Gallery.prototype.showPrevImage = function() {
-  this.showImage(
-    this.currentImage.previousElementSibling || this.gallery.lastElementChild
-  );
+  this.showImage(this.currentImage.previousElementSibling || this.gallery.lastElementChild);
 };
 
 Gallery.prototype.showImage = function(el) {

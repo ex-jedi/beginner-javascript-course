@@ -60,12 +60,14 @@
 
       // Make a function that creates a range from x to y with Array.from();
 
+      // From MDN
       function rangeFunc(start, stop, step) {
         return Array.from(Array.from({ length: (stop - start) / step + 1 }, (_, i) => start + i * step));
       }
 
       const rangeArr = rangeFunc(2, 10, 1);
       console.log('rangeArr', rangeArr);
+
       // From video
       function createRange(start, end) {
         const range = Array.from({ length: end - start + 1 }, function(item, index) {
@@ -136,7 +138,19 @@
       console.log('Toppings unshifted', toppings);
 
       // Do the last four,but immutable (with spreads and new variables)
+      console.group('Immutabe Toppings');
+      const toppingsNew = toppings.slice(0, toppings.length - 1);
+      console.log('toppingsNew', toppingsNew);
 
+      const toppingsNewTwo = [...toppingsNew, toppings[toppings.length - 1]];
+      console.log('toppingsNewTwo', toppingsNewTwo);
+
+      const toppingsNewThree = toppings.slice(1, toppings.length);
+      console.log('toppingsNewThree', toppingsNewThree);
+
+      const toppingsNewFour = [toppings[0], ...toppingsNewThree];
+      console.log('toppingsNewFour', toppingsNewFour);
+      console.groupEnd();
       // Make a copy of the toppings array with slice()
       const newToppings = toppings.slice();
       console.log('New toppings', newToppings);
@@ -211,6 +225,9 @@
       // Sort the prices with sort()
       const pricesInOrder = Object.values(prices).sort((a, b) => a - b);
       console.log('pricesInOrder', pricesInOrder);
+
+      const thisRange = Array.from({ length: 10 }, (item, index) => index);
+      console.log('thisRange', thisRange);
       /*
         Looping Methods (next)
       */
