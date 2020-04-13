@@ -257,10 +257,7 @@
       console.log('orderOrder', orderOrder);
 
       // Sort the prices with sort()
-      const pricesInOrder = Object.values(prices).sort((a, b) => {
-  debugger;
-  a - b;
-});
+      const pricesInOrder = Object.values(prices).sort((a, b) => a - b);
       console.log('pricesInOrder', pricesInOrder);
 
       const thisRange = Array.from({ length: 10 }, (item, index) => index);
