@@ -12,7 +12,19 @@
 
 <body>
   <script>
-    const toppings = ['Mushrooms ', 'Tomatoes', 'Eggs', 'Chili', 'Lettuce', 'Avocado', 'Chiles', 'Bacon', 'Pickles', 'Onions', 'Cheese'];
+    const toppings = [
+  'Mushrooms ',
+  'Tomatoes',
+  'Eggs',
+  'Chili',
+  'Lettuce',
+  'Avocado',
+  'Chiles',
+  'Bacon',
+  'Pickles',
+  'Onions',
+  'Cheese',
+];
 
     const students = [
       {
@@ -67,32 +79,31 @@
         birthday: 'April 22, 1993',
         names: {
           first: 'Keith',
-          last: 'Buckley'
-        }
+          last: 'Buckley',
+        },
       },
       {
         birthday: 'January 3, 1975',
         names: {
           first: 'Larry',
-          last: 'Heep'
-        }
+          last: 'Heep',
+        },
       },
       {
         birthday: 'February 12, 1944',
         names: {
           first: 'Linda',
-          last: 'Bermeer'
-        }
-      }
+          last: 'Bermeer',
+        },
+      },
     ];
-
 
     const buns = ['egg', 'wonder', 'brioche'];
 
     const meats = {
       beyond: 10,
       beef: 5,
-      pork: 7
+      pork: 7,
     };
 
     const prices = {
@@ -124,11 +135,25 @@
       { type: 'pants', price: 123 },
     ];
 
-
     /*
       Looping Methods
     */
 
+    // forEach
+    // Function using all three paramiters
+    function logTopping(topping, index, originalArray) {
+      const prevTopping = originalArray[index - 1];
+      const nextTopping = originalArray[index + 1];
+      // log topping
+      console.log('Current topping', topping);
+      // log previous topping
+      prevTopping ? console.log('Previous topping', prevTopping) : null;
+      // log next topping
+      nextTopping ? console.log('Next topping', nextTopping) : null;
+      // If it's the last one sat goodbye
+      console.log('----🍕----');
+      originalArray.length - 1 === index ? console.log('Goodbye!') : null;
+    }
   </script>
 </body>
 
