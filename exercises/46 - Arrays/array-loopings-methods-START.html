@@ -138,6 +138,22 @@
     /*
       Looping Methods
     */
+
+    // forEach
+    // Function using all three paramiters
+    function logTopping(topping, index, originalArray) {
+      const prevTopping = originalArray[index - 1];
+      const nextTopping = originalArray[index + 1];
+      // log topping
+      console.log('Current topping', topping);
+      // log previous topping
+      prevTopping ? console.log('Previous topping', prevTopping) : null;
+      // log next topping
+      nextTopping ? console.log('Next topping', nextTopping) : null;
+      // If it's the last one sat goodbye
+      console.log('----🍕----');
+      originalArray.length - 1 === index ? console.log('Goodbye!') : null;
+    }
   </script>
 </body>
 
