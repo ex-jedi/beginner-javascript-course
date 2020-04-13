@@ -50,7 +50,6 @@
       /*
         Static Methods
       */
-      console.clear();
       // Array.of();
       const thing = 'Hello';
 
@@ -109,14 +108,14 @@
       */
 
       // Display all bun types with " or " - use join()
-      const bunsString = buns.join(' - ');
-      console.log(bunsString);
+      const bunsString = buns.join(' or ');
+      console.log('bunsString:', bunsString);
 
       // We have a string "hot dogs,hamburgers,sausages,corn" - use split() to turn it into a array
 
       const foodString = 'hot dogs, hamburgers, sausages, corn';
       const newFoodArr = foodString.split(',');
-      console.log(newFoodArr);
+      console.log('newFoodArr', newFoodArr);
 
       // take the last item off toppings with pop()
       const popped = toppings.pop();
@@ -139,46 +138,52 @@
 
       // Do the last four,but immutable (with spreads and new variables)
       console.group('Immutabe Toppings');
-      const toppingsNew = toppings.slice(0, toppings.length - 1);
-      console.log('toppingsNew', toppingsNew);
+      let toppingsNew = toppings.slice(0, toppings.length - 1);
+      console.log('toppingsNew 1', toppingsNew);
 
-      const toppingsNewTwo = [...toppingsNew, toppings[toppings.length - 1]];
-      console.log('toppingsNewTwo', toppingsNewTwo);
+      toppingsNew = [...toppingsNew, toppings[toppings.length - 1]];
+      console.log('toppingsNew 2', toppingsNew);
 
-      const toppingsNewThree = toppings.slice(1, toppings.length);
-      console.log('toppingsNewThree', toppingsNewThree);
+      let toppingsNewTwo = toppings.slice(1, toppings.length);
+      console.log('toppingsNewTwo 1', toppingsNewTwo);
 
-      const toppingsNewFour = [toppings[0], ...toppingsNewThree];
-      console.log('toppingsNewFour', toppingsNewFour);
+      toppingsNewTwo = [toppings[0], ...toppingsNewTwo];
+      console.log('toppingsNewTwo 2', toppingsNewTwo);
       console.groupEnd();
+
       // Make a copy of the toppings array with slice()
-      const newToppings = toppings.slice();
-      console.log('New toppings', newToppings);
+      const toppingsCopy = toppings.slice();
+      console.log('New toppings', toppingsCopy);
 
       // Make a copy of the toppings array with a spread
-      const betterNewToppings = [...toppings];
-      console.log('Better new toppings', betterNewToppings);
-      // take out items 3 to 5 of your new toppings array with splice()
+      const betterToppingsCopy = [...toppings];
+      console.log('Better new toppings', betterToppingsCopy);
 
-      const spliced = toppings.splice(2, 3);
+      // take out items 3 to 5 of your new toppings array with splice()
+      const spliced = betterToppingsCopy.splice(2, 3);
       console.log('Spliced val =', spliced);
-      console.log('Toppings spliced', toppings);
+      console.log('Toppings copy spliced', betterToppingsCopy);
 
       // find the index of Avocado with indexOf() / lastIndexOf()
       const avoIndex = toppings.indexOf('Avocado');
       console.log('Avo index =', avoIndex);
 
       // Check if hot sauce is in the toppings with includes()
-
-      const anyHotSauce = toppings.includes('hot sauce ');
+      const anyHotSauce = toppings.includes('hot sauce');
       console.log('Any hot sauce', anyHotSauce);
 
-      if (!anyHotSauce) {
-        toppings.reverse();
-      }
-
       // add it if it's not
+
+      if (!anyHotSauce) {
+        toppings.push('Hot Sauce');
+        console.log('Hot toppings', toppings);
+      }
       // flip those toppings around with reverse()
+      // Immutable
+      const toppingsReversed = [...toppings].reverse();
+      console.log('toppingsReversed - immutable', toppingsReversed);
+      toppings.reverse();
+      // Mutable
       console.log('Toppings reversed', toppings);
 
       /*
