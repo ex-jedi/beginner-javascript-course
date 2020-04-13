@@ -190,17 +190,47 @@
         Callback Methods
       */
 
+      // Putting functions into an Object
+      // const util = {
+      //   findBurgerRating(singleFeedback) {
+      //     return singleFeedback.comment.includes('burg');
+      //   },
+      // };
+
       // find the first rating that talks about a burger with find()
-      const anyBurgers = feedback.find(({ comment }) => comment.includes('burg'));
-      console.log('anyBurgers', anyBurgers);
+      // Arrow function with deconstruction
+      // const burgFinder = ({ comment }) => comment.includes('burg');
+
+      // Regular function
+      // function burgFinder(singleFeedback) {
+      //   return singleFeedback.comment.includes('burg');
+      // }
+
+      // More modular reusable function
+      function findByWord(word) {
+        return function({ comment }) {
+          return comment.toLowerCase().includes(word);
+        };
+      }
+
+      const burgRating = feedback.find(findByWord('burg'));
+      console.log('burgRating', burgRating);
+
+      const smoothieRating = feedback.find(findByWord('Smooth'));
+      console.log('smoothieRating', smoothieRating);
 
       // find all ratings that are above 2 with filter()
+      function filterByRating(score) {
+        return function({ rating }) {
+          return rating >= score;
+        };
+      }
 
-      const prettyGoodRating = feedback.filter(({ rating }) => rating > 2);
-      console.log('prettyGoodRating', prettyGoodRating);
+      const prettyGoodRating = feedback.filter(filterByRating(2));
+      console.table(prettyGoodRating);
 
       // find all ratings that talk about a burger with filter()
-      const burgerTalk = feedback.filter(({ comment }) => comment.toLowerCase().includes('burg'));
+      const burgerTalk = feedback.filter(findByWord('burg'));
 
       console.log('burgerTalk', burgerTalk);
 
@@ -210,9 +240,8 @@
       console.log('allGoodRatings', allGoodRatings);
 
       // check if there is at least 5 of one type of meat with some()
-      const enoughMeat = Object.values(meats).some(meat => meat >= 4);
+      const enoughMeat = Object.values(meats).some(meat => meat >= 5);
       console.log('enoughMeat', enoughMeat);
-      console.log(Object.values(meats));
 
       // make sure we have at least 3 of every meat with every()
 
@@ -228,7 +257,10 @@
       console.log('orderOrder', orderOrder);
 
       // Sort the prices with sort()
-      const pricesInOrder = Object.values(prices).sort((a, b) => a - b);
+      const pricesInOrder = Object.values(prices).sort((a, b) => {
+  debugger;
+  a - b;
+});
       console.log('pricesInOrder', pricesInOrder);
 
       const thisRange = Array.from({ length: 10 }, (item, index) => index);
