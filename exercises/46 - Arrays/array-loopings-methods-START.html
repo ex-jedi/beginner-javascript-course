@@ -233,9 +233,39 @@
         name: `${person.names.first} ${person.names.last}`,
       };
     });
-
     console.table(cleanPeople);
-  </script>
+
+    // Filter and Find
+    const over40 = cleanPeople.filter(person => person.age > 40);
+    console.table(over40);
+
+    // Filter returns an array with items that match the contition. Find returns the item that matches the condition
+    const student1 = students.find(({ id }) => id === '565a');
+    console.log('student1', student1);
+
+    function findById(id) {
+      return function isStudent(student) {
+        return student.id === id;
+      };
+    }
+
+    // Higher order function (function that returns a function)
+    const student2 = students.find(findById('f396'));
+    console.log('student2', `${student2.first_name} ${student2.last_name}`);
+
+    // More flexible function
+    function findByProp(propKey, propVal) {
+      return function isStudent(student) {
+        return student[propKey] === propVal;
+      };
+    }
+
+    const studentFinder = students.find(findByProp('first_name', 'Flory'));
+    console.log('studentFinder', studentFinder);
+
+    const studentFinder2 = students.find(findByProp('id', '3a16'));
+    console.log('studentFinder2', studentFinder2);
+</script>
 </body>
 
 </html>
