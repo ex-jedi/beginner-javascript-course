@@ -239,7 +239,7 @@
     const over40 = cleanPeople.filter(person => person.age > 40);
     console.table(over40);
 
-    // Filter returns an array with items that match the contition. Find returns the item that matches the condition
+    // Filter returns an array with items that match the condition. Find returns the item that matches the condition
     const student1 = students.find(({ id }) => id === '565a');
     console.log('student1', student1);
 
@@ -253,7 +253,7 @@
     const student2 = students.find(findById('f396'));
     console.log('student2', `${student2.first_name} ${student2.last_name}`);
 
-    // More flexible function
+    // More flexible function higher order function
     function findByProp(propKey, propVal) {
       return function isStudent(student) {
         return student[propKey] === propVal;
