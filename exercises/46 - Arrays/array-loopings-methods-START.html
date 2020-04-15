@@ -281,10 +281,18 @@
     console.clear();
 
     function inventoryReducer(totals, item) {
-      console.log(`Looping over ${item.type}`);
+      // Increment type by 1
+      // totals[item.type] ? (totals[item.type] += 1) : (totals[item.type] = 1);
+      totals[item.type] = totals[item.type] + 1 || 1;
+      // Return totals so next loop can use it
+      return totals;
     }
+
     const inventoryCounts = inventory.reduce(inventoryReducer, {});
     console.log('inventoryCounts', inventoryCounts);
+
+    const totalInventoryPrice = inventory.reduce((acc, { price }) => acc + price, 0);
+    console.log('totalInventoryPrice', totalInventoryPrice);
 </script>
 </body>
 
