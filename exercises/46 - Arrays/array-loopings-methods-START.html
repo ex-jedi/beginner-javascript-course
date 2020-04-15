@@ -265,6 +265,36 @@
 
     const studentFinder2 = students.find(findByProp('id', '3a16'));
     console.log('studentFinder2', studentFinder2);
+
+    // ********** Reduce! **********
+
+    function tallyNumbers(tally, currentVal) {
+      console.log(`The current value is ${currentVal}`);
+      console.log(`The tally is ${tally}`);
+      console.log('----');
+      return tally + currentVal;
+    }
+
+    // Second (optional) argument is the tally's starting value. It will add the first two items on start if it's omitted
+    const allOrders = orderTotals.reduce(tallyNumbers, 0);
+    console.log('allOrders', allOrders);
+
+    console.clear();
+    function inventoryReducer(totals, item) {
+      // Increment type by 1
+      // totals.shirt ? (totals.shirt += 1) : (totals.shirt = 1);
+      debugger;
+      totals[item.type] ? (totals[item.type] += 1) : (totals[item.type] = 1);
+      // totals[item.type] = totals[item.type] + 1 || 1;
+      // Return totals so next loop can use it
+      return totals;
+    }
+
+    const inventoryCounts = inventory.reduce(inventoryReducer, {});
+    console.log('inventoryCounts', inventoryCounts);
+
+    const totalInventoryPrice = inventory.reduce((acc, { price }) => acc + price, 0);
+    console.log('totalInventoryPrice', totalInventoryPrice);
 </script>
 </body>
 
