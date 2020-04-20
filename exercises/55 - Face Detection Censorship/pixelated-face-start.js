@@ -2,8 +2,10 @@ const video = document.querySelector('.webcam');
 const canvas = document.querySelector('.video');
 const ctx = canvas.getContext('2d');
 const faceCanvas = document.querySelector('.face');
-const faceCtx = canvas.getContext('2d');
+const faceCtx = faceCanvas.getContext('2d');
 const faceDetector = new window.FaceDetector();
+const SIZE = 7;
+const SCALE = 1.5;
 
 // Populate video function
 
@@ -37,6 +39,8 @@ function drawFace(face) {
 }
 
 function censor({ boundingBox: face }) {
+  faceCanvas.imageSmoothingEnabled = false;
+  faceCtx.clearRect(0, 0, faceCanvas.width, faceCanvas.height);
   // draw small face
   faceCtx.drawImage(
     // 5 source arguments
@@ -46,13 +50,26 @@ function censor({ boundingBox: face }) {
     face.width,
     face.height,
     // 4 draw arguments
-    face.x, // Where do we start drawinf the x & y?
+    face.x, // Where do we start drawing the x & y?
     face.y,
-    face.width,
-    face.height
+    SIZE,
+    SIZE
   );
-  // remove and draw at normal size
-  // console.log(face);
+  // Draw the small face back on but scale up
+  const width = face.width * SCALE;
+  const height = face.height * SCALE;
+  faceCtx.drawImage(
+    faceCanvas, // Source
+    face.x, // Where do we start the source pull
+    face.y,
+    SIZE,
+    SIZE,
+    // Drawing args
+    face.x - (width - face.width) / 2, // Where do we start drawing the x & y?
+    face.y - (height - face.height) / 2,
+    width,
+    height
+  );
 }
 
 populateVideo().then(detect);
