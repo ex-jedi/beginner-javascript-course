@@ -4,9 +4,7 @@ const ctx = canvas.getContext('2d');
 const faceCanvas = document.querySelector('.face');
 const faceCtx = faceCanvas.getContext('2d');
 const faceDetector = new window.FaceDetector();
-const optionsInputs = document.querySelectorAll(
-  '.controls input[type="range"]'
-);
+const optionsInputs = document.querySelectorAll('.controls input[type="range"]');
 
 const options = {
   SIZE: 10,
