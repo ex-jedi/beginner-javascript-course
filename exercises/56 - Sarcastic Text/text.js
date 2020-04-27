@@ -44,11 +44,14 @@ function transformText(text) {
   result.textContent = mod.join('');
 }
 
-textarea.addEventListener('input', e => transformText(e.target.value));
+textarea.addEventListener('input', e => {
+  // console.log('current target', e.currentTarget.value);
+  // console.log('target', e.target.value);
+  transformText(e.currentTarget.value);
+});
 
 filterInputs.forEach(input =>
   input.addEventListener('input', () => {
-    debugger;
     transformText(textarea.value);
   })
 );
