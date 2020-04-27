@@ -1,5 +1,5 @@
 // https://courses.wesbos.com/account/access/5e4818abd9cc836465201439/view/375731570
-// Start video at 11.50 mins
+// Start video at 11.50 minutes
 
 const vid = document.querySelector('.webcam');
 const canvas = document.querySelector('.video');
@@ -14,6 +14,7 @@ const options = {
 
 function handleOption(e) {
   const { value, name } = e.currentTarget;
+  console.log(name, value);
   options[name] = parseFloat(value);
 }
 
@@ -35,17 +36,9 @@ async function populateVideo() {
   console.dir(vid);
 }
 
-async function detect() {
-  const faces = await faceDetector.detect(vid);
-  faces.forEach(drawFace);
-  faces.forEach(censor);
-  // Ask browser when next animation frame is and get it to run detect
-  requestAnimationFrame(detect);
-  // console.log(faces);
-}
-
 function drawFace(face) {
   const { width, height, top, left } = face.boundingBox;
+  // console.log(face);
   // console.log({ width, height, top, left });
   // console.log(width, height, top, left);
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -56,8 +49,8 @@ function drawFace(face) {
 
 function censor({ boundingBox: face }) {
   // console.log(face);
-  faceCanvas.imageSmoothingEnabled = false;
   faceCtx.clearRect(0, 0, faceCanvas.width, faceCanvas.height);
+  faceCanvas.imageSmoothingEnabled = false;
   // draw small face
   faceCtx.drawImage(
     // 5 source arguments
@@ -87,6 +80,15 @@ function censor({ boundingBox: face }) {
     width,
     height
   );
+}
+
+async function detect() {
+  const faces = await faceDetector.detect(vid);
+  faces.forEach(drawFace);
+  faces.forEach(censor);
+  // Ask browser when next animation frame is and get it to run detect
+  requestAnimationFrame(detect);
+  // console.log(faces);
 }
 
 populateVideo().then(detect);
