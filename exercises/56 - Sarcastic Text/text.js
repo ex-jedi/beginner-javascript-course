@@ -16,6 +16,7 @@ const filters = {
     }
     // Returns 0 (falsy) if letter index is even so will lowercase letter
     return letter.toLowerCase();
+    // return index % 2 ? letter.toUpperCase() : letter.toLowerCase();
   },
   funky(letter) {
     // First check if there is a funky letter for this case
@@ -29,7 +30,7 @@ const filters = {
   },
   unable(letter) {
     const random = Math.floor(Math.random() * 3);
-    if (letter === ' ' && random === 2) {
+    if (letter === ' ' && random === 1) {
       return '...';
     }
     return letter;
@@ -39,6 +40,8 @@ const filters = {
 function transformText(text) {
   // const filter = document.querySelector('[name="filter"]:checked').value;
   const filter = filterInputs.find(radio => radio.checked).value;
+  // const filterTest = filterInputs.find(radio => radio.checked);
+  // console.dir(filterTest);
   // Loop over each letter of text
   const mod = Array.from(text).map(filters[filter]);
   result.textContent = mod.join('');
