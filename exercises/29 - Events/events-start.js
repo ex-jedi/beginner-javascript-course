@@ -37,12 +37,21 @@ buyButtons.forEach(function(buyButton) {
 window.addEventListener(
   'click',
   event => {
-    // console.log('Window Target', event.target);
+    console.log('Window Target', event.target);
     console.log('You clicked the window');
-    // event.stopPropagation();
-  },
-  { capture: true }
+    console.log('Type', event.type);
+  }
+  // { capture: true }
 );
+
+const photoEL = document.querySelector('.photo');
+
+photoEL.addEventListener('mouseenter', event => {
+  console.log('Target', event.currentTarget);
+  // 'this' is equal to whatever is left of the dot
+  // In arrow functions 'this' is no longer scoped to the element
+  console.log('This', this);
+});
 
 /*
 function buyItem(event) {
