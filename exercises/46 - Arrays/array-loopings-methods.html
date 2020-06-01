@@ -262,30 +262,39 @@ const orderTotalsWithTax = orderTotals.map(total =>
     console.log(student);
     console.log(student2);
 
-    // Reduce!
-    // console.clear();
+    // * Reduce!
+    console.clear();
 
-    function tallyNumbers(tally, currentTotal) {
+    // A less than ideal way to add up a bunch of stuff
+    // A bit messy as it relies on an external variable
+    // let total = 0;
+    // orderTotals.forEach(itemTotal => (total += itemTotal));
+    // console.log('Total', total);
+
+    function tallyNumbers(tally, currentValue) {
       // console.log(`The current tally is ${tally}`);
-      // console.log(`The current total is ${currentTotal}`);
-      // console.log('---------');
-      // return the current tally PLUS the amount of this order
-      return tally + currentTotal;
+      // console.log(`The current total is ${currentValue}`);
+      // console.log('-----😎----');
+      // return the current tally PLUS the amount of this order(currentValue)
+      return tally + currentValue;
     }
 
+    // Second argument is tally's initial value. It's optional.
     const allOrders = orderTotals.reduce(tallyNumbers, 0);
 
     function inventoryReducer(totals, item) {
-      // console.log(`Looping over ${item.type}`);
+      console.log(`Looping over ${item.type}`);
       // increment the type by 1
+      // if (item.type === 'shirt') {
+      //   totals.shirt = totals.shirt + 1 || 1;
+      // }
       totals[item.type] = totals[item.type] + 1 || 1;
-      // totals.shirt ? totals.shirt + 1 : totals.shirt = 1;
       // return the totals, so the next loop can use it
       return totals;
     }
 
     const inventoryCounts = inventory.reduce(inventoryReducer, {});
-    // console.log(inventoryCounts);
+    console.log(inventoryCounts);
 
     const totalInventoryPrice = inventory.reduce((acc, item) => acc + item.price, 0);
     // console.log(totalInventoryPrice);
