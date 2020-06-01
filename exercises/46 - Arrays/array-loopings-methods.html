@@ -282,12 +282,17 @@ const orderTotalsWithTax = orderTotals.map(total =>
     // Second argument is tally's initial value. It's optional.
     const allOrders = orderTotals.reduce(tallyNumbers, 0);
 
+    //  IMPORTANT: The way Wes does the exercise in the video is a bit confusing
+    // Below is a bit more clear
     function inventoryReducer(totals, item) {
-      console.log(`Looping over ${item.type}`);
-      // increment the type by 1
+      // console.log(`Looping over ${item.type}`);
       // if (item.type === 'shirt') {
       //   totals.shirt = totals.shirt + 1 || 1;
       // }
+      // Increment the type by 1 or initialise it
+      // If you try to add a number to nothing you'll get NaN, hence why you need to initialise it
+      // Debugger is very useful here to see what's going on
+      // debugger;
       totals[item.type] = totals[item.type] + 1 || 1;
       // return the totals, so the next loop can use it
       return totals;
@@ -297,7 +302,12 @@ const orderTotalsWithTax = orderTotals.map(total =>
     console.log(inventoryCounts);
 
     const totalInventoryPrice = inventory.reduce((acc, item) => acc + item.price, 0);
-    // console.log(totalInventoryPrice);
+    // Same as above with debugger
+    // const totalInventoryPrice = inventory.reduce((acc, item) => {
+    //   debugger;
+    //   return acc + item.price;
+    // }, 0);
+    console.log(totalInventoryPrice);
   </script>
 </body>
 
