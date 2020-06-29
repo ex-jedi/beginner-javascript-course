@@ -262,7 +262,7 @@ const orderTotalsWithTax = orderTotals.map(total =>
     console.log(student);
     console.log(student2);
 
-    // * Reduce!
+    // * Reduce
     console.clear();
 
     // A less than ideal way to add up a bunch of stuff
@@ -271,16 +271,17 @@ const orderTotalsWithTax = orderTotals.map(total =>
     // orderTotals.forEach(itemTotal => (total += itemTotal));
     // console.log('Total', total);
 
-    function tallyNumbers(tally, currentValue) {
-      // console.log(`The current tally is ${tally}`);
-      // console.log(`The current total is ${currentValue}`);
-      // console.log('-----😎----');
-      // return the current tally PLUS the amount of this order(currentValue)
-      return tally + currentValue;
-    }
+    // function tallyNumbers(tally, currentValue) {
+    //   console.log(`The current total is ${tally}`);
+    //   console.log(`The current value is ${currentValue}`);
+    //   console.log('-----😎----');
+    //   // return the current tally PLUS the amount of this order(currentValue)
+    //   return tally + currentValue;
+    // }
 
     // Second argument is tally's initial value. It's optional.
-    const allOrders = orderTotals.reduce(tallyNumbers, 0);
+    // const allOrders = orderTotals.reduce(tallyNumbers, 0);
+    // console.log(allOrders);
 
     //  IMPORTANT: The way Wes does the exercise in the video is a bit confusing
     // Below is a bit more clear
@@ -294,6 +295,8 @@ const orderTotalsWithTax = orderTotals.map(total =>
       // Debugger is very useful here to see what's going on
       // debugger;
       totals[item.type] = totals[item.type] + 1 || 1;
+      // ALternative with ternary
+      // totals[item.type] ? (totals[item.type] += 1) : (totals[item.type] = 1);
       // return the totals, so the next loop can use it
       return totals;
     }
