@@ -10,7 +10,7 @@
 
 <body>
   <script>
-    console.clear();
+    // console.clear();
     // Grab all the text from a web page
     // put contents into string
 const masterString = `Skip to main content
@@ -545,7 +545,7 @@ TermsPrivacyCookies
 // filter out non alphanumeric characters and return array
 // Count how many times each letter and number occurs
 
-// Regex test
+// Regex filter
 function isAlphanumeric(char) {
   // either works
   return char.match(/[a-zA-Z0-9]/gi);
@@ -557,11 +557,15 @@ function isAlphanumeric(char) {
 //   return item.toLowerCase();
 // }
 
+// This or above works the same way
 const makeLowerCase = item => item.toLowerCase();
 
 // counter function
 function characterCounter(accumulator, currentValue) {
-  accumulator[currentValue] ? (accumulator[currentValue] += 1) : (accumulator[currentValue] = 1);
+  // eslint-disable-next-line no-unused-expressions
+  accumulator[currentValue] // Check if current letter is already in the accumulator object
+        ? (accumulator[currentValue] += 1) // If it is increment by one
+        : (accumulator[currentValue] = 1); // If not add it to accumulator
   return accumulator;
 }
 
