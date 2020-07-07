@@ -49,7 +49,7 @@ function transformText(text) {
 
 textarea.addEventListener('input', e => {
   // console.log('current target', e.currentTarget.value);
-  // console.log('target', e.target.value);
+  console.log('target', e.currentTarget.value);
   transformText(e.currentTarget.value);
 });
 
