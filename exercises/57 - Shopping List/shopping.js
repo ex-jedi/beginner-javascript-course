@@ -37,7 +37,10 @@ function displayItems() {
   const html = items
     .map(
       item => `<li class="shopping-item">
-    <input type="checkbox">
+    <input
+    type="checkbox"
+    value="${item.id}"
+    ${item.complete ? 'checked' : null}>
     <span class="itemName">${item.name}</span>
     <button
     aria-label="Remove ${item.name}"
@@ -61,9 +64,10 @@ function restoreFromLocalStorage() {
   // Retrieve items from local storage
   const lsItems = JSON.parse(localStorage.getItem('items'));
   if (lsItems.length) {
-    // Spreads items from local storage into items
-    // Could also change items to let. Bunch of ways to do this though
-    items.push(...lsItems);
+    // Overwrites items with contents of local storage
+    items = lsItems;
+    // Alternative if you don't want to overwrite the array totally Bunch of ways to do this though
+    // items.push(...lsItems);
     list.dispatchEvent(new CustomEvent('itemsUpdated'));
   }
   // console.log(lsItems);
@@ -76,16 +80,31 @@ function deleteItem(id) {
   list.dispatchEvent(new CustomEvent('itemsUpdated'));
 }
 
+function markAsComplete(id) {
+  const itemRef = items.find(item => item.id === id);
+  // Toggles itemRef.complete boolean
+  itemRef.complete = !itemRef.complete;
+  console.log(itemRef);
+  list.dispatchEvent(new CustomEvent('itemsUpdated'));
+}
+
 shoppingForm.addEventListener('submit', handleSubmit);
 list.addEventListener('itemsUpdated', displayItems);
+
 // Can add multiple listeners for a custom event
 list.addEventListener('itemsUpdated', mirrorToLocalStorage);
+
 // Delete item by event delegation. Listen for a click on the list but check the target is a button
 list.addEventListener('click', function(e) {
+  const itemId = parseInt(e.target.value);
   if (e.target.matches('button')) {
     // Below returns a string. Needs to be changed to a number
-    deleteItem(parseInt(e.target.value));
+    deleteItem(itemId);
+  }
+  if (e.target.matches('[type="checkbox"]')) {
+    markAsComplete(itemId);
   }
 });
+
 // Runs on pageload to restore items from local storage
 restoreFromLocalStorage();
