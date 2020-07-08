@@ -33,21 +33,43 @@ function handleSubmit(e) {
 }
 
 function displayItems() {
-  console.log(items);
+  // console.log(items);
   const html = items
     .map(
       item => `<li class="shopping-item">
-      <input type="checkbox">
-  <span class="itemName">${item.name}</span>
-  <button aria-label="Remove${item.name}">&times;</button>
-  </li>`
+    <input type="checkbox">
+    <span class="itemName">${item.name}</span>
+    <button aria-label="Remove${item.name}">&times;</button>
+    </li>`
     )
     .join('');
   console.log(html);
+  console.log(`----------🐈--------`);
   list.innerHTML = html;
+}
+
+function mirrorToLocalStorage() {
+  console.info('Saving to local storage');
+  // Local storage only takes strings
+  localStorage.setItem('items', JSON.stringify(items));
+}
+
+function restoreFromLocalStorage() {
+  // Retrieve items from local storage
+  const lsItems = JSON.parse(localStorage.getItem('items'));
+  if (lsItems.length) {
+    // Spreads items from local storage into items
+    // Could also change items to let. Bunch of ways to do this though
+    items.push(...lsItems);
+    list.dispatchEvent(new CustomEvent('itemsUpdated'));
+  }
+  console.log(lsItems);
 }
 
 shoppingForm.addEventListener('submit', handleSubmit);
 list.addEventListener('itemsUpdated', displayItems);
 // Can add multiple listeners for a custom event
-// list.addEventListener('itemsUpdated', e => console.log(e));
+list.addEventListener('itemsUpdated', mirrorToLocalStorage);
+
+// Runs on pageload to restore items from local storage
+restoreFromLocalStorage();
