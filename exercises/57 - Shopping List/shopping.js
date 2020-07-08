@@ -4,7 +4,7 @@ const shoppingForm = document.querySelector('.shopping');
 const list = document.querySelector('.list');
 
 // Array to hold state
-const items = [];
+let items = [];
 
 function handleSubmit(e) {
   e.preventDefault();
@@ -39,7 +39,10 @@ function displayItems() {
       item => `<li class="shopping-item">
     <input type="checkbox">
     <span class="itemName">${item.name}</span>
-    <button aria-label="Remove${item.name}">&times;</button>
+    <button
+    aria-label="Remove ${item.name}"
+    value="${item.id}"
+    >&times;</button>
     </li>`
     )
     .join('');
@@ -63,13 +66,26 @@ function restoreFromLocalStorage() {
     items.push(...lsItems);
     list.dispatchEvent(new CustomEvent('itemsUpdated'));
   }
-  console.log(lsItems);
+  // console.log(lsItems);
+}
+
+function deleteItem(id) {
+  console.log('Deleting item', id);
+  // Filter out item for deletion
+  items = items.filter(item => item.id !== id);
+  list.dispatchEvent(new CustomEvent('itemsUpdated'));
 }
 
 shoppingForm.addEventListener('submit', handleSubmit);
 list.addEventListener('itemsUpdated', displayItems);
 // Can add multiple listeners for a custom event
 list.addEventListener('itemsUpdated', mirrorToLocalStorage);
-
+// Delete item by event delegation. Listen for a click on the list but check the target is a button
+list.addEventListener('click', function(e) {
+  if (e.target.matches('button')) {
+    // Below returns a string. Needs to be changed to a number
+    deleteItem(parseInt(e.target.value));
+  }
+});
 // Runs on pageload to restore items from local storage
 restoreFromLocalStorage();
