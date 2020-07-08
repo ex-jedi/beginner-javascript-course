@@ -1,3 +1,5 @@
+// https://courses.wesbos.com/account/access/5e4818abd9cc836465201439/view/375774374
+
 const shoppingForm = document.querySelector('.shopping');
 const list = document.querySelector('.list');
 
@@ -8,6 +10,8 @@ function handleSubmit(e) {
   e.preventDefault();
   // Inputs can be accessed by appending their name (item in this case) to whatever is accessing the form (in this case e.currentTarget 👇🏾.)
   const name = e.currentTarget.item.value;
+  // Prevents blank items being added to items
+  if (!name) return;
   // Item object, containing state info. Good to have an ID when creating a list of things, makes it easier to find
   // Useful trick. Using Date.now() to generate unique ID. Only a problem if you're making more than one item a millisecond 👇🏾👇🏾
   const item = {
@@ -22,7 +26,10 @@ function handleSubmit(e) {
   // Clear the form. Either of the below works fine. reset() will clear all the inputs in a form.
   // e.currentTarget.item.value = '';
   e.target.reset();
-  displayItems();
+  // Running displayItems() here isn't ideal. If this became more complex coupling these two functions together could be a problem 👇🏾
+  // displayItems();
+  // Instead we'll fire a custom event when items is updated
+  list.dispatchEvent(new CustomEvent('itemsUpdated'));
 }
 
 function displayItems() {
@@ -32,7 +39,7 @@ function displayItems() {
       item => `<li class="shopping-item">
       <input type="checkbox">
   <span class="itemName">${item.name}</span>
-  <button>&times;</button>
+  <button aria-label="Remove${item.name}">&times;</button>
   </li>`
     )
     .join('');
@@ -41,3 +48,6 @@ function displayItems() {
 }
 
 shoppingForm.addEventListener('submit', handleSubmit);
+list.addEventListener('itemsUpdated', displayItems);
+// Can add multiple listeners for a custom event
+// list.addEventListener('itemsUpdated', e => console.log(e));
