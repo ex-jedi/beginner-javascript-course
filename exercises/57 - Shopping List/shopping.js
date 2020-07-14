@@ -1,5 +1,8 @@
 // https://courses.wesbos.com/account/access/5e4818abd9cc836465201439/view/375774374
 
+// MDN Custom Events
+// https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events
+
 const shoppingForm = document.querySelector('.shopping');
 const list = document.querySelector('.list');
 
@@ -23,9 +26,10 @@ function handleSubmit(e) {
   items.push(item);
   // Logs how many items there are, just fyi.
   console.log(`There are ${items.length} items in state`);
-  // Clear the form. Either of the below works fine. reset() will clear all the inputs in a form.
+  // Clear the form. Any of the below works fine. reset() will clear all the inputs in a form.
   // e.currentTarget.item.value = '';
-  e.target.reset();
+  // e.target.reset();
+  e.currentTarget.reset();
   // Running displayItems() here isn't ideal. If this became more complex coupling these two functions together could be a problem 👇🏾
   // displayItems();
   // Instead we'll fire a custom event when items is updated
@@ -65,9 +69,10 @@ function restoreFromLocalStorage() {
   const lsItems = JSON.parse(localStorage.getItem('items'));
   if (lsItems.length) {
     // Overwrites items with contents of local storage
-    items = lsItems;
+    // items = lsItems;
     // Alternative if you don't want to overwrite the array totally Bunch of ways to do this though
-    // items.push(...lsItems);
+    items.push(...lsItems);
+    // lsItems.forEach(item => items.push(item));
     list.dispatchEvent(new CustomEvent('itemsUpdated'));
   }
   // console.log(lsItems);
@@ -98,7 +103,7 @@ list.addEventListener('itemsUpdated', mirrorToLocalStorage);
 list.addEventListener('click', function(e) {
   const itemId = parseInt(e.target.value);
   if (e.target.matches('button')) {
-    // Below returns a string. Needs to be changed to a number
+    // Below returns a string. Needs to be changed to a number, which is done above.
     deleteItem(itemId);
   }
   if (e.target.matches('[type="checkbox"]')) {
