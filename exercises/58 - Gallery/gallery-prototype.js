@@ -29,6 +29,30 @@ function Gallery(gallery) {
     modal.classList.add('open');
   }
 
+  // Show next image when next button clicked
+  function showNextImage() {
+    console.log(currentImage);
+    console.log(currentImage.nextElementSibling);
+  }
+
+  // Close modal
+  function closeModal() {
+    modal.classList.remove('open');
+    // TODO: Add event listeners for click and keyboard
+  }
+
+  // Close modal when there's a click outside it
+  function handleClickOutside(e) {
+    if (e.target === e.currentTarget) {
+      closeModal();
+    }
+  }
+
+  // Close modal with escape key
+  function handleKeyUp(e) {
+    if (e.key === 'Escape') closeModal();
+  }
+
   // Show images function
   function showImage(el) {
     // Safety thing to prevent breaking if there's no image
@@ -47,8 +71,19 @@ function Gallery(gallery) {
     openModal();
   }
 
+  // Event listeners
+
   // Loop over images and add event listener. Callback function passes current target as argument to show image function
   images.forEach(image => image.addEventListener('click', e => showImage(e.currentTarget)));
+
+  // Modal click outside listener
+  modal.addEventListener('click', handleClickOutside);
+
+  // Escape Key listener
+  window.addEventListener('keyup', handleKeyUp);
+
+  // Next button listener
+  nextButton.addEventListener('click', showNextImage);
 }
 
 // Use it on the page
