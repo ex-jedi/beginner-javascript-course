@@ -78,6 +78,8 @@ function Gallery(gallery) {
   // Close modal with escape key
   function handleKeyUp(e) {
     if (e.key === 'Escape') closeModal();
+    if (e.key === 'ArrowRight') showNextImage();
+    if (e.key === 'ArrowLeft') showPreviousImage();
   }
 
   // Show images function
