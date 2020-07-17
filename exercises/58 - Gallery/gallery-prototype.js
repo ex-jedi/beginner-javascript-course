@@ -39,13 +39,15 @@ function Gallery(gallery) {
 
   // Show next image when next button clicked
   function showNextImage() {
-    console.log(currentImage);
-    console.log(currentImage.nextElementSibling);
+    // || gallery.firstElementChild starts again when last image is reached
+    showImage(currentImage.nextElementSibling || gallery.firstElementChild);
   }
 
   // Close modal
   function closeModal() {
     modal.classList.remove('open');
+
+    // Cleaning up event listeners
     // Escape Key listener
     window.removeEventListener('keyup', handleKeyUp);
 
