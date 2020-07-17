@@ -77,9 +77,9 @@ function Gallery(gallery) {
 
   // Close modal with escape key
   function handleKeyUp(e) {
-    if (e.key === 'Escape') closeModal();
-    if (e.key === 'ArrowRight') showNextImage();
-    if (e.key === 'ArrowLeft') showPreviousImage();
+    if (e.key === 'Escape') return closeModal();
+    if (e.key === 'ArrowRight') return showNextImage();
+    if (e.key === 'ArrowLeft') return showPreviousImage();
   }
 
   // Show images function
@@ -107,6 +107,17 @@ function Gallery(gallery) {
 
   // Modal click outside listener
   modal.addEventListener('click', handleClickOutside);
+
+  // Adds event listener so gallery can be open with enter when user has tabbed to an image
+  // Loop over each image
+  images.forEach(image =>
+    // Attach event listener for each image
+    image.addEventListener('keyup', e => {
+      if (e.key === 'Enter') {
+        showImage(e.currentTarget);
+      }
+    })
+  );
 }
 
 // Use it on the page
