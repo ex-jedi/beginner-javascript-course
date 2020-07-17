@@ -25,11 +25,8 @@ function Gallery(gallery) {
     console.log(el);
   }
 
-  function handleImageClick(event) {
-    showImage(event.currentTarget);
-  }
-
-  images.forEach(image => image.addEventListener('click', handleImageClick));
+  // Loop over images and add event listener. Callback function passes current target as argument to show image function
+  images.forEach(image => image.addEventListener('click', e => showImage(e.currentTarget)));
 }
 
 // Use it on the page
