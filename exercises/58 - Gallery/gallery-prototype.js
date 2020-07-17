@@ -23,6 +23,7 @@ function Gallery(gallery) {
       console.info('No image to show');
     }
     console.log(el);
+    modal.querySelector('img').src = el.src;
   }
 
   // Loop over images and add event listener. Callback function passes current target as argument to show image function
