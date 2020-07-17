@@ -27,6 +27,14 @@ function Gallery(gallery) {
       return;
     }
     modal.classList.add('open');
+
+    // Event listeners here to bind them to current gallery. If not they fire on all galleries even it they're closed
+
+    // Escape Key listener
+    window.addEventListener('keyup', handleKeyUp);
+
+    // Next button listener
+    nextButton.addEventListener('click', showNextImage);
   }
 
   // Show next image when next button clicked
@@ -38,6 +46,11 @@ function Gallery(gallery) {
   // Close modal
   function closeModal() {
     modal.classList.remove('open');
+    // Escape Key listener
+    window.removeEventListener('keyup', handleKeyUp);
+
+    // Next button listener
+    nextButton.removeEventListener('click', showNextImage);
     // TODO: Add event listeners for click and keyboard
   }
 
@@ -78,12 +91,6 @@ function Gallery(gallery) {
 
   // Modal click outside listener
   modal.addEventListener('click', handleClickOutside);
-
-  // Escape Key listener
-  window.addEventListener('keyup', handleKeyUp);
-
-  // Next button listener
-  nextButton.addEventListener('click', showNextImage);
 }
 
 // Use it on the page
