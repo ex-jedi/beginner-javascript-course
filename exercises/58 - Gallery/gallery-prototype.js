@@ -18,6 +18,17 @@ function Gallery(gallery) {
   // Keep track of current image open
   let currentImage;
 
+  // Open modal
+  function openModal() {
+    console.info('Opening Modal');
+    // Check if modal is already open (prevents animation being triggered on each image click)
+    if (modal.matches('.open')) {
+      console.info('Modal already open');
+      return;
+    }
+    modal.classList.add('open');
+  }
+
   // Show images function
   function showImage(el) {
     // Safety thing to prevent breaking if there's no image
@@ -33,6 +44,7 @@ function Gallery(gallery) {
     modal.querySelector('figure p').textContent = el.dataset.description;
     // Update current image (stores what image is open)
     currentImage = el;
+    openModal();
   }
 
   // Loop over images and add event listener. Callback function passes current target as argument to show image function
