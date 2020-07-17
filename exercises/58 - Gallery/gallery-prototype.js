@@ -20,10 +20,10 @@ function Gallery(gallery) {
 
   // Open modal
   function openModal() {
-    console.info('Opening Modal');
+    // console.info('Opening Modal');
     // Check if modal is already open (prevents animation being triggered on each image click)
     if (modal.matches('.open')) {
-      console.info('Modal already open');
+      // console.info('Modal already open');
       return;
     }
     modal.classList.add('open');
@@ -35,12 +35,21 @@ function Gallery(gallery) {
 
     // Next button listener
     nextButton.addEventListener('click', showNextImage);
+
+    // Prev button listener
+    prevButton.addEventListener('click', showPreviousImage);
   }
 
   // Show next image when next button clicked
   function showNextImage() {
     // || gallery.firstElementChild starts again when last image is reached
     showImage(currentImage.nextElementSibling || gallery.firstElementChild);
+  }
+
+  // Show previous image when previous button clicked
+  function showPreviousImage() {
+    // || gallery.firstElementChild starts again when last image is reached
+    showImage(currentImage.previousElementSibling || gallery.lastElementChild);
   }
 
   // Close modal
@@ -53,6 +62,9 @@ function Gallery(gallery) {
 
     // Next button listener
     nextButton.removeEventListener('click', showNextImage);
+
+    // Prev button listener
+    prevButton.removeEventListener('click', showPreviousImage);
     // TODO: Add event listeners for click and keyboard
   }
 
@@ -74,7 +86,7 @@ function Gallery(gallery) {
     if (!el) {
       console.info('No image to show');
     }
-    console.log(el);
+    // console.log(el);
     // Change modal image source when image is clicked
     modal.querySelector('img').src = el.src;
     // Change modal title when image is clicked
