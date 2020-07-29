@@ -10,6 +10,15 @@ function Slider(slider) {
   const slides = slider.querySelector('.slides');
   const prevButton = document.querySelector('.goToPrev');
   const nextButton = document.querySelector('.goToNext');
+
+  function startSlider() {
+    // current variable is needed in a number of places so we're making it above
+    current = slider.querySelector('.current') || slides.firstElementChild;
+    console.log(current);
+  }
+
+  // When this slider is created run the startSlider function
+  startSlider();
 }
 
 const mySlider = Slider(document.querySelector('.slider'));

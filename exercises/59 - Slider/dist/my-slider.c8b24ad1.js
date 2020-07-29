@@ -131,6 +131,15 @@ function Slider(slider) {
   var slides = slider.querySelector('.slides');
   var prevButton = document.querySelector('.goToPrev');
   var nextButton = document.querySelector('.goToNext');
+
+  function startSlider() {
+    // current variable is needed in a number of places so we're making it above
+    current = slider.querySelector('.current') || slides.firstElementChild;
+    console.log(current);
+  } // When this slider is created run the startSlider function
+
+
+  startSlider();
 }
 
 var mySlider = Slider(document.querySelector('.slider'));
@@ -163,7 +172,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61862" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61809" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
