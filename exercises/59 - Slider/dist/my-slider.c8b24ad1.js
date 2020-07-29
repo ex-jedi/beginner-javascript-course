@@ -118,7 +118,23 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"src/my-slider.js":[function(require,module,exports) {
-console.log('Hello');
+function Slider(slider) {
+  if (!(slider instanceof Element)) {
+    throw new Error('No slider passed in');
+  } // Make variables for working with slider
+
+
+  var current;
+  var prev;
+  var next; // Select elements needed for slider
+
+  var slides = slider.querySelector('.slides');
+  var prevButton = document.querySelector('.goToPrev');
+  var nextButton = document.querySelector('.goToNext');
+}
+
+var mySlider = Slider(document.querySelector('.slider'));
+var dogSlider = Slider(document.querySelector('.dog-slider'));
 },{}],"node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
