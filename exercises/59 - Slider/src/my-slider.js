@@ -3,6 +3,7 @@ function Slider(slider) {
     throw new Error('No slider passed in');
   }
   // Make variables for working with slider
+  // These are needed in a number of places so we're making them here
   let current;
   let prev;
   let next;
@@ -12,11 +13,10 @@ function Slider(slider) {
   const nextButton = document.querySelector('.goToNext');
 
   function startSlider() {
-    // current variable is needed in a number of places so we're making it above
     current = slider.querySelector('.current') || slides.firstElementChild;
-    console.log(current);
+    prev = current.previousElementSibling || slides.lastElementChild;
+    next = current.nextElementSibling || slides.firstElementChild;
   }
-
   // When this slider is created run the startSlider function
   startSlider();
 }
