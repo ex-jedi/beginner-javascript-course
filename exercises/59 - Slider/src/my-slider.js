@@ -63,6 +63,27 @@ function Slider(slider) {
   // Hook up Prev and Next Buttons
   prevButton.addEventListener('click', () => move('back'));
   nextButton.addEventListener('click', move); // Can just pass reference to function as we don't teen to pass in direction as we have the else option handling this above
+
+  // Move slider with arrow keys
+
+  // Check arrow key press
+  function arrowKeyHandler(e) {
+    if (e.key === 'ArrowLeft') {
+      move('back');
+    } else if (e.key === 'ArrowRight') {
+      move();
+    }
+  }
+
+  // Add arrowKeyHandler when slider is focused
+  slider.addEventListener('focus', () => {
+    window.addEventListener('keyup', arrowKeyHandler);
+  });
+
+  // Remove arrowKeyHandler when slider looses focus
+  slider.addEventListener('blur', () => {
+    window.removeEventListener('keyup', arrowKeyHandler);
+  });
 }
 
 const mySlider = Slider(document.querySelector('.slider'));
