@@ -582,9 +582,11 @@ console.log('characterCount', characterCount);
 
 console.log('characterCountSuccinct', characterCountSuccinct);
 
+console.log('Object.entries', Object.entries(characterCountSuccinct));
 // find most popular
-const numericSort = (a, b) => b[1] - a[1];
-
+const numericSort = (a, b) =>
+  // debugger;
+  b[1] - a[1];
 const mostPopular = Object.entries(characterCountSuccinct).sort(numericSort);
 
 console.log('mostPopular', mostPopular);

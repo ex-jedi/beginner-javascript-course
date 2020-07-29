@@ -66,9 +66,7 @@ function Gallery(gallery) {
   }
 
   // These are our Event Listeners!
-  images.forEach(image =>
-    image.addEventListener('click', e => showImage(e.currentTarget))
-  );
+  images.forEach(image => image.addEventListener('click', e => showImage(e.currentTarget)));
 
   // loop over each image
   images.forEach(image => {
