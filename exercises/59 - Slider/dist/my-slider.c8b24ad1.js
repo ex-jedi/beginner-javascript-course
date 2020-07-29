@@ -125,8 +125,8 @@ function Slider(slider) {
   // These are needed in a number of places so we're making them here
 
 
-  var current;
   var prev;
+  var current;
   var next; // Select elements needed for slider
 
   var slides = slider.querySelector('.slides');
@@ -137,10 +137,47 @@ function Slider(slider) {
     current = slider.querySelector('.current') || slides.firstElementChild;
     prev = current.previousElementSibling || slides.lastElementChild;
     next = current.nextElementSibling || slides.firstElementChild;
+  } // Adds classes to previous, current and next slides
+
+
+  function applyClasses() {
+    prev.classList.add('prev');
+    current.classList.add('current');
+    next.classList.add('next');
+  }
+
+  function move(direction) {
+    var _prev$classList, _current$classList, _next$classList;
+
+    // Strip all classes from slides
+    var classesToRemove = ['prev', 'current', 'next']; // Fancy way. Make array ow elements, loop over and spread classes to remove as argument
+    // [prev, current, next].forEach(el => el.classlist.remove(...classesToRemove));
+    // This does the same but is maybe more readable
+
+    (_prev$classList = prev.classList).remove.apply(_prev$classList, classesToRemove);
+
+    (_current$classList = current.classList).remove.apply(_current$classList, classesToRemove);
+
+    (_next$classList = next.classList).remove.apply(_next$classList, classesToRemove); // Get direction ov movement and update slide classes accordingly
+
+
+    if (direction === 'back') {
+      // Make new array of current values, use destructuring to overwrite them
+      var _ref = [prev.previousElementSibling, prev, current];
+      prev = _ref[0];
+      current = _ref[1];
+      next = _ref[2];
+    } else {
+      var _ref2 = [current, next, next.nextElementSibling];
+      prev = _ref2[0];
+      current = _ref2[1];
+      next = _ref2[2];
+    }
   } // When this slider is created run the startSlider function
 
 
   startSlider();
+  applyClasses();
 }
 
 var mySlider = Slider(document.querySelector('.slider'));
@@ -173,7 +210,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61809" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61862" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
