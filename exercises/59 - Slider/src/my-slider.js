@@ -9,8 +9,8 @@ function Slider(slider) {
   let next;
   // Select elements needed for slider
   const slides = slider.querySelector('.slides');
-  const prevButton = document.querySelector('.goToPrev');
-  const nextButton = document.querySelector('.goToNext');
+  const prevButton = slider.querySelector('.goToPrev');
+  const nextButton = slider.querySelector('.goToNext');
 
   function startSlider() {
     current = slider.querySelector('.current') || slides.firstElementChild;
@@ -35,17 +35,34 @@ function Slider(slider) {
     current.classList.remove(...classesToRemove);
     next.classList.remove(...classesToRemove);
     // Get direction ov movement and update slide classes accordingly
+    // Shifting all slides either one forwards or one backwards
     if (direction === 'back') {
       // Make new array of current values, use destructuring to overwrite them
-      [prev, current, next] = [prev.previousElementSibling, prev, current];
+      [prev, current, next] = [
+        // Get previous slide or the very last slide - enables wrapping
+        prev.previousElementSibling || slides.lastElementChild,
+        prev,
+        current,
+      ];
     } else {
-      [prev, current, next] = [current, next, next.nextElementSibling];
+      [prev, current, next] = [
+        current,
+        next,
+        // Get next slide or very first slide - enables wrapping
+        next.nextElementSibling || slides.firstElementChild,
+      ];
     }
+    applyClasses();
   }
 
   // When this slider is created run the startSlider function
   startSlider();
   applyClasses();
+
+  // Event listeners
+  // Hook up Prev and Next Buttons
+  prevButton.addEventListener('click', () => move('back'));
+  nextButton.addEventListener('click', move); // Can just pass reference to function as we don't teen to pass in direction as we have the else option handling this above
 }
 
 const mySlider = Slider(document.querySelector('.slider'));

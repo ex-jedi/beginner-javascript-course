@@ -159,6 +159,7 @@ function Slider(slider) {
     (_current$classList = current.classList).remove.apply(_current$classList, classesToRemove);
 
     (_next$classList = next.classList).remove.apply(_next$classList, classesToRemove); // Get direction ov movement and update slide classes accordingly
+    // Shifting all slides either one forwards or one backwards
 
 
     if (direction === 'back') {
@@ -177,7 +178,15 @@ function Slider(slider) {
 
 
   startSlider();
-  applyClasses();
+  applyClasses(); // Event listeners
+  // Hook up Prev and Next Buttons
+
+  prevButton.addEventListener('click', function () {
+    return move('back');
+  });
+  nextButton.addEventListener('click', function () {
+    return move;
+  }); // Can just pass reference to function as we don't teen to pass in direction as we have the else option handling this above
 }
 
 var mySlider = Slider(document.querySelector('.slider'));
@@ -210,7 +219,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61862" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61809" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
