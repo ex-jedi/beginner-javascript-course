@@ -8,7 +8,35 @@
 <body>
 
 <script>
-  console.log('Hello');
+  const myDate = new Date('August 30, 2020');
+  // console.dir(myDate);
+  // console.log(myDate.getFullYear());
+
+  const names = ['Mark', 'Kate'];
+  // Same as...
+  const namesNew = new Array('Mark', 'Kate');
+  console.log(names, namesNew);
+
+  const mark = { name: 'Mark' };
+  // Same as...
+  const markNew = new Object({ name: 'Mark' });
+  console.log(mark, markNew);
+
+const span = document.createElement('span');
+console.log(span);
+
+function Pizza() {
+  console.log('Making a Pizza');
+}
+
+const anchovyPizza = Pizza(); // Returns undefined
+const pepperoniPizza = new Pizza(); // Returns Pizza object. Creates new object that's an instance of the function that made it!
+console.log(anchovyPizza);
+console.log(pepperoniPizza);
+console.log('What function made me?', pepperoniPizza.constructor);
+console.log(pepperoniPizza instanceof Pizza);
+
+  // Some things don't have a literal syntax, like Date()
 </script>
 </body>
 </html>
