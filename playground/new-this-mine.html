@@ -6,7 +6,8 @@
   <title>New, This, Prototypes and Classes</title>
 </head>
 <body>
-
+<button class="button-one">Button</button>
+<button class="button-two">Button Two</button>
 <script>
   const myDate = new Date('August 30, 2020');
   // console.dir(myDate);
@@ -25,18 +26,39 @@
 const span = document.createElement('span');
 console.log(span);
 
-function Pizza() {
-  console.log('Making a Pizza');
-}
+  function Pizza(toppings = [], customer) {
+    console.log('Making a pizza');
+    // save the toppings that were passed in, to this instance of pizza
+    this.toppings = toppings;
+    this.customer = customer;
+    this.id = Math.floor(Math.random() * 16777215).toString(16);
+  }
 
 const anchovyPizza = Pizza(); // Returns undefined
-const pepperoniPizza = new Pizza(); // Returns Pizza object. Creates new object that's an instance of the function that made it!
+const hamPizza = new Pizza(); // Returns Pizza object. Creates new object that's an instance of the function that made it!
 console.log(anchovyPizza);
-console.log(pepperoniPizza);
-console.log('What function made me?', pepperoniPizza.constructor);
-console.log(pepperoniPizza instanceof Pizza);
+console.log(hamPizza);
+console.log('What function made me?', hamPizza.constructor);
+console.log(hamPizza instanceof Pizza);
 
   // Some things don't have a literal syntax, like Date()
-</script>
+
+// ********** This **********
+const button1 = document.querySelector('.button-one');
+const button2 = document.querySelector('.button-two');
+
+function tellMeAboutTheButton() {
+  console.log(this);
+}
+
+button1.addEventListener('click', tellMeAboutTheButton);
+button2.addEventListener('click', tellMeAboutTheButton);
+
+  const pepperoniPizza = new Pizza(['pepperoni'], 'Wes Bos');
+  const canadianPizza = new Pizza(['pepperoni', 'mushrooms', 'onion'], 'Kait Bos');
+
+  console.log(pepperoniPizza);
+  console.log(canadianPizza);
+  </script>
 </body>
 </html>
