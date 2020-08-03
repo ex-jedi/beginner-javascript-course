@@ -6,7 +6,10 @@
   <title>New, This, Prototypes and Classes</title>
 </head>
 <body>
-
+<button class="button-one">Button One</button>
+<button class="button-two">Button Two</button>
+<button class="button-three">Button Three</button>
+<button class="button-four">Button Four</button>
 <script>
   const myDate = new Date('August 30, 2020');
   // console.dir(myDate);
@@ -25,18 +28,66 @@
 const span = document.createElement('span');
 console.log(span);
 
-function Pizza() {
-  console.log('Making a Pizza');
+// Constructor function
+function Pizza(toppings = [], customer) {
+    console.log('Making a pizza');
+    console.log(this);
+    // This keyword when creating an object is used to store information about that instance
+    this.toppings = toppings;
+    this.customer = customer;
+    // Way to create random id
+    this.id = Math.floor(Math.random() * 16777215).toString(16);
 }
 
 const anchovyPizza = Pizza(); // Returns undefined
-const pepperoniPizza = new Pizza(); // Returns Pizza object. Creates new object that's an instance of the function that made it!
+const hamPizza = new Pizza(); // Returns Pizza object. Creates new object that's an instance of the function that made it!
 console.log(anchovyPizza);
-console.log(pepperoniPizza);
-console.log('What function made me?', pepperoniPizza.constructor);
-console.log(pepperoniPizza instanceof Pizza);
+console.log(hamPizza);
+console.log('What function made me?', hamPizza.constructor);
+console.log(hamPizza instanceof Pizza);
 
   // Some things don't have a literal syntax, like Date()
-</script>
+
+// ********** This **********
+const button1 = document.querySelector('.button-one');
+const button2 = document.querySelector('.button-two');
+const button3 = document.querySelector('.button-three');
+const button4 = document.querySelector('.button-four');
+
+// This keyword is scoped to a function
+// function tellMeAboutTheButton() {
+//   console.log(this);
+// }
+function tellMeAboutTheButton() {
+    console.log('Outside', this);
+    setTimeout(function() {
+      // Doesn't work as this keyword has been changed. Use an arrow function instead
+      console.log('Inside', this);
+      this.textContent = `You clicked me!`;
+  }, 1000);
+}
+// Below will work as this keyword is not altered by an arrow function
+// function tellMeAboutTheButton() {
+//     console.log('Outside', this);
+//     setTimeout(() => {
+//       // Below wont work as this keyword has been changed. Use an arrow function instead
+//       console.log('Inside', this);
+//       this.textContent = `You clicked me!`;
+//   }, 1000);
+// }
+button1.addEventListener('click', tellMeAboutTheButton);
+button2.addEventListener('click', tellMeAboutTheButton);
+
+// Arrow functions don't alter this, it'll be scoped to a higher function
+const tellMeAboutTheButtonArrow = () => console.log(this);
+button3.addEventListener('click', tellMeAboutTheButtonArrow);
+button4.addEventListener('click', tellMeAboutTheButtonArrow);
+
+const pepperoniPizza = new Pizza(['pepperoni'], 'Wes Bos');
+const canadianPizza = new Pizza(['pepperoni', 'mushrooms', 'onion'], 'Kait Bos');
+
+console.log(pepperoniPizza);
+console.log(canadianPizza);
+  </script>
 </body>
 </html>
