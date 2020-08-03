@@ -15,7 +15,12 @@ function Gallery(gallery) {
   // Selecting previous and next buttons in modal
   this.prevButton = this.modal.querySelector('.prev');
   this.nextButton = this.modal.querySelector('.next');
-  // Keep track of current image open
+
+  // Binding our methods to the instance when we need them. This ensures that the this keyword will reference here and not on the thing it's called on. Otherwise, when this is used in an event listener it'll reference the thing to the left of the dot.
+  this.showNextImage = this.showNextImage.bind(this);
+  this.showPreviousImage = this.showPreviousImage.bind(this);
+  this.handleKeyUp = this.handleKeyUp.bind(this);
+  this.handleClickOutside = this.handleClickOutside.bind(this);
 
   // Event listeners
 
@@ -47,8 +52,6 @@ Gallery.prototype.openModal = function() {
   }
   this.modal.classList.add('open');
 
-  // Event listeners here to bind them to current gallery. If not they fire on all galleries even it they're closed
-
   // Escape Key listener
   window.addEventListener('keyup', this.handleKeyUp);
 
@@ -61,7 +64,9 @@ Gallery.prototype.openModal = function() {
 
 // Show next image when next button clicked
 Gallery.prototype.showNextImage = function() {
+  console.log('Showing next image');
   // || gallery.firstElementChild starts again when last image is reached
+
   this.showImage(this.currentImage.nextElementSibling || this.gallery.firstElementChild);
 };
 
