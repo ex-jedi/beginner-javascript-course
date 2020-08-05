@@ -39,6 +39,8 @@ function Pizza(toppings = [], customer) {
     this.id = Math.floor(Math.random() * 16777215).toString(16);
 
     this.slices = 10;
+
+    // Putting this function here means it's created every time an instance is made. But as the code is the same for each instance, ech instance doesn't need its own function. It does need some of it's own data, its own ID, slice count and customer, but not its own function. This becomes a problem if you need to create lots of pizzas... 20 000 pizzas = 20 000 eat functions.
     this.eat = function() {
       if (this.slices > 1) {
         this.slices -= 1;
