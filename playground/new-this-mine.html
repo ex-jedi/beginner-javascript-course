@@ -37,6 +37,16 @@ function Pizza(toppings = [], customer) {
     this.customer = customer;
     // Way to create random id
     this.id = Math.floor(Math.random() * 16777215).toString(16);
+
+    this.slices = 10;
+    this.eat = function() {
+      if (this.slices > 1) {
+        this.slices -= 1;
+        console.log(`Munch! you now have ${this.slices} left!`);
+      } else {
+        console.log('Sorry! All gone!');
+      }
+    };
 }
 
 const anchovyPizza = Pizza(); // Returns undefined
