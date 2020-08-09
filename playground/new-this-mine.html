@@ -29,7 +29,7 @@ const span = document.createElement('span');
 console.log(span);
 
 // Constructor function
-function Pizza(toppings = [], customer) {
+function Pizza(toppings = [], customer = 'customer') {
     console.log('Making a pizza');
     console.log(this);
     // This keyword when creating an object is used to store information about that instance
@@ -40,7 +40,8 @@ function Pizza(toppings = [], customer) {
 
     this.slices = 10;
 
-    // Putting this function here means it's created every time an instance is made. But as the code is the same for each instance, ech instance doesn't need its own function. It does need some of it's own data, its own ID, slice count and customer, but not its own function. This becomes a problem if you need to create lots of pizzas... 20 000 pizzas = 20 000 eat functions.
+    // Putting this function here means a new separate function created every time an instance is made. But as the code is the same for each instance, ech instance doesn't need its own function. It does need some of it's own data, its own ID, slice count and customer, but not its own function. This becomes a problem if you need to create lots of pizzas... 20 000 pizzas = 20 000 eat functions.
+    /*
     this.eat = function() {
       if (this.slices > 0) {
         this.slices -= 1;
@@ -50,7 +51,31 @@ function Pizza(toppings = [], customer) {
       console.log('Sorry! All gone!');
       return this.slices;
     };
+    */
 }
+
+// Adding this to the prototype means this isn't duplicated every time we make an instance. Also if we change this, the changes will be available on every instance.
+Pizza.prototype.eat = function() {
+    if (this.slices > 0) {
+      this.slices -= 1;
+      console.log(`Munch! you now have ${this.slices} left!`);
+      return this.slices;
+    }
+    console.log('Sorry! All gone!');
+    return this.slices;
+  };
+
+  Pizza.prototype.describe = function() {
+    let toppings;
+    const toppingsOne = [...this.toppings.slice(0, this.toppings.length - 1)];
+    const toppingsTwo = [...this.toppings.slice(-1)];
+    if (this.toppings.length > 1) {
+      toppings = `${toppingsOne.join(', ')} and ${toppingsTwo.toString()} toppings`;
+    } else {
+      toppings = `${this.toppings.toString()} topping`;
+    }
+    return `This pizza is for ${this.customer}. It has ${toppings}. There are ${this.slices} slices left.`;
+};
 
 const anchovyPizza = Pizza(); // Returns undefined
 const hamPizza = new Pizza(); // Returns Pizza object. Creates new object that's an instance of the function that made it!
@@ -58,6 +83,13 @@ console.log(anchovyPizza);
 console.log(hamPizza);
 console.log('What function made me?', hamPizza.constructor);
 console.log(hamPizza instanceof Pizza);
+
+const pepperoniPizza = new Pizza(['pepperoni'], 'Wes Bos');
+const canadianPizza = new Pizza(['pepperoni', 'mushrooms', 'onion'], 'Kait Bos');
+const fourSeasonsPizza = new Pizza(['tomato', 'mozzarella', 'black olives', 'sun dried tomatoes', 'mushrooms'], 'Me');
+
+console.log(pepperoniPizza);
+console.log(canadianPizza);
 
   // Some things don't have a literal syntax, like Date()
 
@@ -96,11 +128,28 @@ const tellMeAboutTheButtonArrow = () => console.log(this);
 button3.addEventListener('click', tellMeAboutTheButtonArrow);
 button4.addEventListener('click', tellMeAboutTheButtonArrow);
 
-const pepperoniPizza = new Pizza(['pepperoni'], 'Wes Bos');
-const canadianPizza = new Pizza(['pepperoni', 'mushrooms', 'onion'], 'Kait Bos');
+// Possible to overwrite built ins. Shouldn't ever do this though.
+// Unmodified
+const newName = 'Mark is a person';
+// console.log('Unmodified', newName.toUpperCase());
+// // Modified. Bad!
+// String.prototype.toUpperCase = function() {
+//     return 'Loud Noises';
+// };
+// console.log('Modified', newName.toUpperCase());
 
-console.log(pepperoniPizza);
-console.log(canadianPizza);
+// Can also write your own built ins.
+String.prototype.sarcastic = function() {
+    const sarcastic = this.split('')
+      .map((char, i) => {
+        if (i % 2) {
+          return char.toUpperCase();
+        }
+        return char.toLowerCase();
+      })
+    .join('');
+    return sarcastic;
+};
   </script>
 </body>
 </html>
