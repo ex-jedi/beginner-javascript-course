@@ -15,8 +15,12 @@ function Slider(slider) {
 
   // Event listeners
   // Hook up Prev and Next Buttons
+  // Binding this here to this keyword being reassigned to the button itself
+  this.move = this.move.bind(this);
   prevButton.addEventListener('click', () => this.move('back'));
-  nextButton.addEventListener('click', () => this.move()); // Can just pass reference to function as we don't teen to pass in direction as we have the else option handling this above
+  nextButton.addEventListener('click', this.move); // No need to pass in direction as we have the else option handling it
+  // Or could use arrow functions to prevent this keyword being reassigned to the button itself
+  // nextButton.addEventListener('click', () => this.move());
 
   // Add arrowKeyHandler when slider is focused
   this.arrowKeyHandler = this.arrowKeyHandler.bind(this);
