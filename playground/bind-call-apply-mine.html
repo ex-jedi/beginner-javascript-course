@@ -9,6 +9,8 @@
 </head>
 
 <body>
+  <p>Hello</p>
+  <button>Click me</button>
 
   <script>
   const person = {
@@ -20,7 +22,20 @@
     },
   };
 
-  const sayHi = person.sayHi.bind(person);
+  const kate = { name: 'Kate' };
+  // Binding variable to an object so you can use sayHI() on it
+  // const sayHi = person.sayHi.bind(person);
+  // const sayHi = person.sayHi.bind({ name: 'Hamish' });
+  const sayHi = person.sayHi.bind(kate);
+
+  //* Query selector example
+  // Below won't work as querySelector has no this
+  // const $ = document.querySelector;
+  // const para = $('p');
+
+  // By calling bind against querySelector, we say when the $ function is run, use `document` as the `this` value.
+  const $ = document.querySelector.bind(document);
+  console.log($('p'));
   </script>
 </body>
 
