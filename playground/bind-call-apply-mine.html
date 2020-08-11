@@ -36,6 +36,24 @@
   // By calling bind against querySelector, we say when the $ function is run, use `document` as the `this` value.
   const $ = document.querySelector.bind(document);
   console.log($('p'));
+
+// Use to include arguments in a method
+  const bill = {
+    total: 1000,
+    calculate(taxrate) {
+      console.log(this);
+      return this.total + this.total * taxrate;
+    },
+  };
+
+  const total = bill.calculate(0.13);
+  console.log(total);
+
+  const calc = bill.calculate.bind(bill);
+  // Bind can take arguments after this object is passed. First argument is this object, other arguments can follow. Useful if you have data available when the function is created you can include it here so it's available pre-loaded to call later on
+  const calcTwo = bill.calculate.bind({ total: 5000 }, 0.25);
+  console.log(calc(0.13));
+  console.log(calcTwo());
   </script>
 </body>
 
