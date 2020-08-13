@@ -1,0 +1,29 @@
+
+<!-- https://courses.wesbos.com/account/access/5e4818abd9cc836465201439/view/375827621  -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Promises</title>
+  <link rel="stylesheet" href="../base.css">
+</head>
+
+<body>
+  <script>
+    function makePizza() {
+      const pizzaPromise = new Promise(function(resolve, reject) {
+        // When it's ready you can resolve this promise
+        // If something goes wrong you can reject this promise
+        resolve('🍕');
+      });
+      return pizzaPromise;
+    }
+
+const pizza = makePizza();
+console.log(pizza);
+  </script>
+</body>
+
+</html>
