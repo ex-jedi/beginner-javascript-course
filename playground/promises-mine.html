@@ -12,17 +12,23 @@
 
 <body>
   <script>
-    function makePizza() {
+    function makePizza(toppings) {
       const pizzaPromise = new Promise(function(resolve, reject) {
         // When it's ready you can resolve this promise
         // If something goes wrong you can reject this promise
-        resolve('🍕');
+        resolve(`Here is your pizza 🍕 with the toppings ${toppings.join(' ')}`);
       });
       return pizzaPromise;
     }
 
-const pizza = makePizza();
-console.log(pizza);
+const pepperoniPromise = makePizza(['pepperoni']);
+const canadianPromise = makePizza(['pepperoni', 'mushrooms', 'onions']);
+// console.log(pepperoniPromise, canadianPromise);
+
+pepperoniPromise.then(function(pizza) {
+  console.log('Aha, got it!');
+  console.log(pizza);
+});
   </script>
 </body>
 
