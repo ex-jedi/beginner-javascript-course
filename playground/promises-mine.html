@@ -12,12 +12,14 @@
 
 <body>
   <script>
-    function makePizza(toppings) {
+    function makePizza(toppings = []) {
       return (pizzaPromise = new Promise(function(resolve, reject) {
+        const amountOfTimeToBake = 500 + toppings.length * 200;
         // Wait 1 second for the pizza to cook
         setTimeout(() => {
           resolve(`Here is your pizza 🍕 with the toppings ${toppings.join(' ')}`);
-        }, 1000);
+          console.log(amountOfTimeToBake);
+        }, amountOfTimeToBake);
         // When it's ready you can resolve this promise
         // If something goes wrong you can reject this promise
       }));
@@ -30,11 +32,19 @@ makePizza(['pepperoni'])
   })
   .then(function(pizza) {
     console.log(pizza);
-    return makePizza(['mozzarella', 'basil']);
+    return makePizza(['mozzarella', 'basil', 'tomatoes', 'pine nuts']);
   })
   .then(function(pizza) {
     console.log(pizza);
-    return makePizza(['chocolate', 'cheese']);
+    return makePizza();
+  })
+  .then(function(pizza) {
+    console.log(pizza);
+        return makePizza(['chocolate', 'cheese']);
+  })
+  .then(pizza => {
+    console.log('All done. here is your last pizza');
+    console.log(pizza);
   });
   </script>
 </body>
