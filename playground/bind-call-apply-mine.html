@@ -29,7 +29,8 @@
   // Binding variable to an object so you can use sayHI() on it
   // const sayHi = person.sayHi.bind(person);
   // const sayHi = person.sayHi.bind({ name: 'Hamish' });
-  const sayHi = person.sayHi.bind(kate);
+  const sayHiNotBound = person.sayHi;
+  const sayHiBound = person.sayHi.bind(kate);
 
   //* Query selector example
   // Below won't work as querySelector has no this
@@ -53,23 +54,25 @@
   };
 
   const total = bill.calculate(0.13);
-  console.log(total);
+  console.log('Total -', total);
 
-  const calc = bill.calculate.bind(bill);
-  // Bind can take arguments after this object is passed. First argument is this object, other arguments can follow. Useful if you have data available when the function is created you can include it here so it's available pre-loaded to call later on
+  // Doesn't work as this refers to the window here
+  const calc = bill.calculate;
+  console.log('Calc - ', calc(0.23));
+  // Bind can take arguments after this object is passed. First argument is this keyword object, other arguments can follow. Useful if you have data available when the function is created you can include it here so it's available pre-loaded to call later on
   const calcTwo = bill.calculate.bind({ total: 2000 }, 0.17);
   console.log(calc(0.13));
   console.log(calcTwo());
 
   // Call and apply
 
-  // Bind will bind an object which you call later. But call binds and calls at the same time. So if you need to bind a function and call it later, use bind. But if you need to bind a function and call it immediately use call.
+  // Bind will bind an object and return a function which you call later. But call binds and calls at the same time, returning the function result. So if you need to bind a function and call it later, use bind. But if you need to bind a function and call it immediately use call.
   const calcThree = bill.calculate.call({ total: 5000 }, 0.25);
-  console.log(calcThree);
+  console.log('calcThree', calcThree);
 
 // Apply works the same way as call but takes an array after the this object
-  const calcFour = bill.calculate.call({ total: 500 }, [0.55]);
-  console.log(calcFour);
+  const calcFour = bill.calculate.apply({ total: 500 }, [0.55]);
+  console.log('calcFour', calcFour);
 
   // Using call and apply for bill object on line 41
   // Regular style
@@ -81,7 +84,7 @@
   const myMealCall = bill.describe.call(bill, 'steak', 'IPA', 0.15);
   console.log('myMealCall -', myMealCall);
 // Apply. Calls it, but with array as arguments
-  const myMealApply = bill.describe.call(bill, ['steak', 'IPA', 0.15]);
+  const myMealApply = bill.describe.apply(bill, [' steak', ' IPA', 0.15]);
   console.log('myMealApply -', myMealApply);
   </script>
 </body>
