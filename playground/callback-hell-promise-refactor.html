@@ -42,15 +42,50 @@
     }
   </style>
   <div class="go">Click Me</div>
-  <script>// console.log('Starting');
-  // setTimeout(() => {
-  //   console.log('Running');
-  // }, 0);
-  // console.log('Ending');
+  <script>
+  const wait = (ms = 0) => new Promise(resolve => setTimeout(resolve, ms));
+
+  wait(200).then(() => {
+    console.log('Done');
+  });
 
   const go = document.querySelector('.go');
+
+  function animate(e) {
+    const el = e.currentTarget;
+    // 1. Change the text to GO when clicked.
+    el.textContent = 'GO!';
+    // 2. Make it a circle after 2 seconds
+    wait(200)
+      .then(() => {
+        el.classList.add('circle');
+        // 3. Make it red after 0.5s
+        return wait(500);
+      })
+      .then(() => {
+        el.classList.add('red');
+        // 4. Make it square after 250ms
+        return wait(250);
+      })
+      .then(() => {
+        el.classList.remove('circle');
+        // 5. make it purple after 500ms
+        return wait(500);
+      })
+      .then(() => {
+        el.classList.remove('red');
+        el.classList.add('purple');
+        // 6. Fade out after 500ms
+        return wait(500);
+      })
+      .then(() => {
+        el.classList.add('fadeOut');
+      });
+  }
+
+  go.addEventListener('click', animate);
   // 1. Change the text to GO when clicked.
-  go.addEventListener('click', e => {
+  go.addEventListener('clickXXX', e => {
     const el = e.currentTarget;
     el.textContent = 'GO!';
     // 2. Make it a circle after 2 seconds
@@ -59,6 +94,7 @@
       // 3. Make it red after 0.5s
       setTimeout(() => {
         el.classList.add('red');
+        // 4. Make it square after 250ms
         setTimeout(() => {
           el.classList.remove('circle');
           // 5. make it purple
@@ -66,6 +102,7 @@
             el.classList.remove('red');
             el.classList.add('purple');
             setTimeout(() => {
+              // 6. Fade out after 500ms
               console.log('You have reached the depths of callback hell!');
               el.classList.add('fadeOut');
             }, 500);
