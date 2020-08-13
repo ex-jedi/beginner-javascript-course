@@ -23,14 +23,19 @@
       }));
     }
 
-const pepperoniPromise = makePizza(['pepperoni']);
-const canadianPromise = makePizza(['pepperoni', 'mushrooms', 'onions']);
-// console.log(pepperoniPromise, canadianPromise);
-
-pepperoniPromise.then(function(pizza) {
-  console.log('Aha, got it!');
-  console.log(pizza);
-});
+makePizza(['pepperoni'])
+  .then(function(pizza) {
+    console.log(pizza);
+    return makePizza(['ham', 'cheese']);
+  })
+  .then(function(pizza) {
+    console.log(pizza);
+    return makePizza(['mozzarella', 'basil']);
+  })
+  .then(function(pizza) {
+    console.log(pizza);
+    return makePizza(['chocolate', 'cheese']);
+  });
   </script>
 </body>
 
