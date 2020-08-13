@@ -29,27 +29,30 @@
       }));
     }
 
-// makePizza(['pepperoni'])
-//   .then(function(pizza) {
-//     console.log(pizza);
-//     return makePizza(['ham', 'cheese']);
-//   })
-//   .then(function(pizza) {
-//     console.log(pizza);
-//     return makePizza(['mozzarella', 'basil', 'tomatoes', 'pine nuts']);
-//   })
-//   .then(function(pizza) {
-//     console.log(pizza);
-//     return makePizza();
-//   })
-//   .then(function(pizza) {
-//     console.log(pizza);
-//         return makePizza(['chocolate', 'cheese']);
-//   })
-//   .then(pizza => {
-//     console.log('All done. here is your last pizza');
-//     console.log(pizza);
-//   });
+// Promise chain will stop when there's an error
+makePizza(['pepperoni'])
+  .then(function(pizza) {
+    console.log(pizza);
+    return makePizza(['ham', 'cheese']);
+  })
+  .then(function(pizza) {
+    console.log(pizza);
+    return makePizza(['mozzarella', 'basil', 'tomatoes', 'pine nuts']);
+  })
+  .then(function(pizza) {
+    console.log(pizza);
+    // Below will error out and prevent other promises from running
+    return makePizza(['pinapple']);
+  })
+  .then(function(pizza) {
+    console.log(pizza);
+        return makePizza(['chocolate', 'cheese']);
+  })
+  .then(pizza => {
+    console.log('All done. here is your last pizza');
+    console.log(pizza);
+  })
+  .catch(handleError);
 
 // run them concurrently
 // const pizzaPromise1 = makePizza(['mozzarella', 'basil', 'tomatoes', 'pine nuts']);
@@ -69,14 +72,27 @@
 //   console.log(pizza);
 // });
 
+// Error handling function
+function handleError(error) {
+  console.log('Ruh roh');
+  console.log(error);
+}
+
 makePizza(['cheese', 'pinapple'])
   .then(pizza => {
     console.log(pizza);
   })
-  .catch(err => {
-    console.log('Ruh roh');
-    console.log(err);
-  });
+  .catch(handleError);
+
+const p1 = makePizza(['pep']);
+const p2 = makePizza(['pinapple']);
+
+// Catches errors while allowing others to run
+const dinnerPromise2 = Promise.allSettled([p1, p2]);
+
+dinnerPromise2.then(pizza => {
+  console.log(pizza);
+});
   </script>
 </body>
 
