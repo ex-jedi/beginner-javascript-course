@@ -18,34 +18,45 @@
         // Wait 1 second for the pizza to cook
         setTimeout(() => {
           resolve(`Here is your pizza 🍕 with the toppings ${toppings.join(' ')}`);
-          console.log(amountOfTimeToBake);
         }, amountOfTimeToBake);
         // When it's ready you can resolve this promise
         // If something goes wrong you can reject this promise
       }));
     }
 
-makePizza(['pepperoni'])
-  .then(function(pizza) {
-    console.log(pizza);
-    return makePizza(['ham', 'cheese']);
-  })
-  .then(function(pizza) {
-    console.log(pizza);
-    return makePizza(['mozzarella', 'basil', 'tomatoes', 'pine nuts']);
-  })
-  .then(function(pizza) {
-    console.log(pizza);
-    return makePizza();
-  })
-  .then(function(pizza) {
-    console.log(pizza);
-        return makePizza(['chocolate', 'cheese']);
-  })
-  .then(pizza => {
-    console.log('All done. here is your last pizza');
-    console.log(pizza);
-  });
+// makePizza(['pepperoni'])
+//   .then(function(pizza) {
+//     console.log(pizza);
+//     return makePizza(['ham', 'cheese']);
+//   })
+//   .then(function(pizza) {
+//     console.log(pizza);
+//     return makePizza(['mozzarella', 'basil', 'tomatoes', 'pine nuts']);
+//   })
+//   .then(function(pizza) {
+//     console.log(pizza);
+//     return makePizza();
+//   })
+//   .then(function(pizza) {
+//     console.log(pizza);
+//         return makePizza(['chocolate', 'cheese']);
+//   })
+//   .then(pizza => {
+//     console.log('All done. here is your last pizza');
+//     console.log(pizza);
+//   });
+
+// run them concurrently
+const pizzaPromise1 = makePizza(['mozzarella', 'basil', 'tomatoes', 'pine nuts']);
+const pizzaPromise2 = makePizza(['chocolate', 'cheese']);
+const pizzaPromise3 = makePizza(['mozzarella', 'basil', 'tomatoes', 'pine nuts']);
+
+const dinnerPromise = Promise.all([pizzaPromise1, pizzaPromise2, pizzaPromise3]);
+
+dinnerPromise.then(function(pizzas) {
+  const [john, paul, george] = pizzas;
+  console.log(john, paul, george);
+});
   </script>
 </body>
 
