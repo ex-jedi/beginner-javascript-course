@@ -17,7 +17,7 @@
       return (pizzaPromise = new Promise(function(resolve, reject) {
         // Reject if someone chooses pinapple topping
         if (toppings.includes('pinapple')) {
-          reject('Sereously?! Get out 🍍');
+          reject('Seriously?! Get out 🍍');
         }
         // Change bake time according to number of toppings
         const amountOfTimeToBake = 500 + toppings.length * 200;
