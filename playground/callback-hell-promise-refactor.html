@@ -51,6 +51,35 @@
 
   const go = document.querySelector('.go');
 
+// Using async await
+  async function animate2(e) {
+    const el = e.currentTarget;
+    // 1. Change the text to GO when clicked.
+    el.textContent = 'GO!';
+
+    // 2. Make it a circle after 2 seconds
+    await wait(200);
+    el.classList.add('circle');
+
+    // 3. Make it red after 0.5s
+    await wait(500);
+    el.classList.add('red');
+
+    // 4. Make it square after 250ms
+    await wait(250);
+    el.classList.remove('circle');
+
+    // 5. make it purple after 500ms
+    await wait(500);
+    el.classList.remove('red');
+    el.classList.add('purple');
+
+    // 6. Fade out after 500ms
+    await wait(500);
+    el.classList.add('fadeOut');
+  }
+
+// Using promises
   function animate(e) {
     const el = e.currentTarget;
     // 1. Change the text to GO when clicked.
@@ -82,8 +111,8 @@
         el.classList.add('fadeOut');
       });
   }
-
-  go.addEventListener('click', animate);
+// Just using callbacks
+  go.addEventListener('click', animate2);
   // 1. Change the text to GO when clicked.
   go.addEventListener('clickXXX', e => {
     const el = e.currentTarget;
