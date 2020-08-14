@@ -46,12 +46,39 @@ function handleError(err) {
   console.log('Ruh roh');
   console.log(err);
 }
+
+// Async functions always return a promise. So you can do promise stuff on the result
 async function go() {
-  const pizza = await makePizza(['pinapple']).catch(handleError);
+  // can handle error here, or..
+  const pizza = await makePizza(['pinapple']); // .catch(handleError);
   console.log(pizza);
+  return pizza;
 }
 
-go();
+// .. can handle error here
+// go().catch(handleError);
+// Can use promise methods on result of async functions
+// go()
+//   .then(result => {
+//     console.log(result);
+//   })
+//   .catch(handleError);
+// ***  Wes' preferred method  ***
+// go().catch(handleError);
+
+// Using higher order functions
+
+function makeSafe(fn, errorHandler) {
+  return function() {
+    fn().catch(errorHandler);
+  };
+}
+
+go(); // Unsafe... wont catch error
+
+const safeGo = makeSafe(go, handleError);
+
+safeGo();
   </script>
 </body>
 
