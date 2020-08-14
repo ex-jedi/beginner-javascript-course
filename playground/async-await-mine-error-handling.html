@@ -31,14 +31,24 @@ function makePizza(toppings = []) {
 }
 
 // Error handling with try and catch
+// Works with other stuff too
+// async function go() {
+//   const pizza = await makePizza(['pinapple']);
+//   console.log(pizza);
+
+//   console.log('Uh oh');
+//   console.log(err);
+// }
+
+// 'Mix and match' with promise syntax
+
+function handleError(err) {
+  console.log('Ruh roh');
+  console.log(err);
+}
 async function go() {
-  try {
-    const pizza = await makePizza(['pinapple']);
-    console.log(pizza);
-  } catch (err) {
-    console.log('Uh oh');
-    console.log(err);
-  }
+  const pizza = await makePizza(['pinapple']).catch(handleError);
+  console.log(pizza);
 }
 
 go();
