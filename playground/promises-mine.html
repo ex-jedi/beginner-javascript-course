@@ -59,6 +59,7 @@ makePizza(['pepperoni'])
 // const pizzaPromise2 = makePizza(['chocolate', 'cheese']);
 // const pizzaPromise3 = makePizza(['mozzarella', 'basil', 'tomatoes', 'pine nuts']);
 
+// Assumes all promises will run successfully. If there's an error it'll stop
 // const dinnerPromise = Promise.all([pizzaPromise1, pizzaPromise2, pizzaPromise3]);
 
 // dinnerPromise.then(function([john, paul, george]) {
@@ -91,6 +92,7 @@ const p2 = makePizza(['pinapple']);
 const dinnerPromise2 = Promise.allSettled([p1, p2]);
 
 dinnerPromise2.then(pizza => {
+  console.log('Dinner Promise 2 -');
   console.log(pizza);
 });
   </script>
