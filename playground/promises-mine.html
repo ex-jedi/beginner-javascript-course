@@ -91,9 +91,16 @@ const p2 = makePizza(['pinapple']);
 // Catches errors while allowing others to run
 const dinnerPromise2 = Promise.allSettled([p1, p2]);
 
-dinnerPromise2.then(pizza => {
-  console.log('Dinner Promise 2 -');
-  console.log(pizza);
+// Adding if/else to filter results
+dinnerPromise2.then(result => {
+  console.log(result);
+  result.forEach(pizza => {
+        if (pizza.status === 'fulfilled') {
+          console.log(`Success - ${pizza.value}`);
+        } else if (pizza.status !== 'fulfilled') {
+          console.log(`Fail - ${pizza.reason}`);
+    }
+  });
 });
   </script>
 </body>
