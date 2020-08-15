@@ -35,27 +35,38 @@ function makePizza(toppings = []) {
 // await wait(2000);
 // console.log('Finishing');
 
-// Only works in a function
-async function go() {
-  console.log('Starting');
-  // Can only use await in async functions
-  await wait(2000);
-  console.log('Ending');
-}
+// Can only use await in async functions
+// async function go() {
+//   console.log('Starting');
+//   // Await will pause a function until the promise is resolved
+//   await wait(2000);
+//   console.log('Running');
+//   await wait(1000);
+//   console.log('Ending');
+// }
 // go();
 
 async function makeDinner() {
   // If you just run the function and store it in a variable you'll get the promise
   // const pizza1 = makePizza(['pepperoni']);
   // To get the data you have to await it
-  const pizzaPromise1 = await makePizza(['pepperoni']);
-  const pizzaPromise2 = await makePizza(['mushrooms']);
-  const [firstPizza, secondPizza] = await Promise.all([pizzaPromise1, pizzaPromise2]);
-  console.log(firstPizza, secondPizza);
+  // Sequentially - though can be a foot gun for performance
+  // const pizza1 = await makePizza(['pepperoni']);
+  // console.log(pizza1);
+  // const pizza2 = await makePizza(['Parma ham']);
+  // console.log(pizza2);
+  // const pizza3 = await makePizza(['Mozarella', 'Parma ham', 'Olives', 'Oregano', 'Garlic']);
+  // console.log(pizza3);
+  // Or concurrently. Better for performance if that's how the code can work
+  const pizzaPromise1 = makePizza(['pepperoni']);
+  const pizzaPromise2 = makePizza(['Parma ham']);
+  const pizzaPromise3 = makePizza(['Mozarella', 'Parma ham', 'Olives', 'Oregano', 'Garlic']);
+  const [firstPizza, secondPizza, thirdPizza] = await Promise.all([pizzaPromise1, pizzaPromise2, pizzaPromise3]);
+  console.log(firstPizza, secondPizza, thirdPizza);
 }
 makeDinner();
 
-// // Function declaration
+// // Async await function declarations
 // async function fd() {}
 
 // // Arrow function
