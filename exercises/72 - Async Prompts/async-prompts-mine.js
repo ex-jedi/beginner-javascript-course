@@ -22,5 +22,7 @@ function ask(options) {
     }
     // Listen for submit event on the inputs
     // When someone does SVGNumberList, resolve the data that was in the input box
+    // Insert popup into the DOM
+    document.body.appendChild(popup);
   });
 }
