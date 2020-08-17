@@ -1,5 +1,7 @@
+const wait = (ms = 0) => new Promise(resolve => setTimeout(resolve, ms));
+
 function ask(options) {
-  return new Promise(function(resolve) {
+  return new Promise(async function(resolve) {
     // Create a popup with all the fields
     // Adding form with createElement immediately returns the DOM node so you can add event listeners to it
     const popup = document.createElement('form');
@@ -24,5 +26,8 @@ function ask(options) {
     // When someone does SVGNumberList, resolve the data that was in the input box
     // Insert popup into the DOM
     document.body.appendChild(popup);
+    // Put very small timeout before we add open class. This puts it in the queue to give element time to fade in.
+    await wait(50);
+    popup.classList.add('open');
   });
 }
