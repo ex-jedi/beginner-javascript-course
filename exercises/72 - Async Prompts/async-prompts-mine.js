@@ -1,5 +1,17 @@
 const wait = (ms = 0) => new Promise(resolve => setTimeout(resolve, ms));
 
+async function destroyPopup(popup) {
+  popup.classList.remove('open');
+  // Waiting for fadeout before removing
+  await wait(1000);
+  popup.remove();
+  // Even though popup is removed from the DOM it's still accessable in JavaScript's memory. So we change it to null
+  console.log('Not gone', popup);
+  // eslint-disable-next-line no-param-reassign
+  popup = null;
+  console.log('Gone', popup);
+}
+
 function ask(options) {
   return new Promise(async function(resolve) {
     // Create a popup with all the fields
@@ -25,7 +37,18 @@ function ask(options) {
       // TODO: Listen for a click on  the cancel button
     }
     // Listen for submit event on the inputs
-    // When someone does SVGNumberList, resolve the data that was in the input box
+    popup.addEventListener(
+      'submit',
+      function(e) {
+        e.preventDefault();
+        console.log('Submitted');
+        resolve(e.target.input.value);
+        // Remove from the DOM
+        destroyPopup(popup);
+      },
+      { once: true }
+    );
+    // When someone does submit, resolve the data that was in the input box
     // Insert popup into the DOM
     document.body.appendChild(popup);
     // Put very small timeout before we add open class. This puts it in the queue to give element time to fade in.
