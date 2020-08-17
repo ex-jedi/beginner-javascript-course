@@ -8,9 +8,10 @@ function ask(options) {
     popup.classList.add('popup');
     popup.insertAdjacentHTML(
       'afterbegin',
-      `
-    <fieldset>
+      `<fieldset>
       <label>${options.title}</label>
+      <input type="text" name="input"/>
+      <button type="submit">Submit</button>
     </fieldset>
     `
     );
@@ -20,6 +21,7 @@ function ask(options) {
       // Need to specify type or it'll make a submit button
       skipButton.type = 'button';
       skipButton.textContent = 'Cancel';
+      popup.firstElementChild.append(skipButton);
       // TODO: Listen for a click on  the cancel button
     }
     // Listen for submit event on the inputs
