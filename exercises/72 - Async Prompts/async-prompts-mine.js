@@ -37,6 +37,14 @@ function ask(options) {
       skipButton.textContent = 'Cancel';
       popup.firstElementChild.append(skipButton);
       // TODO: Listen for a click on  the cancel button
+      skipButton.addEventListener(
+        'click',
+        function() {
+          resolve(null);
+          destroyPopup(popup);
+        },
+        { once: true }
+      );
     }
     // Listen for submit event on the inputs
     popup.addEventListener(
