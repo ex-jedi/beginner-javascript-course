@@ -78,3 +78,57 @@ async function askQuestion(e) {
 }
 const buttons = document.querySelectorAll('[data-question]');
 buttons.forEach(button => button.addEventListener('click', askQuestion));
+
+// How do you ask questions in series?
+const questions = [
+  { title: 'What is your name?' },
+  { title: 'What is your age?', cancel: true },
+  { title: 'What is your dogs name?' },
+];
+
+// Promise.all? It'll open all the popups at the same time!
+// const answers = Promise.all([ask(questions[0]), ask(questions[1]), ask(questions[2])]).then(answers =>
+//   console.log(answers)
+// );
+// better way to do above (still doesn't work though for the same reason)
+// Promise.all(questions.map(ask)).then(result => console.log(result));
+
+// This does the same. All three popups appear on the page at the same time.
+// questions.forEach(async function(question) {
+//   console.log('Asking');
+//   console.log(question);
+//   const answer = await ask(question);
+//   console.log(answer);
+// });
+
+// For of loop saves the day. For of allows you to pause a loop with await. Example...
+// async function askMany() {
+//   for (const question of questions) {
+//     console.log(question);
+//     const answer = await ask(question);
+//     console.log(answer);
+//   }
+// }
+
+// askMany();
+
+// As above using utility function
+async function asyncMap(array, callback) {
+  // Make array to store results
+  const results = [];
+  // Loop over array
+  for (const item of array) {
+    const result = await callback(item);
+    results.push(result);
+  }
+  // When loop is done return results
+  return results;
+}
+
+// asyncMap(questions, ask);
+
+async function go() {
+  const answers = await asyncMap(questions, ask);
+  console.log(answers);
+}
+go();
