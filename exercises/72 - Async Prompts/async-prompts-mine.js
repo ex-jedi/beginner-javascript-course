@@ -1,3 +1,5 @@
+// https://courses.wesbos.com/account/access/5e4818abd9cc836465201439/view/375832620
+// Paused at 25:48
 const wait = (ms = 0) => new Promise(resolve => setTimeout(resolve, ms));
 
 async function destroyPopup(popup) {
@@ -56,3 +58,15 @@ function ask(options) {
     popup.classList.add('open');
   });
 }
+
+// Select all buttons that have a question (data-question)
+async function askQuestion(e) {
+  const button = e.currentTarget;
+  // Check if button has cancel data attribute. An empty string is falsy so this is the best way to check.
+  // const cancelIt = 'cancel' in button.dataset;
+  // or...
+  const cancel = button.hasAttribute('data-cancel');
+  const answer = await ask({ title: button.dataset.question, cancel });
+}
+const buttons = document.querySelectorAll('[data-question]');
+buttons.forEach(button => button.addEventListener('click', askQuestion));
