@@ -121,18 +121,20 @@ async function asyncMap(array, callback) {
     const result = await callback(item);
     results.push(result);
   }
-  // When loop is done return results
+  // When loop is done diplay results
+  const wrapper = document.querySelector('.wrapper');
   const showResults = document.createElement('ul');
   showResults.classList.add('results');
-  document.body.insertAdjacentElement('beforeend', showResults);
+  wrapper.insertAdjacentElement('beforeend', showResults);
   results.reverse().forEach(result => {
     showResults.insertAdjacentHTML(
       'afterbegin',
       `
-    <li>${result}</li>
-    `
+      <li>${result}</li>
+      `
     );
   });
+  // When loop is done return results
   return results;
 }
 
