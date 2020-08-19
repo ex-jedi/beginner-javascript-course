@@ -6,7 +6,7 @@ async function destroyPopup(popup) {
   // Waiting for fadeout before removing
   await wait(1000);
   popup.remove();
-  // Even though popup is removed from the DOM it's still accessable in JavaScript's memory. So we change it to null
+  // Even though popup is removed from the DOM it's still accessable in JavaScript's memory (in case you want to add it back). So we change it to null
   console.log('Not gone', popup);
   // eslint-disable-next-line no-param-reassign
   popup = null;
