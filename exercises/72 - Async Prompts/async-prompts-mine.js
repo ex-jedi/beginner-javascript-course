@@ -15,6 +15,7 @@ async function destroyPopup(popup) {
 
 function ask(options) {
   // Not passing in reject param as we'll resolve this empty if nothing is entered in the prompt
+  // To use await the parent function must be async
   return new Promise(async function(resolve) {
     // Create a popup with all the fields
     // Adding form with createElement immediately returns the DOM node so you can add event listeners to it
@@ -36,7 +37,7 @@ function ask(options) {
       skipButton.type = 'button';
       skipButton.textContent = 'Cancel';
       popup.firstElementChild.append(skipButton);
-      // TODO: Listen for a click on  the cancel button
+      //  Listen for a click on  the cancel button
       skipButton.addEventListener(
         'click',
         function() {
@@ -52,6 +53,7 @@ function ask(options) {
       function(e) {
         e.preventDefault();
         console.log('Submitted');
+        // If an input has a name it's available as a property on the form so it can be accessed by dot notation
         resolve(e.target.input.value);
         // Remove from the DOM
         destroyPopup(popup);
