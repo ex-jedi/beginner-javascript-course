@@ -122,13 +122,24 @@ async function asyncMap(array, callback) {
     results.push(result);
   }
   // When loop is done return results
+  const showResults = document.createElement('ul');
+  showResults.classList.add('results');
+  document.body.insertAdjacentElement('beforeend', showResults);
+  results.reverse().forEach(result => {
+    showResults.insertAdjacentHTML(
+      'afterbegin',
+      `
+    <li>${result}</li>
+    `
+    );
+  });
   return results;
 }
 
-// asyncMap(questions, ask);
+asyncMap(questions, ask);
 
-async function go() {
-  const answers = await asyncMap(questions, ask);
-  console.log(answers);
-}
-go();
+// async function go() {
+//   const answers = await asyncMap(questions, ask);
+//   console.log(answers);
+// }
+// go();
