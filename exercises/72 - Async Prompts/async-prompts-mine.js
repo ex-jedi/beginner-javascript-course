@@ -77,6 +77,7 @@ async function askQuestion(e) {
   // or...
   const cancel = button.hasAttribute('data-cancel');
   const answer = await ask({ title: button.dataset.question, cancel });
+  console.log(answer);
 }
 const buttons = document.querySelectorAll('[data-question]');
 buttons.forEach(button => button.addEventListener('click', askQuestion));
@@ -142,10 +143,10 @@ async function asyncMap(array, callback) {
   return results;
 }
 
-asyncMap(questions, ask);
+// asyncMap(questions, ask);
 
-// async function go() {
-//   const answers = await asyncMap(questions, ask);
-//   console.log(answers);
-// }
-// go();
+async function go() {
+  const answers = await asyncMap(questions, ask);
+  console.log(answers);
+}
+go();
