@@ -1,5 +1,4 @@
 // https://courses.wesbos.com/account/access/5e4818abd9cc836465201439/view/375832620
-// Paused at 25:48
 const wait = (ms = 0) => new Promise(resolve => setTimeout(resolve, ms));
 
 async function destroyPopup(popup) {
@@ -15,6 +14,7 @@ async function destroyPopup(popup) {
 }
 
 function ask(options) {
+  // Not passing in reject param as we'll resolve this empty if nothing is entered in the prompt
   return new Promise(async function(resolve) {
     // Create a popup with all the fields
     // Adding form with createElement immediately returns the DOM node so you can add event listeners to it
@@ -124,15 +124,17 @@ async function asyncMap(array, callback) {
   // When loop is done diplay results
   const wrapper = document.querySelector('.wrapper');
   const showResults = document.createElement('ul');
+  let count = questions.length - 1;
   showResults.classList.add('results');
   wrapper.insertAdjacentElement('beforeend', showResults);
   results.reverse().forEach(result => {
     showResults.insertAdjacentHTML(
       'afterbegin',
       `
-      <li>${result}</li>
+      <li>${questions[count].title} - ${result}</li>
       `
     );
+    count -= 1;
   });
   // When loop is done return results
   return results;
