@@ -1,0 +1,97 @@
+<!-- https://courses.wesbos.com/account/access/5e4818abd9cc836465201439/view/375830382  -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Async Await</title>
+  <link rel="stylesheet" href="../base.css">
+</head>
+
+<body>
+  <script>
+// Async is a syntax improvement for using promises
+const wait = (ms = 0) => new Promise(resolve => setTimeout(resolve, ms));
+
+function makePizza(toppings = []) {
+  return (pizzaPromise = new Promise(function(resolve, reject) {
+    // Reject if someone chooses pinapple topping
+    if (toppings.includes('pinapple')) {
+      reject('Seriously?! Get out 🍍');
+    }
+    // Change bake time according to number of toppings
+    const amountOfTimeToBake = 500 + toppings.length * 200;
+    setTimeout(() => {
+      resolve(`Here is your pizza 🍕 with the toppings ${toppings.join(' ')}`);
+    }, amountOfTimeToBake);
+    // When it's ready you can resolve this promise
+    // If something goes wrong you can reject this promise
+  }));
+}
+
+// Doesn't work. You can't do top level awaiting
+// console.log('Beginning');
+// await wait(2000);
+// console.log('Finishing');
+
+// Can only use await in async functions
+// async function go() {
+//   console.log('Starting');
+//   // Await will pause a function until the promise is resolved
+//   await wait(2000);
+//   console.log('Running');
+//   await wait(1000);
+//   console.log('Ending');
+// }
+// go();
+
+async function makeDinner() {
+  // If you just run the function and store it in a variable you'll get the promise
+  // const pizza1 = makePizza(['pepperoni']);
+  // To get the data you have to await it
+  // Sequentially - though can be a foot gun for performance
+  // const pizza1 = await makePizza(['pepperoni']);
+  // console.log(pizza1);
+  // const pizza2 = await makePizza(['Parma ham']);
+  // console.log(pizza2);
+  // const pizza3 = await makePizza(['Mozarella', 'Parma ham', 'Olives', 'Oregano', 'Garlic']);
+  // console.log(pizza3);
+  // Or concurrently. Better for performance if that's how the code can work
+  const pizzaPromise1 = makePizza(['pepperoni']);
+  const pizzaPromise2 = makePizza(['Parma ham']);
+  const pizzaPromise3 = makePizza(['Mozarella', 'Parma ham', 'Olives', 'Oregano', 'Garlic']);
+  const [firstPizza, secondPizza, thirdPizza] = await Promise.all([pizzaPromise1, pizzaPromise2, pizzaPromise3]);
+  console.log(firstPizza, secondPizza, thirdPizza);
+}
+makeDinner();
+
+// // Async await function declarations
+// async function fd() {}
+
+// // Arrow function
+// const arrowFn = async () => {};
+
+// // Callback function
+// window.addEventListener('click', async function() {});
+
+// // Methods
+// const person = {
+//   // Method longhand
+//   // eslint-disable-next-line object-shorthand
+//   sayHello: async function() {
+//     console.log('Hello');
+//   },
+//   // Method shorthand
+//   async sayHI() {
+//     console.log('Hi');
+//   },
+//   // Function property
+//   sayHey: async () => {
+//     console.log('Hey');
+//   },
+// };
+  </script>
+</body>
+
+</html>

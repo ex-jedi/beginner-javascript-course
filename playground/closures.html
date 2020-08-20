@@ -1,3 +1,4 @@
+<!-- https://courses.wesbos.com/account/access/5e4818abd9cc836465201439/view/375524347  -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -22,11 +23,12 @@
       // const innerFn = outer();
       // innerFn();
 
+      // Example one
       // function createGreeting(greeting = '') {
       //   const myGreet = greeting.toUpperCase();
-      //   return function (name) {
+      //   return function(name) {
       //     return `${myGreet} ${name}`;
-      //   }
+      //   };
       // }
 
       // const sayHello = createGreeting('hello');
@@ -35,30 +37,37 @@
       // console.log(sayHello('kait'));
       // console.log(sayHey('kait'));
 
-      // function createGame(gameName) {
-      //   let score = 0;
-      //   return function win() {
-      //     score++;
-      //     return `Your name ${gameName} score is ${score}`;
-      //   }
-      // }
-
-      // const hockeyGame = createGame('Hockey');
-      // const soccerGame = createGame('Soccer');
+      // Example two
 
       function createGame(gameName) {
         let score = 0;
         return function win() {
-          // debugger;
           score++;
-          return `Your game ${gameName} score is ${score}`;
+          console.log(`Your name ${gameName} score is ${score}`);
+          return `Your name ${gameName} score is ${score}`;
         };
       }
 
       const hockeyGame = createGame('Hockey');
-      const footyGame = createGame('Football');
+      const soccerGame = createGame('Soccer');
+
+      // Every time these functions are called the gameName variable is still accessable. Also the score is incremented by 1
       hockeyGame();
-      footyGame();
+      soccerGame();
+
+      // function createGame(gameName) {
+      //   let score = 0;
+      //   return function win() {
+      //     // debugger;
+      //     score++;
+      //     return `Your game ${gameName} score is ${score}`;
+      //   };
+      // }
+
+      // const hockeyGame = createGame('Hockey');
+      // const footyGame = createGame('Football');
+      // hockeyGame();
+      // footyGame();
 
       // function prepareCake(flavor) {
       //   // Adding debugger
