@@ -6,6 +6,7 @@ function Slider(slider) {
   // Select elements needed for slider
   this.slider = slider;
   this.slides = slider.querySelector('.slides');
+  // Left as regular variables as we don't need them outside the constructor
   const prevButton = slider.querySelector('.goToPrev');
   const nextButton = slider.querySelector('.goToNext');
 
@@ -15,12 +16,13 @@ function Slider(slider) {
 
   // Event listeners
   // Hook up Prev and Next Buttons
-  // Binding this here to this keyword being reassigned to the button itself
-  this.move = this.move.bind(this);
+  // Binding this here to prevent the this keyword being reassigned to the button itself
+  // this.move = this.move.bind(this);
   prevButton.addEventListener('click', () => this.move('back'));
-  nextButton.addEventListener('click', this.move); // No need to pass in direction as we have the else option handling it
+  // No need to pass in direction as we have the else option handling it
+  // nextButton.addEventListener('click', this.move);
   // Or could use arrow functions to prevent this keyword being reassigned to the button itself
-  // nextButton.addEventListener('click', () => this.move());
+  nextButton.addEventListener('click', () => this.move());
 
   // Add arrowKeyHandler when slider is focused
   this.arrowKeyHandler = this.arrowKeyHandler.bind(this);
@@ -38,6 +40,7 @@ Slider.prototype.startSlider = function() {
   this.current = this.slider.querySelector('.current') || this.slides.firstElementChild;
   this.prev = this.current.previousElementSibling || this.slides.lastElementChild;
   this.next = this.current.nextElementSibling || this.slides.firstElementChild;
+  ``;
 };
 
 // Adds classes to previous, current and next slides

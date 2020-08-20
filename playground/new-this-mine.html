@@ -54,16 +54,16 @@ function Pizza(toppings = [], customer = 'customer') {
     */
 }
 
-// Adding this to the prototype means this isn't duplicated every time we make an instance. Also if we change this, the changes will be available on every instance.
+// Adding this to the prototype means this isn't duplicated every time we make an instance. Also if we make changes here, they'll be available on every instance.
 Pizza.prototype.eat = function() {
-    if (this.slices > 0) {
+  if (this.slices > 0) {
       this.slices -= 1;
       console.log(`Munch! you now have ${this.slices} left!`);
       return this.slices;
     }
     console.log('Sorry! All gone!');
     return this.slices;
-  };
+};
 
   Pizza.prototype.describe = function() {
     let toppings;
@@ -139,6 +139,7 @@ const newName = 'Mark is a person';
 // console.log('Modified', newName.toUpperCase());
 
 // Can also write your own built ins.
+// eslint-disable-next-line no-extend-native
 String.prototype.sarcastic = function() {
     const sarcastic = this.split('')
       .map((char, i) => {
@@ -147,7 +148,7 @@ String.prototype.sarcastic = function() {
         }
         return char.toLowerCase();
       })
-    .join('');
+      .join('');
     return sarcastic;
 };
   </script>
