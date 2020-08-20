@@ -5,3 +5,14 @@ const wait = (ms = 0) => new Promise(resolve => setTimeout(resolve, ms));
 function getRandomBetween(min = 20, max = 150, randomNumber = Math.random()) {
   return Math.floor(randomNumber * (max - min) + min);
 }
+
+function draw(el) {
+  const text = el.textContent;
+  let soFar = '';
+  for (const letter of text) {
+    soFar += letter;
+    console.log(soFar);
+  }
+}
+
+const els = document.querySelectorAll('[data-type]').forEach(draw);
