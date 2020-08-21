@@ -26,14 +26,14 @@ function getRandomBetween(min = 20, max = 150, randomNumber = Math.random()) {
 // }
 
 // Recursion alternative
-function draw(el) {
+async function draw(el) {
   let index = 1;
   const text = el.textContent;
   const { typeMin, typeMax } = el.dataset;
   async function drawLetter() {
     el.textContent = text.slice(0, index);
     index += 1;
-    // Add exit condition when all the text has been types out
+    // Add exit condition when all the text has been typed out
     if (index <= text.length) {
       // Put this here so every letter has a random wait time. If we put it in the outer function it would only be calculated once and every letter would have the same wait time
       const amountOfTimeToWait = getRandomBetween(typeMin, typeMax);
