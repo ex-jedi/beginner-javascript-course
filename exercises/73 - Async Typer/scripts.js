@@ -10,18 +10,19 @@ async function draw(el) {
   const text = el.textContent;
   let soFar = '';
   // For initial wait
-  // el.textContent = soFar;
-  // await wait(2000);
+  el.textContent = soFar;
+  await wait(1000);
   for (const letter of text) {
     console.log(letter);
     soFar += letter;
     console.log(soFar);
     el.textContent = soFar;
     // Wait for some amount of time
-    console.log(el.dataset);
-    const amountOfTimeToWait = getRandomBetween();
+    const { typeMin, typeMax } = el.dataset;
+    console.log(typeMin, typeMax);
+    const amountOfTimeToWait = getRandomBetween(typeMin, typeMax);
     await wait(amountOfTimeToWait);
   }
 }
 
-const els = document.querySelectorAll('[data-type]').forEach(draw);
+document.querySelectorAll('[data-type]').forEach(draw);
