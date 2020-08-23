@@ -3,6 +3,7 @@
 const baseEndpoint = 'http://www.recipepuppy.com/api';
 const proxy = 'https://cors-anywhere.herokuapp.com/';
 const form = document.querySelector('form.search');
+const recipesGrid = document.querySelector('.recipes');
 
 async function fetchRecipes(query) {
   const res = await fetch(`${proxy}${baseEndpoint}?q=${query}`);
@@ -17,11 +18,14 @@ function displayRecipes(recipes) {
     <div class="recipe">
     <h2>${recipe.title}</h2>
     <p>${recipe.ingredients}</p>
-    ${recipe.thumbnail ? `<img src="${recipe.thumbnail}" alt="${recipe.title}" />` : null};
+    ${recipe.thumbnail && `<img src="${recipe.thumbnail}" alt="${recipe.title}" />`}
+    <p>
+    <a href="${recipe.href}">${recipe.title}</a>
+    </p>
     </div>
     `
   );
-  console.log(html);
+  recipesGrid.innerHTML = html.join('');
 }
 
 async function handleSubmit(event) {
@@ -31,11 +35,17 @@ async function handleSubmit(event) {
   el.submit.disabled = true;
   // Submit search
   const recipes = await fetchRecipes(el.query.value);
-  console.log(recipes.results[0]);
+  console.log(recipes.results);
   displayRecipes(recipes.results);
   el.submit.disabled = false;
 }
 
 form.addEventListener('submit', handleSubmit);
 
-fetchRecipes('pizza');
+// Diplay default  on load
+async function recipesOnLoad() {
+  const recipesLoad = await fetchRecipes('pizza');
+  displayRecipes(recipesLoad.results);
+}
+
+recipesOnLoad();
