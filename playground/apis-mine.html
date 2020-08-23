@@ -1,0 +1,73 @@
+<!-- https://courses.wesbos.com/account/access/5e4818abd9cc836465201439/view/375839333  -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>APIs</title>
+  <link rel="stylesheet" href="../base.css">
+</head>
+
+<body>
+  <p class="user"></p>
+
+  <script>
+  // AJAX - Asynchronous JavaScript and XML. But when people refer to AJAX they generally just mean fetching data from an API and displating it
+  // Endpoint - The URL you need to visit to get the data
+
+  // Refactoring code at the bottom for async await
+
+  // Not mandatory, but Wes suggests storing the endpoint in a variable
+  const baseEndpoint = 'https://api.github.com';
+  const usersEndpoint = `${baseEndpoint}/users`;
+  const userEl = document.querySelector('.user');
+
+  async function displayUser(username) {
+    // Display something while data loads
+    userEl.textContent = 'loading...';
+    // Fetch. Returns a promise
+    const response = await fetch(`${usersEndpoint}/${username}`);
+    const data = await response.json();
+
+    console.log(data);
+    console.log(data.name);
+    console.log(data.location);
+    console.log(data.blog);
+    // Display some user data
+    userEl.textContent = `${data.name} - ${data.blog}`;
+  }
+
+  function handleError(err) {
+    console.log('Ruh roh');
+    console.log(err);
+    userEl.textContent = `Something went wrong: ${err}`;
+  }
+
+  displayUser('ex-jedi').catch(handleError);
+
+  // Ordinary promise syntax
+  //   // Not mandatory, but Wes suggests storing the endpoint in a variable
+  // const endpoint = 'https://api.github.com/users/wesbos';
+  // const userEl = document.querySelector('.user');
+
+  // // Display something while data loads
+  // userEl.textContent = 'loading...';
+  // // Fetch. Returns a promise
+  // const wesPromise = fetch(endpoint);
+
+  // wesPromise
+  //   .then(response => response.json()) // First promise contains the response. Return the response. .json parses the JSON string into an object for us. Responses can be of different type.
+  //   .then(data => {
+  //     console.log(data);
+  //     console.log(data.name);
+  //     console.log(data.location);
+  //     console.log(data.blog);
+  //     // Display some user data
+  //     userEl.textContent = `${data.name} - ${data.blog}`;
+  // }) // Second promise contains the data. Return the data
+  //   .catch(handleError); // Always have an error handler.
+  </script>
+</body>
+
+</html>

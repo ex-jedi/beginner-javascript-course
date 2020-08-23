@@ -6,7 +6,7 @@ function Slider(slider) {
   // Select elements needed for slider
   this.slider = slider;
   this.slides = slider.querySelector('.slides');
-  // Left as regular variables as we don't need them outside the constructor
+  // Left as regular variables as we don't need them outside the constructor. But changing them to this works
   const prevButton = slider.querySelector('.goToPrev');
   const nextButton = slider.querySelector('.goToNext');
 
