@@ -42,6 +42,7 @@ async function fetchAndDisplay(query) {
   // Submit search
   const recipes = await fetchRecipes(query);
   displayRecipes(recipes.results);
+  console.dir(recipes.results);
   form.submit.disabled = false;
 }
 
