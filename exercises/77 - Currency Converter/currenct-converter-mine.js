@@ -1,4 +1,5 @@
 // https://courses.wesbos.com/account/access/5e4818abd9cc836465201439/view/375929658
+// Capturing select inputs with attribute selectors
 const fromSelect = document.querySelector('[name="from_currency"]');
 const toSelect = document.querySelector('[name="to_currency"]');
 
@@ -38,10 +39,20 @@ const currencies = {
 };
 
 function generateOptions(options) {
-  return Object.entries(options)
-    .map(([currencyCode, currencyName]) => `<option value="${currencyCode}">${currencyCode} - ${currencyName}</option>`)
-    .join('');
+  return (
+    // Convert currencies object into array
+    Object.entries(options)
+      // Mapping over currencies array
+      .map(
+        // Destructuring array into variables & outputting html template for each item
+        ([currencyCode, currencyName]) => `<option value="${currencyCode}">${currencyCode} - ${currencyName}</option>`
+      )
+      // Joining on nothind so they output as an HTML dump with no commas separating each item
+      .join('')
+  );
 }
+
+// Storing generateOptions output in variable as it'll be used twice. Better than running it twice
 const optionsHtml = generateOptions(currencies);
 fromSelect.innerHTML = optionsHtml;
 toSelect.innerHTML = optionsHtml;
