@@ -6,7 +6,7 @@ const jokeHolder = document.querySelector('.joke p');
 const buttonText = [
   'Ugh.',
   '🤦🏻‍♂️',
-  'omg dad.',
+  'oh dad.',
   'you are the worst',
   'seriously',
   'stop it.',
@@ -25,6 +25,12 @@ async function fetchJoke() {
   console.log(data);
   return data;
   // return response.json();
+}
+
+// Utility function to get random item from array.
+function randomItemFromArray(arr, not) {
+  const item = arr[Math.floor(Math.random() * arr.length)];
+  return item;
 }
 
 async function handleClick() {
