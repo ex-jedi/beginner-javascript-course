@@ -15,5 +15,14 @@ const buttonText = [
 ];
 
 async function fetchJoke() {
-  const response = await fetch('https://icanhazdadjoke.com');
+  const response = await fetch('https://icanhazdadjoke.com', {
+    headers: {
+      Accept: 'application/json',
+    },
+  });
+  console.log(response);
+  const joke = await response.json();
+  console.log(joke);
 }
+
+fetchJoke();
