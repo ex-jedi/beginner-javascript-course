@@ -8,7 +8,6 @@ const endPoint = 'https://api.exchangeratesapi.io/latest';
 const ratesByBase = {}; // Where we're going to store the rates
 const form = document.querySelector('.app form');
 const locale = navigator.language;
-console.log(locale);
 
 const currencies = {
   USD: 'United States Dollar',
