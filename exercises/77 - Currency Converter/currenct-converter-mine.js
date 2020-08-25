@@ -2,6 +2,7 @@
 // Capturing select inputs with attribute selectors
 const fromSelect = document.querySelector('[name="from_currency"]');
 const toSelect = document.querySelector('[name="to_currency"]');
+const endPoint = 'https://api.exchangeratesapi.io/latest';
 
 const currencies = {
   USD: 'United States Dollar',
@@ -50,6 +51,13 @@ function generateOptions(options) {
       // Joining on nothind so they output as an HTML dump with no commas separating each item
       .join('')
   );
+}
+
+async function fetchRates(base = 'USD') {
+  const res = await fetch(`${endPoint}?base=${base}`);
+  const rates = await res.json();
+  console.log(rates);
+  return rates;
 }
 
 // Storing generateOptions output in variable as it'll be used twice. Better than running it twice
