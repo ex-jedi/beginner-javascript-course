@@ -21,8 +21,19 @@ async function fetchJoke() {
     },
   });
   console.log(response);
-  const joke = await response.json();
-  console.log(joke);
+  const data = await response.json();
+  console.log(data);
+  return data;
+  // return response.json();
 }
 
-fetchJoke();
+async function handleClick() {
+  // Fetch request returns an object which has a joke property. Storing it a variable 'joke' using destructuring
+  const { joke } = await fetchJoke();
+  console.log(joke);
+  jokeHolder.textContent = joke;
+}
+
+jokeButton.addEventListener('click', handleClick);
+
+// fetchJoke();
