@@ -77,6 +77,7 @@ async function convert(amount, from, to) {
   const rate = ratesByBase[from].rates[to];
   const convertedAmount = rate * amount;
   console.log(`${amount} ${from} is ${convertedAmount} in ${to}`);
+  return convertedAmount;
 }
 
 // Storing generateOptions output in variable as it'll be used twice. Better than running it twice
