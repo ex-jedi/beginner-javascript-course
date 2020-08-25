@@ -3,6 +3,7 @@
 const jokeButton = document.querySelector('.getJoke');
 const jokeHolder = document.querySelector('.joke p');
 const loader = document.querySelector('.loader');
+const jokeText = document.querySelector('.jokeText');
 
 const buttonText = [
   'Ugh.',
@@ -15,14 +16,25 @@ const buttonText = [
   'that was the worst one',
 ];
 
+const wait = (ms = 0) => new Promise(resolve => setTimeout(resolve, ms));
+
 async function fetchJoke() {
+  // Show loader
+  loader.classList.remove('hidden');
+  // Hide Joke
+  jokeText.classList.add('hidden');
   const response = await fetch('https://icanhazdadjoke.com', {
     headers: {
       Accept: 'application/json',
     },
   });
   // console.log(response);
+  await wait(500);
   const data = await response.json();
+  // Hide loader
+  loader.classList.add('hidden');
+  // Shoe joke
+  jokeText.classList.remove('hidden');
   // console.log(data);
   return data;
   // return response.json();
@@ -44,7 +56,7 @@ async function handleClick() {
   const { joke } = await fetchJoke();
   // console.log(joke);
   jokeHolder.textContent = joke;
-  jokeButton.textContent = randomItemFromArray(buttonText, jokeButton.textContent);
+  jokeText.textContent = randomItemFromArray(buttonText, jokeText.textContent);
 }
 
 jokeButton.addEventListener('click', handleClick);
