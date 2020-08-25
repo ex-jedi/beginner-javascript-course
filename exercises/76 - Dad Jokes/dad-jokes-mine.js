@@ -2,6 +2,7 @@
 // https://icanhazdadjoke.com/api API
 const jokeButton = document.querySelector('.getJoke');
 const jokeHolder = document.querySelector('.joke p');
+const loader = document.querySelector('.loader');
 
 const buttonText = [
   'Ugh.',
@@ -31,6 +32,7 @@ async function fetchJoke() {
 function randomItemFromArray(arr, not) {
   const item = arr[Math.floor(Math.random() * arr.length)];
   if (item === not) {
+    console.log(not);
     console.log('You already said that');
     return randomItemFromArray(arr, not);
   }
