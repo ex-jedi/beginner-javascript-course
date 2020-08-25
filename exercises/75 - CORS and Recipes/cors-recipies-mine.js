@@ -4,7 +4,7 @@ const baseEndpoint = 'http://www.recipepuppy.com/api';
 const proxy = 'https://cors-anywhere.herokuapp.com/';
 const form = document.querySelector('form.search');
 // Grab query initial value to display on page load
-const initvalue = form.query.value;
+const initValue = form.query.value;
 const recipesGrid = document.querySelector('.recipes');
 
 async function fetchRecipes(query) {
@@ -42,6 +42,7 @@ async function fetchAndDisplay(query) {
   // Submit search
   const recipes = await fetchRecipes(query);
   displayRecipes(recipes.results);
+  console.dir(recipes.results);
   form.submit.disabled = false;
 }
 
@@ -54,4 +55,4 @@ form.addEventListener('submit', handleSubmit);
 // }
 // recipesOnLoad();
 
-fetchAndDisplay(initvalue);
+fetchAndDisplay(initValue);
