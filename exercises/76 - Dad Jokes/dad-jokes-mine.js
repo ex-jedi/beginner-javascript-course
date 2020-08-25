@@ -20,9 +20,9 @@ async function fetchJoke() {
       Accept: 'application/json',
     },
   });
-  console.log(response);
+  // console.log(response);
   const data = await response.json();
-  console.log(data);
+  // console.log(data);
   return data;
   // return response.json();
 }
@@ -30,14 +30,19 @@ async function fetchJoke() {
 // Utility function to get random item from array.
 function randomItemFromArray(arr, not) {
   const item = arr[Math.floor(Math.random() * arr.length)];
+  if (item === not) {
+    console.log('You already said that');
+    return randomItemFromArray(arr, not);
+  }
   return item;
 }
 
 async function handleClick() {
   // Fetch request returns an object which has a joke property. Storing it a variable 'joke' using destructuring
   const { joke } = await fetchJoke();
-  console.log(joke);
+  // console.log(joke);
   jokeHolder.textContent = joke;
+  jokeButton.textContent = randomItemFromArray(buttonText, jokeButton.textContent);
 }
 
 jokeButton.addEventListener('click', handleClick);
