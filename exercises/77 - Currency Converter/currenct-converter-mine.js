@@ -1,3 +1,7 @@
+// https://courses.wesbos.com/account/access/5e4818abd9cc836465201439/view/375929658
+const fromSelect = document.querySelector('[name="from_currency"]');
+const toSelect = document.querySelector('[name="to_currency"]');
+
 const currencies = {
   USD: 'United States Dollar',
   AUD: 'Australian Dollar',
@@ -32,3 +36,12 @@ const currencies = {
   ZAR: 'South African Rand',
   EUR: 'Euro',
 };
+
+function generateOptions(options) {
+  return Object.entries(options)
+    .map(([currencyCode, currencyName]) => `<option value="${currencyCode}">${currencyCode} - ${currencyName}</option>`)
+    .join('');
+}
+const optionsHtml = generateOptions(currencies);
+fromSelect.innerHTML = optionsHtml;
+toSelect.innerHTML = optionsHtml;
