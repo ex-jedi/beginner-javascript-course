@@ -9,6 +9,6 @@ export function returnHi(name) {
   return `Hi ${name} ${last}`;
 }
 
-// Can also use named exports. Really a matter of preference. WEs uses both
+// Can also use named exports, you can have as many as you want. Really a matter of preference. Wes uses both
 
 export { middle };
