@@ -1,3 +1,6 @@
+const endPoint = 'https://api.exchangeratesapi.io/latest';
+const ratesByBase = {}; // Where we're going to store the rates
+
 export async function fetchRates(base = 'USD') {
   const res = await fetch(`${endPoint}?base=${base}`);
   const rates = await res.json();

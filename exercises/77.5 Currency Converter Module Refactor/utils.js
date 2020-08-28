@@ -1,3 +1,5 @@
+import { locale } from './elements';
+
 export function generateOptions(options) {
   return (
     // Convert currencies object into array
@@ -10,4 +12,11 @@ export function generateOptions(options) {
       // Joining on nothind so they output as an HTML dump with no commas separating each item
       .join('')
   );
+}
+
+export function formatCurrency(amount, currency) {
+  return Intl.NumberFormat(locale, {
+    style: 'currency',
+    currency,
+  }).format(amount);
 }
