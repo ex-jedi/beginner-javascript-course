@@ -7,7 +7,8 @@
 */
 
 // Imports
-import { init } from './lib';
+import { init } from './init';
 
-// Start the app
-init();
+// Start the app only when user mouses over it
+const app = document.querySelector('.app');
+app.addEventListener('mouseenter', init, { once: true });
