@@ -1,3 +1,5 @@
+const last = 'Phoenix';
+
 export function returnHi(name) {
-  return `hi ${name}`;
+  return `Hi ${name} ${last}`;
 }
