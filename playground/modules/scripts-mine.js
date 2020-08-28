@@ -10,18 +10,22 @@
 import thisReallyIsMe, { returnHi as sayHi, middle, last } from './utils-mine.js';
 import * as everything from './wes-mine.js';
 
-console.log(everything);
-console.log(everything.dog);
-console.log(everything.default.name);
+// console.log(everything);
+// console.log(everything.dog);
+// console.log(everything.default.name);
 
 // There can be only one default export per file and you can name them whatever you want. You can do both in a file/module. Wes tends to use this when a file/module only has one thing in it
 // import thisIsMe from './wes-mine';
 
-const name = 'Mark';
-
 // console.log(returnHi(name));
-console.log(sayHi('Mark')); // Using renamed import
-console.log(middle);
-console.log(last);
-// console.log(thisIsMe.last);
-console.log(thisReallyIsMe.last);
+// console.log(sayHi('Mark')); // Using renamed import
+// console.log(middle);
+// console.log(last);
+// // console.log(thisIsMe.last);
+// console.log(thisReallyIsMe.last);
+
+// Loading on demand
+import { handleButtonClick } from './handlers-mine';
+
+const button = document.querySelector('button');
+button.addEventListener('click', handleButtonClick);
