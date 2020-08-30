@@ -1,4 +1,7 @@
 // Names export. Can have lots of there
+import { jokeText } from './elements';
+import { wait } from './utils';
+
 export async function fetchJoke(loader) {
   // Show loader
   loader.classList.remove('hidden');
