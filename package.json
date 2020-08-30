@@ -16,5 +16,7 @@
     "url": "https://github.com/ex-jedi/beginner-javascript-course/issues"
   },
   "homepage": "https://github.com/ex-jedi/beginner-javascript-course#readme",
-  "devDependencies": {}
+  "devDependencies": {
+    "cssnano": "^4.1.10"
+  }
 }
