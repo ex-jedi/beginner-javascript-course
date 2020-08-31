@@ -1,7 +1,9 @@
+//* Waait
 // Wes' one line wait for a bit package. Default import so can call it anything!
 import holdUp from 'waait';
 
-// Faker. Generates a load of placeholder data
+//* Faker
+// Generates a load of placeholder data
 // https://www.npmjs.com/package/faker
 // If you see this in the docs.. var faker = require('faker').. this is the old way to do it. Replace with a standard import statement, as below
 
@@ -13,6 +15,13 @@ import holdUp from 'waait';
 // or Just the bit you need
 import { name } from 'faker';
 
+//* date-fns
+// Nicer way of working with dates
+// Importing date distance thing, not all of it.
+// https://date-fns.org/v2.16.1/docs/formatDistance
+import { formatDistance, format } from 'date-fns';
+
+//* Faker
 console.log(name);
 console.log(`Hello, I'm ${name.firstName()}`);
 
@@ -20,6 +29,7 @@ console.log(`Hello, I'm ${name.firstName()}`);
 const fakeNames = Array.from({ length: 10 }, () => `${name.firstName()} ${name.lastName()}`);
 console.log(fakeNames);
 
+//* Waait
 async function go() {
   console.log('Going!');
   await holdUp(1000);
@@ -27,3 +37,14 @@ async function go() {
 }
 
 go();
+
+//* date-fns
+
+const diff = formatDistance(new Date(), new Date(2020, 3, 4, 10, 32, 0), { addSuffix: true }); //= > 'in about 1 hour'
+
+console.log(diff);
+
+// How do I get Month Date Year  using date-fns?
+const date = new Date();
+const formatted = format(date, `MMMM 'the' do y`);
+console.log(formatted);
