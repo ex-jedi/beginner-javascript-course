@@ -16,6 +16,10 @@ import { name } from 'faker';
 console.log(name);
 console.log(`Hello, I'm ${name.firstName()}`);
 
+// Array of fake names
+const fakeNames = Array.from({ length: 10 }, name.firstName);
+console.log(fakeNames);
+
 async function go() {
   console.log('Going!');
   await holdUp(1000);

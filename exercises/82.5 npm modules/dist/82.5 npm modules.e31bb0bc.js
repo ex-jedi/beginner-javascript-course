@@ -100434,7 +100434,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // console.log(`Hello I'm ${faker.name.firstName()}`);
 // or Just the bit you need
 console.log(_faker.name);
-console.log(`Hello, I'm ${_faker.name.firstName()}`);
+console.log(`Hello, I'm ${_faker.name.firstName()}`); // Array of fake names
+
+const fakeNames = Array.from({
+  length: 10
+}, _faker.name.firstName);
+console.log(fakeNames);
 
 async function go() {
   console.log('Going!');
