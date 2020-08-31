@@ -17,7 +17,7 @@ console.log(name);
 console.log(`Hello, I'm ${name.firstName()}`);
 
 // Array of fake names
-const fakeNames = Array.from({ length: 10 }, name.firstName);
+const fakeNames = Array.from({ length: 10 }, () => `${name.firstName()} ${name.lastName()}`);
 console.log(fakeNames);
 
 async function go() {
