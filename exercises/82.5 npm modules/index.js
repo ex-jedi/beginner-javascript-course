@@ -55,13 +55,15 @@ const formatted = format(date, `MMMM 'the' do y`);
 console.log(formatted);
 
 //* Axios
+// FEtch is fine for most use cases. But Axios is useful for more involves stuff, when you need more data from the request
 async function getJoke() {
-  const { data } = await axios.get('https://icanhazdadjoke.com/', {
+  // Can destructure the response straight into thr data property... const { data } = await axios.get(... console.log(data);
+  const response = await axios.get('https://icanhazdadjoke.com/', {
     headers: {
       Accept: 'application/json',
     },
   });
-  console.log(data.joke);
+  console.log(response);
 }
 
 getJoke();

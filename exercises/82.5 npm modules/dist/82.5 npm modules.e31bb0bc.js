@@ -120431,16 +120431,16 @@ console.log(diff); // How do I get Month Date Year  using date-fns?
 const date = new Date();
 const formatted = (0, _dateFns.format)(date, `MMMM 'the' do y`);
 console.log(formatted); //* Axios
+// FEtch is fine for most use cases. But Axios is useful for more involves stuff, when you need more data from the request
 
 async function getJoke() {
-  const {
-    data
-  } = await _axios.default.get('https://icanhazdadjoke.com/', {
+  // Can destructure the response straight into thr data property... const { data } = await axios.get(... console.log(data);
+  const response = await _axios.default.get('https://icanhazdadjoke.com/', {
     headers: {
       Accept: 'application/json'
     }
   });
-  console.log(data.joke);
+  console.log(response);
 }
 
 getJoke();
