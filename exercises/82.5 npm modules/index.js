@@ -1,3 +1,5 @@
+// https://courses.wesbos.com/account/access/5e4818abd9cc836465201439/view/375820314
+// Doesn't work so well with Prepros. Have to link processed file
 //* Waait
 // Wes' one line wait for a bit package. Default import so can call it anything!
 import holdUp from 'waait';
@@ -20,6 +22,9 @@ import { name } from 'faker';
 // Importing date distance thing, not all of it.
 // https://date-fns.org/v2.16.1/docs/formatDistance
 import { formatDistance, format } from 'date-fns';
+
+//* Axios
+import axios from 'axios';
 
 //* Faker
 console.log(name);
@@ -48,3 +53,15 @@ console.log(diff);
 const date = new Date();
 const formatted = format(date, `MMMM 'the' do y`);
 console.log(formatted);
+
+//* Axios
+async function getJoke() {
+  const { data } = await axios.get('https://icanhazdadjoke.com/', {
+    headers: {
+      Accept: 'application/json',
+    },
+  });
+  console.log(data.joke);
+}
+
+getJoke();
