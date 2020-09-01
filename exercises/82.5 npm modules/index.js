@@ -1,5 +1,6 @@
 // https://courses.wesbos.com/account/access/5e4818abd9cc836465201439/view/375820314
 // Doesn't work so well with Prepros. Have to link processed file
+// Parcel sorts import paths for us. Looks like you have to enter the whole path for Prepros?
 //* Waait
 // Wes' one line wait for a bit package. Default import so can call it anything!
 import holdUp from 'waait';
@@ -28,7 +29,11 @@ import axios from 'axios';
 
 //* Lodash
 // Helper functions and methods
-import { intersection } from 'lodash';
+import { intersection, isEqual } from 'lodash';
+
+//* await-to-js
+// Error handling thing
+import to from 'await-to-js';
 
 //* Faker
 console.log(name);
@@ -80,3 +85,27 @@ const b = [2, 7, 66, 55, 45, 32, 1, 7, 8, 9];
 // Lodash helper function - intersection
 const sameValues = intersection(a, b);
 console.log('Same vals', sameValues);
+
+const personOne = { name: 'Mark' };
+const personTwo = { name: 'Mark' };
+
+console.log(isEqual(personOne, personTwo));
+
+//* await-to-js
+function checkIfNameIsCool(firstName) {
+  return new Promise(function(resolve, reject) {
+    if (firstName === 'Mark') {
+      resolve('Yaaas');
+    } else {
+      reject(new Error('Nope!'));
+    }
+  });
+}
+
+// to() method returns an array as the response, first item in the array is the error, second is the data
+// You can de-structure the response array
+async function checkName(nameToCheck) {
+  const [error, success] = await to(checkIfNameIsCool(nameToCheck));
+  console.log(error, success);
+}
+checkName('Tim');

@@ -139580,7 +139580,35 @@ var define;
   }
 }.call(this));
 
-},{"buffer":"node_modules/buffer/index.js"}],"index.js":[function(require,module,exports) {
+},{"buffer":"node_modules/buffer/index.js"}],"node_modules/await-to-js/dist/await-to-js.es5.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.to = to;
+exports.default = void 0;
+
+/**
+ * @param { Promise } promise
+ * @param { Object= } errorExt - Additional Information you can pass to the err object
+ * @return { Promise }
+ */
+function to(promise, errorExt) {
+  return promise.then(function (data) {
+    return [null, data];
+  }).catch(function (err) {
+    if (errorExt) {
+      Object.assign(err, errorExt);
+    }
+
+    return [err, undefined];
+  });
+}
+
+var _default = to;
+exports.default = _default;
+},{}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _waait = _interopRequireDefault(require("waait"));
@@ -139593,10 +139621,13 @@ var _axios = _interopRequireDefault(require("axios"));
 
 var _lodash = require("lodash");
 
+var _awaitToJs = _interopRequireDefault(require("await-to-js"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // https://courses.wesbos.com/account/access/5e4818abd9cc836465201439/view/375820314
 // Doesn't work so well with Prepros. Have to link processed file
+// Parcel sorts import paths for us. Looks like you have to enter the whole path for Prepros?
 //* Waait
 // Wes' one line wait for a bit package. Default import so can call it anything!
 //* Faker
@@ -139615,6 +139646,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //* Axios
 //* Lodash
 // Helper functions and methods
+//* await-to-js
+// Error handling thing
 //* Faker
 console.log(_faker.name);
 console.log(`Hello, I'm ${_faker.name.firstName()}`); // Array of fake names
@@ -139660,8 +139693,34 @@ const a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const b = [2, 7, 66, 55, 45, 32, 1, 7, 8, 9]; // Lodash helper function - intersection
 
 const sameValues = (0, _lodash.intersection)(a, b);
-console.log(sameValues);
-},{"waait":"node_modules/waait/index.js","faker":"node_modules/faker/index.js","date-fns":"node_modules/date-fns/esm/index.js","axios":"node_modules/axios/index.js","lodash":"node_modules/lodash/lodash.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+console.log('Same vals', sameValues);
+const personOne = {
+  name: 'Mark'
+};
+const personTwo = {
+  name: 'Mark'
+};
+console.log((0, _lodash.isEqual)(personOne, personTwo)); //* await-to-js
+
+function checkIfNameIsCool(firstName) {
+  return new Promise(function (resolve, reject) {
+    if (firstName === 'Mark') {
+      resolve('Yaaas');
+    } else {
+      reject(new Error('Nope!'));
+    }
+  });
+} // to() method returns an array as the response, first item in the array is the error, second is the data
+// You can de-structure the response array
+
+
+async function checkName(nameToCheck) {
+  const [error, success] = await (0, _awaitToJs.default)(checkIfNameIsCool(nameToCheck));
+  console.log(error, success);
+}
+
+checkName('Tim');
+},{"waait":"node_modules/waait/index.js","faker":"node_modules/faker/index.js","date-fns":"node_modules/date-fns/esm/index.js","axios":"node_modules/axios/index.js","lodash":"node_modules/lodash/lodash.js","await-to-js":"node_modules/await-to-js/dist/await-to-js.es5.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -139689,7 +139748,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61699" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51647" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
