@@ -26,6 +26,10 @@ import { formatDistance, format } from 'date-fns';
 //* Axios
 import axios from 'axios';
 
+//* Lodash
+// Helper functions and methods
+import { intersection } from 'lodash';
+
 //* Faker
 console.log(name);
 console.log(`Hello, I'm ${name.firstName()}`);
@@ -57,7 +61,7 @@ console.log(formatted);
 //* Axios
 // FEtch is fine for most use cases. But Axios is useful for more involves stuff, when you need more data from the request
 async function getJoke() {
-  // Can destructure the response straight into thr data property... const { data } = await axios.get(... console.log(data);
+  // Can de-structure the response straight into thr data property... const { data } = await axios.get(... console.log(data);
   const response = await axios.get('https://icanhazdadjoke.com/', {
     headers: {
       Accept: 'application/json',
@@ -67,3 +71,12 @@ async function getJoke() {
 }
 
 getJoke();
+
+//* Lodash
+// What numbers are the same in each array?
+const a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const b = [2, 7, 66, 55, 45, 32, 1, 7, 8, 9];
+
+// Lodash helper function - intersection
+const sameValues = intersection(a, b);
+console.log('Same vals', sameValues);
