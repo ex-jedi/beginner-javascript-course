@@ -139705,7 +139705,7 @@ console.log((0, _lodash.isEqual)(personOne, personTwo)); //* await-to-js
 function checkIfNameIsCool(firstName) {
   return new Promise(function (resolve, reject) {
     if (firstName === 'Mark') {
-      resolve('Yaaas');
+      resolve(`Yaas ${firstName}`);
     } else {
       reject(new Error('Nope!'));
     }
@@ -139716,10 +139716,15 @@ function checkIfNameIsCool(firstName) {
 
 async function checkName(nameToCheck) {
   const [error, success] = await (0, _awaitToJs.default)(checkIfNameIsCool(nameToCheck));
-  console.log(error, success);
+
+  if (error) {
+    console.log(error);
+  } else {
+    console.log(success);
+  }
 }
 
-checkName('Tim');
+checkName('Mark');
 },{"waait":"node_modules/waait/index.js","faker":"node_modules/faker/index.js","date-fns":"node_modules/date-fns/esm/index.js","axios":"node_modules/axios/index.js","lodash":"node_modules/lodash/lodash.js","await-to-js":"node_modules/await-to-js/dist/await-to-js.es5.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';

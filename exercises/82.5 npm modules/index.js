@@ -95,7 +95,7 @@ console.log(isEqual(personOne, personTwo));
 function checkIfNameIsCool(firstName) {
   return new Promise(function(resolve, reject) {
     if (firstName === 'Mark') {
-      resolve('Yaaas');
+      resolve(`Yaas ${firstName}`);
     } else {
       reject(new Error('Nope!'));
     }
@@ -106,6 +106,10 @@ function checkIfNameIsCool(firstName) {
 // You can de-structure the response array
 async function checkName(nameToCheck) {
   const [error, success] = await to(checkIfNameIsCool(nameToCheck));
-  console.log(error, success);
+  if (error) {
+    console.log(error);
+  } else {
+    console.log(success);
+  }
 }
-checkName('Tim');
+checkName('Mark');
