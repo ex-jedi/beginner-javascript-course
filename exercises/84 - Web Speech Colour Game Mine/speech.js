@@ -7,15 +7,12 @@ function displayColors(colors) {
   return colors
     .map(
       color =>
-        `<span class="color ${color} ${
-          isDark(color) ? 'dark' : ''
-        }" style="background: ${color};">${color}</span>`
+        `<span class="color ${color} ${isDark(color) ? 'dark' : ''}" style="background: ${color};">${color}</span>`
     )
     .join('');
 }
 
-window.SpeechRecognition =
-  window.SpeechRecognition || window.webkitSpeechRecognition;
+window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
 function start() {
   // see if their browser supports this
@@ -35,3 +32,9 @@ function start() {
 
 start();
 colorsEl.innerHTML = displayColors(colorsByLength);
+
+console.log('Hello');
+
+window.myName = 'Mark';
+
+const testName = 'PHOENIX';
