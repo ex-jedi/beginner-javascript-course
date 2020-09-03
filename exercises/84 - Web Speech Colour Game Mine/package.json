@@ -1,5 +1,5 @@
 {
-  "name": "web-speech-colours",
+  "name": "colours",
   "version": "1.0.0",
   "description": "",
   "main": "colors.js",
@@ -8,10 +8,10 @@
   },
   "author": "",
   "license": "ISC",
-  "browserslist": [
-    "last 1 chrome versions"
-  ],
   "devDependencies": {
     "parcel-bundler": "^1.12.4"
-  }
+  },
+  "browserslist": [
+    "last 1 chrome versions"
+  ]
 }
