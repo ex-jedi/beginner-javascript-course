@@ -4,6 +4,7 @@
 // Careful to make sure that vital data, such as prices can't be changed client side
 // Need to be very careful to
 // When you allow users to input html users can run JavaScript on the page. onload or onerror attributes on img tag can allow malicious JavaScript on your site
+// Always send and receive data requests to https
 
 import { sanitize } from 'dompurify';
 
