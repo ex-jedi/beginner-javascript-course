@@ -1,10 +1,14 @@
 import { handleResult } from './handlers';
-import { colorsByLength } from './colors';
+import { colorsByLength, isDark } from './colors';
 
 const colorsEl = document.querySelector('.colors');
 
 function displayColors(colors) {
-  return colors.map(color => `<span class="color" style="background: ${color};">${color}</span>`).join('');
+  return colors
+    .map(
+      color => `<span class="color ${isDark(color[1]) && 'dark'}" style="background: ${color[1]};">${color[0]}</span>`
+    )
+    .join('');
 }
 
 window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -26,6 +30,7 @@ function start() {
     console.log(recognition);
   }
 }
+console.log(colorsByLength);
 colorsEl.innerHTML = displayColors(colorsByLength);
 start();
 
