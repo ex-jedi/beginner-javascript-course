@@ -22,4 +22,6 @@ export function handleResult({ results }) {
   // Target span with class of that colour
   const colorSpan = document.querySelector(`.${color}`);
   colorSpan.classList.add('got');
+  // Change body background color
+  document.body.style.backgroundColor = color;
 }
