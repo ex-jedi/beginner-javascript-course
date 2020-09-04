@@ -33,9 +33,7 @@ function handleTabClick(event) {
   */
 
   // Method two(wes version) - find in the array of tabPanel
-  const tabPanel = tabPanels.find(
-    panel => panel.getAttribute('aria-labelledby') === id
-  );
+  const tabPanel = tabPanels.find(panel => panel.getAttribute('aria-labelledby') === id);
   tabPanel.hidden = false;
 }
 
