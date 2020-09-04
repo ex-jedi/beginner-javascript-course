@@ -5,9 +5,7 @@ const colorsEl = document.querySelector('.colors');
 
 function displayColors(colors) {
   return colors
-    .map(
-      color => `<span class="color ${isDark(color[1]) && 'dark'}" style="background: ${color[1]};">${color[0]}</span>`
-    )
+    .map(color => `<span class="color ${isDark(color) && 'dark'}" style="background: ${color};">${color}</span>`)
     .join('');
 }
 
