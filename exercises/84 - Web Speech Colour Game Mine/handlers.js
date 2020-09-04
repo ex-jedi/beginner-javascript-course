@@ -19,4 +19,7 @@ export function handleResult({ results }) {
   }
   // if it is;
   console.log(`${color} is a color`);
+  // Target span with class of that colour
+  const colorSpan = document.querySelector(`.${color}`);
+  colorSpan.classList.add('got');
 }
