@@ -8,6 +8,7 @@ function handleTabClick(e) {
   tabPanels.forEach(panel => (panel.hidden = true));
   // Mark all tabs as unselected
   // Have to use button.setAttribute('aria-selected', false) rather than button.ariaSelected = false for cross browser reasons
+  // Some attributes can be accessed as a property with dot notation, for some you have to use setAttribute()
   tabButtons.forEach(button => button.setAttribute('aria-selected', false));
   // Mark clicked tab button as selected
   // Find associated tab panel and show it
