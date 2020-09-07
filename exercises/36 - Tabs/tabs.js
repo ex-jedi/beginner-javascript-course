@@ -3,7 +3,7 @@ const tabs = document.querySelector('.tabs');
 const tabButtons = tabs.querySelectorAll('[role="tab"]');
 const tabPanels = tabs.querySelectorAll('[role="tabpanel"]');
 
-function handleTabClick(e) {
+function handleTabClick({ currentTarget }) {
   // Hide all tab panels. Easier to hide them all then show the one you want.
   tabPanels.forEach(panel => (panel.hidden = true));
   // Mark all tabs as unselected
@@ -12,6 +12,7 @@ function handleTabClick(e) {
   tabButtons.forEach(button => button.setAttribute('aria-selected', false));
   // Mark clicked tab button as selected
   // Find associated tab panel and show it
+  currentTarget.setAttribute('aria-selected', true);
 }
 
 tabButtons.forEach(button => button.addEventListener('click', handleTabClick));
