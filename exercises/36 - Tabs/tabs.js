@@ -18,7 +18,7 @@ function handleTabClick({ currentTarget }) {
   // Method one
   // const tabToOpen = tabs.querySelector(`[aria-labelledby="${id}"]`);
   // tabToOpen.hidden = false;
-  // Method two - find in array of tab panels. Wes' favored method as we already have the tabPanels. But either is just fine
+  // Method two - find in array of tab panels. Wes' favoured method as we already have the tabPanels. But either is just fine
   const tabToOpen = tabPanels.find(
     panel => panel.getAttribute('aria-labelledby') === id
   );
