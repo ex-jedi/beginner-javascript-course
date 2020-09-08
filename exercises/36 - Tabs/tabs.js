@@ -1,42 +1,28 @@
 const tabs = document.querySelector('.tabs');
+// Searching in tab rather than in document
 const tabButtons = tabs.querySelectorAll('[role="tab"]');
-const tabPanels = Array.from(document.querySelectorAll('[role="tabpanel"]'));
+// Turn tabPanels into array so we can use find()
+const tabPanels = Array.from(tabs.querySelectorAll('[role="tabpanel"]'));
 
-function handleTabClick(event) {
-  // Hide non clicked tab panels
-  tabPanels.forEach(panel => {
-    panel.hidden = true;
-  });
+function handleTabClick({ currentTarget }) {
+  // Hide all tab panels. Easier to hide them all then show the one you want.
+  tabPanels.forEach(panel => (panel.hidden = true));
   // Mark all tabs as unselected
-  tabButtons.forEach(tabButtons => {
-    tabButtons.setAttribute('aria-selected', false);
-  });
-  // Mark the clicked tab as selected
-  event.currentTarget.setAttribute('aria-selected', true);
-  // Find the associated tab panel and show it
-
-  const { id } = event.currentTarget;
-  /*
- Method one
-  console.log(id);
-  const tabPanel = tabs.querySelector(`[aria-labelledby="${id}"]`);
-  tabPanel.hidden = false;
-  */
-
-  /*
-  Method two(my version) - find in the array of tabPanel
-  tabPanels.find(panel => {
-    if (panel.getAttribute('aria-labelledby') === id) {
-      panel.hidden = false;
-    }
-  });
-  */
-
-  // Method two(wes version) - find in the array of tabPanel
-  const tabPanel = tabPanels.find(
+  // Have to use button.setAttribute('aria-selected', false) rather than button.ariaSelected = false for cross browser reasons
+  // Some attributes can be accessed as a property with dot notation, for some you have to use setAttribute()
+  tabButtons.forEach(button => button.setAttribute('aria-selected', false));
+  // Mark clicked tab button as selected
+  currentTarget.setAttribute('aria-selected', true);
+  // Find associated tab panel and show it
+  const { id } = currentTarget;
+  // Method one
+  // const tabToOpen = tabs.querySelector(`[aria-labelledby="${id}"]`);
+  // tabToOpen.hidden = false;
+  // Method two - find in array of tab panels. Wes' favoured method as we already have the tabPanels. But either is just fine
+  const tabToOpen = tabPanels.find(
     panel => panel.getAttribute('aria-labelledby') === id
   );
-  tabPanel.hidden = false;
+  tabToOpen.hidden = false;
 }
 
 tabButtons.forEach(button => button.addEventListener('click', handleTabClick));
