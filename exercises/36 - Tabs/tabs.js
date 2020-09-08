@@ -11,8 +11,11 @@ function handleTabClick({ currentTarget }) {
   // Some attributes can be accessed as a property with dot notation, for some you have to use setAttribute()
   tabButtons.forEach(button => button.setAttribute('aria-selected', false));
   // Mark clicked tab button as selected
-  // Find associated tab panel and show it
   currentTarget.setAttribute('aria-selected', true);
+  // Find associated tab panel and show it
+  const { id } = currentTarget;
+  const tabToOpen = tabs.querySelector(`[aria-labelledby="${id}"]`);
+  tabToOpen.hidden = false;
 }
 
 tabButtons.forEach(button => button.addEventListener('click', handleTabClick));
