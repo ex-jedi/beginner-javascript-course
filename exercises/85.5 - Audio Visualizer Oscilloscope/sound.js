@@ -1,84 +1,38 @@
-import { hslToRgb } from './utils';
-
+// https://courses.wesbos.com/account/access/5e4818abd9cc836465201439/view/375797239
+// A lot of this is very specific to audio so don't worry if it's hard to follow
 const WIDTH = 1500;
 const HEIGHT = 1500;
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 canvas.width = WIDTH;
 canvas.height = HEIGHT;
-let analyzer;
-let bufferLength;
+// Initiated here so it can be used globally, for simplicity
+let analyser;
 
 function handleError(err) {
-  console.log('You must give access to your mic in order to proceed');
+  console.log('You must allow mic if this is gonna work!');
+  const wrong = new Error(err);
+  console.log(wrong);
 }
 
+// Microphones are only accessable over a secure origin. Localhost or https.
 async function getAudio() {
+  // Get users microphone
   const stream = await navigator.mediaDevices.getUserMedia({ audio: true }).catch(handleError);
+  // Create new audio context
   const audioCtx = new AudioContext();
-  analyzer = audioCtx.createAnalyser();
+  // Create audio analyser
+  analyser = audioCtx.createAnalyser();
+  // Pass user audio into audio context and store in variable
   const source = audioCtx.createMediaStreamSource(stream);
-  source.connect(analyzer);
-  // How much data should we collect
-  analyzer.fftSize = 2 ** 8;
-  // pull the data off the audio
-  // how many pieces of data are there?!?
-  bufferLength = analyzer.frequencyBinCount;
-  const timeData = new Uint8Array(bufferLength);
-  const frequencyData = new Uint8Array(bufferLength);
-  drawTimeData(timeData);
-  drawFrequency(frequencyData);
-}
-
-function drawTimeData(timeData) {
-  // inject the time data into our timeData array
-  analyzer.getByteTimeDomainData(timeData);
-  // now that we have the data, lets turn it into something visual
-  // 1. Clear the canvas TODO
-  ctx.clearRect(0, 0, WIDTH, HEIGHT);
-  // 2. setup some canvas drawing
-  ctx.lineWidth = 10;
-  ctx.strokeStyle = '#ffc600';
-  ctx.beginPath();
-  const sliceWidth = WIDTH / bufferLength;
-  let x = 0;
-  timeData.forEach((data, i) => {
-    const v = data / 128;
-    const y = (v * HEIGHT) / 2;
-    // draw our lines
-    if (i === 0) {
-      ctx.moveTo(x, y);
-    } else {
-      ctx.lineTo(x, y);
-    }
-    x += sliceWidth;
-  });
-
-  ctx.stroke();
-
-  // call itself as soon as possible
-  requestAnimationFrame(() => drawTimeData(timeData));
-}
-
-function drawFrequency(frequencyData) {
-  // get the frequency data into our frequencyData array
-  analyzer.getByteFrequencyData(frequencyData);
-  // figure out the bar width
-  const barWidth = (WIDTH / bufferLength) * 2.5;
-  let x = 0;
-  frequencyData.forEach(amount => {
-    // 0 to 255
-    const percent = amount / 255;
-    const [h, s, l] = [360 / (percent * 360) - 0.5, 0.8, 0.5];
-    const barHeight = HEIGHT * percent * 0.5;
-    // TODO: Convert the colour to HSL TODO
-    const [r, g, b] = hslToRgb(h, s, l);
-    ctx.fillStyle = `rgb(${r},${g},${b})`;
-    ctx.fillRect(x, HEIGHT - barHeight, barWidth, barHeight);
-    x += barWidth + 2;
-  });
-
-  requestAnimationFrame(() => drawFrequency(frequencyData));
+  // Pipe source into analyser
+  source.connect(analyser);
+  // How much data do we want to collect?
+  analyser.fftSize = 2 ** 10; // To the power of - **
+  // Extract data from audio
+  // Uint8Array is a special array for very large numbers. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array
+  const timeData = new Uint8Array(analyser.frequencyBinCount);
+  console.log(timeData);
 }
 
 getAudio();
