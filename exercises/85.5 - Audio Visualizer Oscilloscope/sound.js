@@ -86,7 +86,7 @@ function drawFrequency(frequencyData) {
     const percent = amount / 255;
     const [h, s, l] = [360 / (percent * 360) - 0.5, 1, 0.5];
     // Calculate bar height
-    const barHeight = HEIGHT * percent * 1.2;
+    const barHeight = HEIGHT * percent * 0.75;
     // Convert colour to HSL
     const [r, g, b] = hslToRgb(h, s, l);
     ctx.fillStyle = `rgb(${r},${g},${b})`;
