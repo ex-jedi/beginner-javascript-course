@@ -1,5 +1,9 @@
 // https://courses.wesbos.com/account/access/5e4818abd9cc836465201439/view/375797239
 // A lot of this is very specific to audio so don't worry if it's hard to follow
+
+// Can't use HSL in canvas so importing function to convert to RGB.
+import { hslToRgb } from './utils';
+
 const WIDTH = 1500;
 const HEIGHT = 1500;
 const canvas = document.querySelector('canvas');
@@ -80,10 +84,12 @@ function drawFrequency(frequencyData) {
   frequencyData.forEach(amount => {
     // Frequency ranges from 0 - 255
     const percent = amount / 255;
+    const [h, s, l] = [360 / (percent * 360) - 0.5, 1, 0.5];
     // Calculate bar height
-    const barHeight = HEIGHT * percent;
-    // Todo: Convert colour to HSL
-    ctx.fillStyle = '#f00';
+    const barHeight = HEIGHT * percent * 1.2;
+    // Convert colour to HSL
+    const [r, g, b] = hslToRgb(h, s, l);
+    ctx.fillStyle = `rgb(${r},${g},${b})`;
     ctx.fillRect(x, HEIGHT - barHeight, barWidth, barHeight);
     x += barWidth + 1;
   });
