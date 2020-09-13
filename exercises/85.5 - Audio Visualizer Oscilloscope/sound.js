@@ -32,6 +32,15 @@ async function getAudio() {
   // Extract data from audio
   // Uint8Array is a special array for very large numbers. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array
   const timeData = new Uint8Array(analyser.frequencyBinCount);
+  const frequencyData = new Uint8Array(analyser.frequencyBinCount);
+  drawTimeData(timeData);
+}
+
+function drawTimeData(timeData) {
+  // Inject the time data into the time data array
+  analyser.getByteTimeDomainData(timeData);
+  // Call itself as soon as possible
+  requestAnimationFrame(() => drawTimeData(timeData));
   console.log(timeData);
 }
 
