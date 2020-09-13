@@ -76,7 +76,7 @@ function drawFrequency(frequencyData) {
   // Calculate bar width
   const barWidth = (WIDTH / bufferLength) * 2.5;
   console.log(barWidth);
-  const x = 0;
+  let x = 0;
   frequencyData.forEach(amount => {
     // Frequency ranges from 0 - 255
     const percent = amount / 255;
@@ -85,7 +85,9 @@ function drawFrequency(frequencyData) {
     // Todo: Convert colour to HSL
     ctx.fillStyle = '#f00';
     ctx.fillRect(x, HEIGHT - barHeight, barWidth, barHeight);
+    x += barWidth + 1;
   });
+
   requestAnimationFrame(() => drawFrequency(frequencyData));
 }
 
