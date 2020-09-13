@@ -47,7 +47,7 @@ function drawTimeData(timeData) {
   ctx.clearRect(0, 0, WIDTH, HEIGHT);
   // 2. Setup some canvas drawing
   ctx.lineWidth = 10;
-  ctx.strokeStyle = '#ffc600';
+  ctx.strokeStyle = '#0f0';
   ctx.beginPath();
   // Figure out width of each line
   const sliceWidth = WIDTH / bufferLength;
