@@ -37,6 +37,7 @@ async function getAudio() {
   const timeData = new Uint8Array(bufferLength);
   const frequencyData = new Uint8Array(bufferLength);
   drawTimeData(timeData);
+  drawFrequency(frequencyData);
 }
 
 function drawTimeData(timeData) {
@@ -67,7 +68,25 @@ function drawTimeData(timeData) {
   ctx.stroke();
   // Call itself as soon as possible
   requestAnimationFrame(() => drawTimeData(timeData));
-  console.log(timeData);
+}
+
+function drawFrequency(frequencyData) {
+  // Put frequency data into our special array
+  analyser.getByteFrequencyData(frequencyData);
+  // Calculate bar width
+  const barWidth = (WIDTH / bufferLength) * 2.5;
+  console.log(barWidth);
+  const x = 0;
+  frequencyData.forEach(amount => {
+    // Frequency ranges from 0 - 255
+    const percent = amount / 255;
+    // Calculate bar height
+    const barHeight = HEIGHT * percent;
+    // Todo: Convert colour to HSL
+    ctx.fillStyle = '#f00';
+    ctx.fillRect(x, HEIGHT - barHeight, barWidth, barHeight);
+  });
+  requestAnimationFrame(() => drawFrequency(frequencyData));
 }
 
 getAudio();
