@@ -43,7 +43,8 @@ function drawTimeData(timeData) {
   // Inject the time data into the time data array
   analyser.getByteTimeDomainData(timeData);
   // Visualise the data
-  // Todo 1. Clear the canvas
+  // 1. Clear the canvas
+  ctx.clearRect(0, 0, WIDTH, HEIGHT);
   // 2. Setup some canvas drawing
   ctx.lineWidth = 10;
   ctx.strokeStyle = '#ffc600';
