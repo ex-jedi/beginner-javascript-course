@@ -8,6 +8,7 @@ canvas.width = WIDTH;
 canvas.height = HEIGHT;
 // Initiated here so it can be used globally, for simplicity
 let analyser;
+let bufferLength;
 
 function handleError(err) {
   console.log('You must allow mic if this is gonna work!');
@@ -30,15 +31,39 @@ async function getAudio() {
   // How much data do we want to collect?
   analyser.fftSize = 2 ** 10; // To the power of - **
   // Extract data from audio
+  // How many pieces of data are there?
+  bufferLength = analyser.frequencyBinCount;
   // Uint8Array is a special array for very large numbers. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array
-  const timeData = new Uint8Array(analyser.frequencyBinCount);
-  const frequencyData = new Uint8Array(analyser.frequencyBinCount);
+  const timeData = new Uint8Array(bufferLength);
+  const frequencyData = new Uint8Array(bufferLength);
   drawTimeData(timeData);
 }
 
 function drawTimeData(timeData) {
   // Inject the time data into the time data array
   analyser.getByteTimeDomainData(timeData);
+  // Visualise the data
+  // Todo 1. Clear the canvas
+  // 2. Setup some canvas drawing
+  ctx.lineWidth = 10;
+  ctx.strokeStyle = '#ffc600';
+  ctx.beginPath();
+  // Figure out width of each line
+  const sliceWidth = WIDTH / bufferLength;
+  let x = 0;
+  timeData.forEach((data, i) => {
+    const v = data / 128;
+    const y = (v * HEIGHT) / 2;
+    // Draw our lines
+    if (i === 0) {
+      ctx.moveTo(x, y);
+    } else {
+      ctx.lineTo(x, y);
+    }
+    x += sliceWidth;
+  });
+
+  ctx.stroke();
   // Call itself as soon as possible
   requestAnimationFrame(() => drawTimeData(timeData));
   console.log(timeData);
