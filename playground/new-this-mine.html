@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New, This, Prototypes and Classes</title>
+</head>
+<body>
+<button class="button-one">Button One</button>
+<button class="button-two">Button Two</button>
+<button class="button-three">Button Three</button>
+<button class="button-four">Button Four</button>
+<script>
+  const myDate = new Date('August 30, 2020');
+  // console.dir(myDate);
+  // console.log(myDate.getFullYear());
+
+  const names = ['Mark', 'Kate'];
+  // Same as...
+  const namesNew = new Array('Mark', 'Kate');
+  console.log(names, namesNew);
+
+  const mark = { name: 'Mark' };
+  // Same as...
+  const markNew = new Object({ name: 'Mark' });
+  console.log(mark, markNew);
+
+const span = document.createElement('span');
+console.log(span);
+
+// Constructor function
+function Pizza(toppings = [], customer = 'customer') {
+    console.log('Making a pizza');
+    console.log(this);
+    // This keyword when creating an object is used to store information about that instance
+    this.toppings = toppings;
+    this.customer = customer;
+    // Way to create random id
+    this.id = Math.floor(Math.random() * 16777215).toString(16);
+
+    this.slices = 10;
+
+    // Putting this function here means a new separate function created every time an instance is made. But as the code is the same for each instance, ech instance doesn't need its own function. It does need some of it's own data, its own ID, slice count and customer, but not its own function. This becomes a problem if you need to create lots of pizzas... 20 000 pizzas = 20 000 eat functions.
+    /*
+    this.eat = function() {
+      if (this.slices > 0) {
+        this.slices -= 1;
+        console.log(`Munch! you now have ${this.slices} left!`);
+        return this.slices;
+      }
+      console.log('Sorry! All gone!');
+      return this.slices;
+    };
+    */
+}
+
+// Adding this to the prototype means this isn't duplicated every time we make an instance. Also if we make changes here, they'll be available on every instance.
+Pizza.prototype.eat = function() {
+  if (this.slices > 0) {
+      this.slices -= 1;
+      console.log(`Munch! you now have ${this.slices} left!`);
+      return this.slices;
+    }
+    console.log('Sorry! All gone!');
+    return this.slices;
+};
+
+  Pizza.prototype.describe = function() {
+    let toppings;
+    const toppingsOne = [...this.toppings.slice(0, this.toppings.length - 1)];
+    const toppingsTwo = [...this.toppings.slice(-1)];
+    if (this.toppings.length > 1) {
+      toppings = `${toppingsOne.join(', ')} and ${toppingsTwo.toString()} toppings`;
+    } else {
+      toppings = `${this.toppings.toString()} topping`;
+    }
+    return `This pizza is for ${this.customer}. It has ${toppings}. There are ${this.slices} slices left.`;
+};
+
+const anchovyPizza = Pizza(); // Returns undefined
+const hamPizza = new Pizza(); // Returns Pizza object. Creates new object that's an instance of the function that made it!
+console.log(anchovyPizza);
+console.log(hamPizza);
+console.log('What function made me?', hamPizza.constructor);
+console.log(hamPizza instanceof Pizza);
+
+const pepperoniPizza = new Pizza(['pepperoni'], 'Wes Bos');
+const canadianPizza = new Pizza(['pepperoni', 'mushrooms', 'onion'], 'Kait Bos');
+const fourSeasonsPizza = new Pizza(['tomato', 'mozzarella', 'black olives', 'sun dried tomatoes', 'mushrooms'], 'Me');
+
+console.log(pepperoniPizza);
+console.log(canadianPizza);
+
+  // Some things don't have a literal syntax, like Date()
+
+// ********** This **********
+const button1 = document.querySelector('.button-one');
+const button2 = document.querySelector('.button-two');
+const button3 = document.querySelector('.button-three');
+const button4 = document.querySelector('.button-four');
+
+// This keyword is scoped to a function
+// function tellMeAboutTheButton() {
+//   console.log(this);
+// }
+function tellMeAboutTheButton() {
+    console.log('Outside', this);
+    setTimeout(function() {
+      // Doesn't work as this keyword has been changed. Use an arrow function instead
+      console.log('Inside', this);
+      this.textContent = `You clicked me!`;
+  }, 1000);
+}
+// Below will work as this keyword is not altered by an arrow function
+// function tellMeAboutTheButton() {
+//     console.log('Outside', this);
+//     setTimeout(() => {
+//       // Below wont work as this keyword has been changed. Use an arrow function instead
+//       console.log('Inside', this);
+//       this.textContent = `You clicked me!`;
+//   }, 1000);
+// }
+button1.addEventListener('click', tellMeAboutTheButton);
+button2.addEventListener('click', tellMeAboutTheButton);
+
+// Arrow functions don't alter this, it'll be scoped to a higher function
+const tellMeAboutTheButtonArrow = () => console.log(this);
+button3.addEventListener('click', tellMeAboutTheButtonArrow);
+button4.addEventListener('click', tellMeAboutTheButtonArrow);
+
+// Possible to overwrite built ins. Shouldn't ever do this though.
+// Unmodified
+const newName = 'Mark is a person';
+// console.log('Unmodified', newName.toUpperCase());
+// // Modified. Bad!
+// String.prototype.toUpperCase = function() {
+//     return 'Loud Noises';
+// };
+// console.log('Modified', newName.toUpperCase());
+
+// Can also write your own built ins.
+// eslint-disable-next-line no-extend-native
+String.prototype.sarcastic = function() {
+    const sarcastic = this.split('')
+      .map((char, i) => {
+        if (i % 2) {
+          return char.toUpperCase();
+        }
+        return char.toLowerCase();
+      })
+      .join('');
+    return sarcastic;
+};
+  </script>
+</body>
+</html>

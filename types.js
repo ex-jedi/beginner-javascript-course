@@ -67,3 +67,4 @@ teller.last = null;
 const old = 18;
 const ofAge = old > 19;
 console.log(ofAge);
+console.log('Hello');

@@ -2,7 +2,7 @@ function Slider(slider) {
   if (!(slider instanceof Element)) {
     throw new Error('No slider passed in');
   }
-  // create some variables for working iwth the slider
+  // create some variables for working with the slider
   let prev;
   let current;
   let next;
