@@ -17,114 +17,67 @@
 
   <body>
     <script>
-      // Anon function in setTimeout
-      // setTimeout(() => {
-      //   console.log('Hello');
-      // }, 3000);
+      // * Timeout
 
-      // Names function to use in setTimeout
       function buzzer() {
-        console.log('Buzzzz!');
+        console.log('BUZZZZZ!!!');
       }
-
-      function sayHi() {
-        console.log('Hi!');
-      }
-
-      // Code after setTimeout doesn't pause until it runs
-      // console.log('Starting');
-      // setTimeout with named function
-      // setTimeout(buzzer, 1000);
-      // console.log('Finishing');
-
-      // Set interval with named function
-      // setInterval(buzzer, 10000);
-
-      // Coding interval and run on load
-      function setImmediateInterval(funcToRun, ms) {
-        // Call passed in function right away
-        funcToRun();
-        // Set an interval
-        return setInterval(funcToRun, ms);
-      }
-
-      // setImmediateInterval(buzzer, 5000);
-      // setImmediateInterval(sayHi, 2000);
-
-      // Clear timers and intervals
-      // Timers
-      function destroy() {
-        document.body.innerHTML = `<h1>DESTROYED</h1>`;
-        // Prevents the saving the planet function from running if timer completes (self added)
-        bombTimer = null;
-      }
-
-      window.addEventListener('click', function() {
-        // Clear (stop) bombTimer
-        clearTimeout(bombTimer);
-        if (bombTimer) {
-          document.body.innerHTML = `<h1>You clicked! You save the planet!!</h1>`;
-        }
-      });
-
-      let bombTimer = setTimeout(destroy, 5000);
-
-      // Intervals
-      const poopInterval = setInterval(() => {
-        console.log('💩');
-        console.log('Tee hee');
-      }, 200);
-
-      // Clear interval with setTimeout
-      setTimeout(() => {
-        clearInterval(poopInterval);
-        console.log("Don't be so childish!");
-      }, 2000);
-
-      /*
-      Completed from example
-      function buzzer() {
-        console.log('ENNGGGGGGG');
-      }
-
       // console.log('Starting');
       // setTimeout(buzzer, 500);
-      // console.log('finishing');
+      // console.log('Finishing');
 
-      function setImmediateInterval(funcToRun, ms) {
-        // right away call that function
+      // * Intervals
+
+      // setInterval(buzzer, 500);
+
+      // Set interval doesn't have the option to run immediately then run the interval. To do that you have to code it manually like so...
+      function setImmediateInterval(funcToRun, interval) {
+        // Call function to run in immediately
         funcToRun();
-        // run a regular interval
-        return setInterval(funcToRun, ms);
+        // Run the interval
+        // Also return it so you can cancel it
+        return setInterval(funcToRun, interval);
+      }
+      // setImmediateInterval(buzzer, 500);
+
+      // Another example, to show how this function can be reused
+      function sayHello() {
+        console.log('Hello!');
       }
 
-      setImmediateInterval(buzzer, 2000);
-      function sayHi() {
-        console.log('Heyyy');
-      }
-      // setImmediateInterval(sayHi, 200);
+      // setImmediateInterval(sayHello, 500);
 
+      // * To clear a timer or interval we have to save a reference to it
+
+      // * Clear a timer
       function destroy() {
-        document.body.innerHTML = `<p>DESTROYED</p>`;
+        document.body.innerHTML = `<h1>DESTROYED</h1>`;
       }
 
-      const bombTimer = setTimeout(destroy, 5000);
+      // const bombTimer = setTimeout(destroy, 5000);
 
-      window.addEventListener('click', function() {
-        console.log('You clicked! You saved the world');
-        // ???? How do i stop
-        clearTimeout(bombTimer); // STOP THE TIMER FROM RUNNING
+      window.addEventListener('click', () => {
+        // Stop the timer save the world!
+        console.log('You saved the world');
+        document.body.innerHTML = `<h1>Saved</h1>`;
+        // Clear the timer by using its reference
+        clearTimeout(bombTimer);
       });
 
-      const poopInterval = setInterval(function() {
-        console.log('💩');
-        console.log('Hehehe');
-      }, 100);
+      // * Clear an interval
 
-      setTimeout(function() {
+      // Save referance to the interval. It'll still run when you write it like this
+      const poopInterval = setInterval(() => {
+        console.log('💩');
+        console.log('Ha ha ha!');
+      }, 500);
+
+      // Clear interval after a set time with a timeout
+      setTimeout(() => {
+        // Clear interval using saved reference to it
         clearInterval(poopInterval);
-      }, 3000);
-      */
+        console.log('Stop your silliness!');
+      }, 5000);
     </script>
   </body>
 </html>
