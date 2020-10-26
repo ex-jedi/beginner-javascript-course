@@ -89,6 +89,45 @@
       // Remove Panasonic
       const newBikes2 = [...newBikes.slice(0, 3), ...newBikes.slice(4)];
       console.log('newBikes2', newBikes2);
+
+      // ********** Finding and removing object array items **********
+
+      const comments = [
+        { text: 'Love it', id: 173 },
+        { text: 'Hate it', id: 123 },
+        { text: 'Want it', id: 133 },
+        { text: 'Got it', id: 143 },
+        { text: 'Rejected it', id: 153 },
+        { text: 'Accepted it', id: 163 },
+      ];
+
+      function deleteComment(id, commentsArray) {
+        // Find the index of the item in the array
+        const commentIndex = commentsArray.findIndex((comment) => comment.id === id);
+        console.log('commentIndex', commentIndex);
+        // Make new array without that item in it
+        // Return the new array
+        return [
+    ...commentsArray.slice(0, commentIndex),
+    ...commentsArray.slice(commentIndex + 1),
+  ];
+      }
+
+      console.log('Delete Comment', deleteComment(173, comments));
+
+      // Find index of array item using find index method
+      const nameIndex = names3.findIndex((name) => name === 'Mark');
+      console.log('nameIndex', nameIndex);
+      // Make array without item
+      const noMark = [
+        // Get everything up to Mark
+        ...names3.slice(0, nameIndex),
+        // Get everything after Mark
+        ...names3.slice(nameIndex + 1),
+      ];
+      console.log('nameIndex item >', names3[nameIndex]);
+      console.log('names3', names3);
+      console.log('noMark', noMark);
     </script>
   </body>
 </html>
