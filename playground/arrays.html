@@ -9,73 +9,86 @@
 
   <body>
     <script>
-      const names = ['wes', 'kait', 'snickers'];
+      // If you use typeof on a array it'll return object as arrays are basically objects (as is everything really).
+      // Use the static method Array.isArray() to check is something is an array.
+      const names = ['Mark', 'Kate', 'Rebecca'];
 
-      console.log(names[0]);
-      console.log(names.length);
+      // Array are 0 based, the counting starts at 0.
+      // console.log(names[0]);
+
+      // Length is not 0 based.
+      // console.log(names.length);
+
+      // To access last item, take the length minus one.
       console.log(names[names.length - 1]);
 
-      names.push('lux');
-      console.log(names);
-      const names2 = [...names, 'lux'];
-      names.unshift('poppy');
-      console.log(names);
-      const names3 = ['poppy', ...names];
-      console.log(names3);
+      // ********** Adding Items to array **********
 
+      // Adding items to end of array.
+      // Mutates original array
+      names.push('Jon');
+      // Better way
+      const names2 = [...names, 'Mads'];
+      console.log('Names2', names2);
+
+      // Add to the beginning of array
+      names.unshift('Ben');
+      // Better way with spread
+      const names3 = ['Gem', ...names];
+      console.log('Names3', names3);
+      console.log('Names', names);
+
+      // ********** Mutable Array Methods **********
+
+      // Mutable. Changes original array/thing
+      // Some methods mutate the original array and some don't.
+      // For instance reverse() changes the original array!!
+      const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+      const numbersBackwards = numbers.reverse();
+      console.log(numbersBackwards);
+      console.log(numbers);
+
+      // When you want to use a mutation method but not change the original array, copy the original array.
+      // USE SPREAD, IT'S THE EASIEST WAY!! REMEMBER!!!
+      const numbersNew = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+      const numbersToReverse = [...numbersNew].reverse();
+      console.log('numbersNew', numbersNew);
+      console.log('numbersToReverse', numbersToReverse);
+
+      // ********** Splice **********
+      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
+      // Splice is a mutation method
+      // First number is the index to start at, second is number of items to splice
+      const numbersToSplice = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+      console.log('numbersToSplice > before', numbersToSplice);
+      numbersToSplice.splice(3, 2);
+      console.log('numbersToSplice > after', numbersToSplice);
+
+      // ********** Immutable Array Methods **********
+
+      // Immutable. Creates a new array and leaves the original unchanged.
+      // Most methods are immutable
+      // Slice returns a portion of an array into a new one and doesn't change the original.
+
+      // ********** Slice **********
+      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
+
+      const pizzaSlice = numbers.slice(2, 4);
+      console.log(pizzaSlice);
+
+      // ********** Adding item to the middle of an array **********
+      // There's no specific method to do this
       const bikes = ['bianchi', 'miele', 'panasonic', 'miyata'];
+      // You can use spread with slice. First number is the index to start from, second it the end index.
+      // IMPORTANT. The end index is not inclusive. It''s stop at the item before the index you specify.
+      // If you leave the last number blank it continues to the end of the array
       const newBikes = [...bikes.slice(0, 2), 'benotto', ...bikes.slice(2)];
+      console.log('newBikes', newBikes);
 
+      // ********** Remove item from the middle of an array **********
+      // Remove Panasonic
       const newBikes2 = [...newBikes.slice(0, 3), ...newBikes.slice(4)];
-      console.log(newBikes2);
-
-      //
-      const comments = [
-        { text: 'Cool Beans', id: 123 },
-        { text: 'Love this', id: 133 },
-        { text: 'Neato', id: 233 },
-        { text: 'good bikes', id: 333 },
-        { text: 'so good', id: 433 },
-      ];
-
-      function deleteComment(id, comments) {
-        // first find the index of the item in the array
-        const commentIndex = comments.findIndex(comment => comment.id === id);
-        // make a new array without that item in it
-        return [
-          ...comments.slice(0, commentIndex),
-          ...comments.slice(commentIndex + 1),
-        ];
-        // return our new array
-      }
-
-      const kaitIndex = names.findIndex(name => name === 'kait');
-      const newNamesWithOutKait = [
-        // get everything up to kait index
-        ...names.slice(0, kaitIndex),
-        // everything after Kait index
-        ...names.slice(kaitIndex + 1),
-      ];
-      console.log(newNamesWithOutKait);
-
-      // const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-      // console.log(numbers);
-      // numbers.splice(3, 2);
-      // console.log(numbers);
-
-      // // Mutation Methods - DO CHANGE THE ORIGINAL DATA
-      // const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-      // // anytime you want to use a mutation method and NOT mutate the orignal array
-      // // we need to take a copy of the array
-      // const numbersReversed = [...numbers].reverse();
-      // console.log(numbersReversed);
-      // // numbers.reverse();
-      // console.log(numbers);
-      // // Immutable - THEY DO NOT CHANGE THE ORIGINAL DATA
-      // const pizzaSlice = numbers.slice(2, 4);
-      // console.log(pizzaSlice);
-      // console.log(numbers);
+      console.log('newBikes2', newBikes2);
     </script>
   </body>
 </html>
