@@ -39,38 +39,32 @@
       { comment: 'I DONT LIKE BURGERS', rating: 1 },
     ];
 
-    /*
-      Static Methods
-    */
+    // ********** Static Methods **********
+    // Methods that exist on the bog momma Array, things like Array.from()
 
-    // Array.of();
+    // Array.of(). Used to create an array from arguments you pass it. Very rarely useful.
 
+    // Array.from(). Makes an array from an array-like or iterable object to convert to an array. (something with a .length)
+    // https://developer.mozilla.org/en-US/docs/web/javascript/reference/global_objects/array/from
+    // Takes two arguments. The array like thing and a map argument.
+      // First argument in the map function doesn't do anything. Sometimes an underscore is put in as a reminder
+    const meRange = Array.from({length: 10}, (_item, index) => index)
+    // console.log('meRange', meRange);
     // Make a function that creates a range from x to y with Array.from();
 
-    function createRange(start, end) {
-      const range = Array.from({ length: end - start + 1 }, function (item, index) {
-        return index + start;
-      });
-      return range;
+    function createRange(start, end){
+    const range = Array.from({length: end - start + 1}, function(_item, index){
+      return index + start
+    })
+    return range;
     }
 
-    const myRange = createRange(3, 7);
+    console.log('createRange', createRange(0,10));
 
-    // Check if the last array you created is really an array with Array.isArray();
-    console.log(Array.isArray(myRange));
 
-    // Take the meats object and make three arrays with Object.entries(), Object.keys, Object.values()
 
-    console.log(Object.entries(meats));
-    console.log(Object.keys(meats));
-    console.log(Object.values(meats));
+    // console.log('meRange', meRange);
 
-    Object.entries(meats).forEach(([meat, qty]) => {
-      // const key = entry[0];
-      // const value = entry[1];
-      // const [key, value] = entry;
-      console.log(meat, qty);
-    });
     /*
       Instance Methods
     */
