@@ -61,7 +61,7 @@
 
     const myRange = createRange(1, 42);
 
-    console.log('myRange', myRange);
+    // console.log('myRange', myRange);
 
     // From MDN
     function rangeFunc(start, stop, step) {
@@ -73,6 +73,23 @@
       // Check if the last array you created is really an array with Array.isArray();
       const isItAnArray = Array.isArray(myRange);
       // console.log('isItAnArray', isItAnArray);
+
+      // Take the meats object and make three arrays with Object.entries(), Object.keys, Object.values()
+      const meatsOne = Object.entries(meats);
+      // console.log(Object.entries(meats));
+      // console.log(Object.keys(meats));
+      // console.log(Object.values(meats));
+
+      Object.entries(meats).forEach(([key, value]) => {
+        // const key = entry[0];
+        // const value = entry[1];
+        // Destructuring
+        // Take first item in array put in in value called key, second into value called value
+        // const [key, value] = entry;
+        // Or you can destructure them in thw same way up there as peramiters
+
+        console.log(key, value);
+      } )
 
     /*
       Instance Methods
