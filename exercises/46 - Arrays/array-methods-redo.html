@@ -59,11 +59,20 @@
     return range;
     }
 
-    console.log('createRange', createRange(0,10));
+    const myRange = createRange(1, 42);
 
+    console.log('myRange', myRange);
 
+    // From MDN
+    function rangeFunc(start, stop, step) {
+      return Array.from(Array.from({ length: (stop - start) / step + 1 }, (_, i) => start + i * step));
+    }
 
     // console.log('meRange', meRange);
+
+      // Check if the last array you created is really an array with Array.isArray();
+      const isItAnArray = Array.isArray(myRange);
+      // console.log('isItAnArray', isItAnArray);
 
     /*
       Instance Methods
