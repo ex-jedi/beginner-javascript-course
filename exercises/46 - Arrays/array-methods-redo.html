@@ -142,7 +142,7 @@
 
     // Check if hot sauce is in the toppings with includes()
     const isInToppings = toppings.includes('Hot Sauce');
-    console.log('isInToppings', isInToppings);
+    // console.log('isInToppings', isInToppings);
 
     // add it if it's not
     // console.log('toppings before', toppings);
@@ -154,22 +154,26 @@
     // flip those toppings around with reverse()
     // toppings.reverse();
     const toppingsReversed = [...toppings].reverse();
-    console.log(toppingsReversed);
+    // console.log(toppingsReversed);
 
-    // **********  Callback Methods **********
+    // **********  Callback Methods (This is a made up category) **********
 
 
     // find the first rating that talks about a burger with find()
 
-    // function findBurgRating(singleFeedback) {
-    //   return singleFeedback.comment.includes('burg');
-    // }
+
+    // console.log('burgerRating', burgerRating);
 
     // const findBurgRating = function (singleFeedback) {
+    // Don't forget to return!!
     //   return singleFeedback.comment.includes('burg');
     // }
 
-    // const findBurgRating = (singleFeedback) => singleFeedback.comment.includes('burg');
+    const findBurgRating = (singleFeedback) => singleFeedback.comment.includes('burg');
+
+    const burgerRating = feedback.find(findBurgRating)
+
+    console.log('burgerRating', burgerRating);
 
     // const util = {
     //   findBurgRating: function (singleFeedback) {
