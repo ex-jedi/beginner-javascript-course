@@ -130,8 +130,8 @@
 
     // Do the last four,but immutable (with spreads and new variables)
     const newToppings = toppings.slice(0, toppings.length - 1);
-    newtoppings = [...newToppings, toppings[toppings.length - 1]];
-    // console.log(newtoppings);
+    const newToppings2 = [...newToppings, toppings[toppings.length - 1]];
+    // console.log(newToppings2);
 
     // Make a copy of the toppings array with slice()
     const toppingsCopy = toppings.slice(0);
@@ -168,8 +168,9 @@
     // console.log(toppingsReversed);
 
     // **********  Callback Methods (This is a made up category) **********
+    // https://courses.wesbos.com/account/access/5e4818abd9cc836465201439/view/375678133
 
-// find the first rating that talks about a burger with find()
+    // find the first rating that talks about a burger with find()
 
     // console.log('burgerRating', burgerRating);
 
@@ -193,56 +194,73 @@
 
     // const findSmootieRating = (singleFeedback) => singleFeedback.comment.includes('Smoothie');
 
+    // * Higher order function (Function that returns a function)
+    //* You can pass in the word you want to search for, so it's more flexible and reusable
     function findByWord(word) {
       return function (singleFeedback) {
         return singleFeedback.comment.includes(word);
       };
     }
 
-    const burgRating = feedback.find(findByWord('burg'));
-    const smoothieRating = feedback.find(findByWord('Smoothie'));
+    //* This will first return the actual word finding function then run it
+    const wordRating = feedback.find(findByWord('needs'));
+    // const smoothieRating = feedback.find(findByWord('Smoothie'));
 
-    console.log(burgRating);
-    // find all ratings that are above 2 with filter()
+    // console.log('wordRating', wordRating);
+
+    //* find all ratings that are above 2 with filter()
     function filterByMinRating(minRating) {
       return function (singleFeedback) {
         return singleFeedback.rating > minRating;
       };
     }
-    const goodReviews = feedback.filter(filterByMinRating(4));
-    console.table(goodReviews);
-    // find all ratings that talk about a burger with filter()
+    const goodReviews = feedback.filter(filterByMinRating(3));
+    // console.table(goodReviews);
+
+    //* Find all ratings that talk about a burger with filter()
     const burgRatings = feedback.filter(findByWord('burg'));
-    console.table(burgRatings);
+    // console.table(burgRatings);
 
     // Remove the one star rating however you like!
     const legitRatings = feedback.filter((single) => single.rating !== 1);
-    console.table(legitRatings);
+    // console.table(legitRatings);
 
-    // check if there is at least 5 of one type of meat with some()
+    //* Check if there is at least 5 of one type of meat with some().
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some.
+    // Returns a boolean.
+    // First need to convert object into array. Just need the values this time so use Object.values.
     const isThereEnoughOfAtLeastOneMeat = Object.values(meats).some((meatValue) => meatValue >= 5);
-    console.log(isThereEnoughOfAtLeastOneMeat);
-    // make sure we have at least 3 of every meat with every()
+    // console.log('isThereEnoughOfAtLeastOneMeat', isThereEnoughOfAtLeastOneMeat);
+
+    //* Make sure we have at least 3 of every meat with every()
+    // Returns boolean
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every
     const isThereEnoughOfEveryMeat = Object.values(meats).every((meatValue) => meatValue >= 3);
-    console.log(isThereEnoughOfEveryMeat);
-    // sort the toppings alphabetically with sort()
+    // console.log('isThereEnoughOfEveryMeat', isThereEnoughOfEveryMeat);
+
+    //* Sort the toppings alphabetically with sort()
+    // Also does some maths things
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
     const numbers = [1, 2, 100, 3, 200, 400, 155];
-    const numbersSorted = numbers.sort((firstItem, secondItem) => firstItem - secondItem);
-    console.log(numbersSorted);
-    console.log(toppings.sort());
-    // sort the order totals from most expensive to least with .sort()
+    const numbersSorted = numbers.sort((firstNumber, secondNumber) => firstNumber - secondNumber);
+    // console.log('numbersSorted', numbersSorted);
+    // console.log(toppings.sort());
+
+    //* Sort the order totals from most expensive to least with .sort()
+    // Wes does it the wrong way round in the video 😂.
     function numberSort(a, b) {
       return b - a;
     }
-    console.log(orderTotals.sort(numberSort));
-    // Sort the prices with sort()
+    // console.log(orderTotals.sort(numberSort));
 
+    //* Sort the prices with sort()
     const productsSortedByPrice = Object.entries(prices).sort(function (a, b) {
+      // debugger;
       const aPrice = a[1];
       const bPrice = b[1];
       return aPrice - bPrice;
     });
-    console.table(Object.fromEntries(productsSortedByPrice));
+    // console.table(Object.fromEntries(productsSortedByPrice));
 
     /*
       Looping Methods (next)
