@@ -26,13 +26,21 @@ function Slider(slider) {
     current = slider.querySelector('.current') || slides.firstElementChild;
     prev = current.previousElementSibling || slides.lastElementChild;
     next = current.nextElementSibling || slides.firstElementChild;
-    console.log('current', current);
-    console.log('prev', prev);
-    console.log('next', next);
+    console.log({ current, prev, next });
   }
+
+  // Applies classes to current, prev nd next slides. Has to be in the slides function to grab those variables
+  function applyClasses() {
+    current.classList.add('current');
+    prev.classList.add('prev');
+    next.classList.add('next');
+  }
+
+  function move(direction) {}
 
   // Runs when slider is created
   startslider();
+  applyClasses();
 }
 
 const mySlider = Slider(document.querySelector('.slider'));
