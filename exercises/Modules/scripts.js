@@ -1,1 +1,3 @@
-const name = 'Mark'
+const name = 'Mark';
+
+console.log(returnHi(name));
