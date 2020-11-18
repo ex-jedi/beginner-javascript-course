@@ -36,7 +36,27 @@ function Slider(slider) {
     next.classList.add('next');
   }
 
-  function move(direction) {}
+  function move(direction) {
+    // Remove slider classes from slides
+    // Convenient way to remove classes. Put them in an array...
+    const classesToRemove = ['prev', 'current', 'next'];
+    // Line up the elements we want to remove classes from and spread the class containing array into the arguments list
+    prev.classList.remove(...classesToRemove);
+    current.classList.remove(...classesToRemove);
+    next.classList.remove(...classesToRemove);
+    // Hotshot way, Not so easy to understand/read though
+    // [prev, current, next].forEach((element) => element.classList.remove(...classesToRemove));
+
+    // Get direction of movement
+    // Using destructuring to switch variables
+    if (direction === 'back') {
+      // Make a new array of the new variables and destructure them over and into the prev, current and next variables
+      // if moving back all slides need to be moved back by one, so prev id the one before it, current changes top prev and next to current
+      [prev, current, next] = [prev.previousElementSibling, prev, current];
+    } else {
+      // Do the opposite to above if direction is not back
+    }
+  }
 
   // Runs when slider is created
   startslider();
