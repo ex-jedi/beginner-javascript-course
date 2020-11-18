@@ -1,3 +1,3 @@
-function returnHi(name) {
-  return 'Hi';
+export function returnHi(name) {
+  return `Hi ${name}`;
 }
