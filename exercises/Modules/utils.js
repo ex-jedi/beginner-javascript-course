@@ -1,6 +1,8 @@
 // This variable is scoped to this module. It's not available globally, but it will work in the function below when that's exported
-const last = 'Phoenix';
+
+const first = 'Mark';
 const middle = 'Robert';
+const last = 'Phoenix';
 
 // Directly export functions/variables
 // export function returnHi(name) {
@@ -11,7 +13,8 @@ function returnHi(name) {
   return `Hi ${name} ${last}`;
 }
 
-// But you can export them too.
-// Named exports
+// Default export. One per module
+export default first;
 
+// Named exports
 export { last, middle, returnHi };
