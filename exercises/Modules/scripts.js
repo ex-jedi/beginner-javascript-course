@@ -14,17 +14,24 @@ import first, { returnHi as sayHi, last, returnHi } from './utils.js';
 // Import everything from a module. Exports an object type thing
 import * as everything from './mark.js';
 
-console.log(everything);
+// On demand import
+import { handleButtonClick } from './handlers.js';
 
-const name = 'Mark';
+// console.log(everything);
+
+// const name = 'Mark';
 
 // console.log(returnHi(name));
 
 // Renamed returnHi export
-console.log(sayHi(name));
+// console.log(sayHi(name));
 
-console.log(first);
-console.log(last);
+// console.log(first);
+// console.log(last);
 
 // console.log(person);
 // console.log(thingy);
+
+// On demand import
+const button = document.querySelector('button');
+button.addEventListener('click', handleButtonClick);
