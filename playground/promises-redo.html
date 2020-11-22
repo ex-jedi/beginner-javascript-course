@@ -18,7 +18,8 @@
       // Takes a callback function with two arguments, resolve & reject
       // Used when we need to wait for something before we can proceed
 
-      const pizzaPromise = new Promise(function (resolve, reject) {
+      // You can return is immediately rather than at the end of the function
+      return new Promise(function (resolve, reject) {
         // For instance lets wait for the pizza to cook
 
         setTimeout(() => {
@@ -27,7 +28,8 @@
         // When you're ready you can resolve the promise
       });
       // This doesn't return the pizza, it returns the pizza promise
-      return pizzaPromise;
+      // You can though return it immediately
+      // return pizzaPromise;
     }
 
     // These return the promise but not the resolves items
@@ -36,7 +38,7 @@
     console.log('pepperoniPromise', pepperoniPromise);
     // console.log('canadianPromise', canadianPromise);
 
-    // To get the resolved item you need another function. This is the old fashioned way.
+    // To get the resolved item you need a .then function. This is the old fashioned way.
     pepperoniPromise.then(function (pizza) {
       console.log('Got it');
       console.log('Resolved pizza:', pizza);
