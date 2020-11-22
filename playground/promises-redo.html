@@ -32,15 +32,22 @@
       // return pizzaPromise;
     }
 
-    // You can call and chain multiple promises... even reusing the same promise
+    // You can call and chain multiple promises... even reusing the same promise multiple times
+    // Before and after will still both run before any of the promises are resolved
+    console.log('Before');
     makePizza(['pepperoni'])
-  .then(function (pizza) {
+      .then(function (pizza) {
         console.log(pizza);
-    return makePizza(['Ham', 'Cheese']);
+        return makePizza(['Ham', 'Cheese']);
       })
-  .then(function (pizza) {
-    console.log(pizza);
-  });
+      .then(function (pizza) {
+        console.log(pizza);
+        return makePizza(['Pineapple', 'Ham']);
+      })
+      .then(function (pizza) {
+        console.log(pizza);
+      });
+    console.log('After');
   </script>
 </body>
 
