@@ -36,20 +36,68 @@
 
     // You can call and chain multiple promises... even reusing the same promise multiple times
     // Before and after will still both run before any of the promises are resolved
-    console.log('Before');
-    makePizza(['Pepperoni'])
-      .then(function (pizza) {
-        console.log(pizza);
-        return makePizza(['Ham', 'Cheese', 'Pineapple', 'Fish', 'More Cheese', 'Bacon', 'Eggs']);
-      })
-      .then(function (pizza) {
-        console.log(pizza);
-        return makePizza(['Pineapple', 'Ham']);
-      })
-      .then(function (pizza) {
-        console.log(pizza);
-      });
-    console.log('After');
+    // This is a sequential promise chain
+    // console.log('Before');
+    // makePizza(['Pepperoni'])
+    //   .then(function (pizza) {
+    //     console.log(pizza);
+    //     return makePizza([
+    //       'Ham',
+    //       'Cheese',
+    //       'Pineapple',
+    //       'Fish',
+    //       'More Cheese',
+    //       'Bacon',
+    //       'Eggs',
+    //       'Ham',
+    //       'Cheese',
+    //       'Pineapple',
+    //       'Fish',
+    //       'More Cheese',
+    //       'Bacon',
+    //       'Eggs',
+    // ]);
+    //   })
+    //   .then(function (pizza) {
+    //     console.log(pizza);
+    //     return makePizza(['Pineapple', 'Ham']);
+    //   })
+    //   .then(function (pizza) {
+    //     console.log(pizza);
+    //     console.log('All done');
+    //   });
+    // console.log('After');
+
+    // Run promises concurrently. Waits for the all to resolve.
+    const pizzaPromise1 = makePizza(['Pepperoni']);
+    const pizzaPromise2 = makePizza(['Ham', 'Pineapple', 'Cheese']);
+    const pizzaPromise3 = makePizza(['Cheese', 'Tomato', 'Green Olives', 'Basil']);
+    const pizzaPromise4 = makePizza(['Beef', 'Chicken']);
+
+    const orderPromise = Promise.all([pizzaPromise1, pizzaPromise2, pizzaPromise3, pizzaPromise4]);
+
+    // orderPromise.then(function (pizzas) {
+    //   console.log(pizzas);
+    // });
+
+    // Same as above but with destructuring in the body
+    // orderPromise.then(function (pizzas) {
+    //   const [first, second, third, forth] = pizzas;
+    //   console.log(first, second, third, forth);
+    // });
+
+    // Same as above but destructuring into paramiters
+    // orderPromise.then(function ([first, second, third, forth]) {
+    //   console.log(first, second, third, forth);
+    // });
+
+    // Gives you the first resolved promise
+    const firstPizzaPromise = Promise.race([pizzaPromise2, pizzaPromise3, pizzaPromise4, pizzaPromise1]);
+
+    firstPizzaPromise.then((pizza) => {
+      console.log(`Here's the first one for you`);
+      console.log(pizza);
+    });
   </script>
 </body>
 
