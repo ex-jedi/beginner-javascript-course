@@ -13,7 +13,7 @@
 
 <body>
   <script>
-    function makePizza(toppings) {
+    function makePizza(toppings = []) {
       // Promises made immediately but resolved later
       // Takes a callback function with two arguments, resolve & reject
       // Used when we need to wait for something before we can proceed
@@ -21,10 +21,12 @@
       // You can return is immediately rather than at the end of the function
       return new Promise(function (resolve, reject) {
         // For instance lets wait for the pizza to cook
+        // Add 200ms for each pizza topping
+        const bakeTime = 500 + toppings.length * 200;
 
         setTimeout(() => {
           resolve(`Here is your pizza 🍕 with the toppings ${toppings.join(' ')}`);
-        }, 1000);
+        }, bakeTime);
         // When you're ready you can resolve the promise
       });
       // This doesn't return the pizza, it returns the pizza promise
@@ -35,10 +37,10 @@
     // You can call and chain multiple promises... even reusing the same promise multiple times
     // Before and after will still both run before any of the promises are resolved
     console.log('Before');
-    makePizza(['pepperoni'])
+    makePizza(['Pepperoni'])
       .then(function (pizza) {
         console.log(pizza);
-        return makePizza(['Ham', 'Cheese']);
+        return makePizza(['Ham', 'Cheese', 'Pineapple', 'Fish', 'More Cheese', 'Bacon', 'Eggs']);
       })
       .then(function (pizza) {
         console.log(pizza);
