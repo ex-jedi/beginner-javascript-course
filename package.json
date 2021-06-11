@@ -53,7 +53,7 @@
     "nth-check": "^1.0.2",
     "object-inspect": "^1.8.0",
     "js-yaml": "^3.14.0",
-    "normalize-url": "^3.3.0",
+    "normalize-url": "^4.5.1",
     "object.assign": "^4.1.0",
     "object-keys": "^1.1.1",
     "object.getownpropertydescriptors": "^2.1.0",
